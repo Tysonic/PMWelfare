@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity.Infrastructure;
 using PMWelfare.Models;
 
 namespace PMWelfare.Controllers
@@ -38,7 +39,7 @@ namespace PMWelfare.Controllers
 
         // GET: expens/Create
         public ActionResult Create()
-        {
+        {   
             ViewBag.prod_id = new SelectList(db.sup_products, "prod_id", "prod_name");
             return View();
         }

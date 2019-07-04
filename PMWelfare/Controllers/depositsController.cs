@@ -20,14 +20,6 @@ namespace PMWelfare.Controllers
             var deposits = db.deposits.Include(s => s.member);
             return View(deposits.ToList());
         }
-        public ActionResult total()
-        {
-            var tot = db.deposits.Where(s => s.updated_at.Value.Month == DateTime.Now.Month).Sum(x => x.amount).ToString();
-            
-            ViewBag.Total = tot;
-        
-            return View("total");
-        }
           
         //public ActionResult Collections()
         //{

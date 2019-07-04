@@ -15,7 +15,6 @@ namespace PMWelfare.Models
             chat_room = new HashSet<chat_room>();
             deposits = new HashSet<deposit>();
             subscriptions = new HashSet<subscription>();
-            Admins = new HashSet<Admin>();
         }
 
         [Key]
@@ -65,7 +64,5 @@ namespace PMWelfare.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<subscription> subscriptions { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Admin> Admins { get; set; }
     }
 }

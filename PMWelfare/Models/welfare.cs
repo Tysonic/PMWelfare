@@ -24,7 +24,6 @@ namespace PMWelfare.Models
         public virtual DbSet<sup_products> sup_products { get; set; }
         public virtual DbSet<supplier> suppliers { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<Admin> Admins { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -129,10 +128,6 @@ namespace PMWelfare.Models
                 .Property(e => e.updated_by)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<member>()
-                .HasMany(e => e.Admins)
-                .WithRequired(e => e.member)
-                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<monthly_summary>()
                 .Property(e => e.closing_balance)
@@ -198,21 +193,6 @@ namespace PMWelfare.Models
                 .Property(e => e.updated_by)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Admin>()
-                .Property(e => e.user_name)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Admin>()
-                .Property(e => e.admin_title)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Admin>()
-                .Property(e => e.created_by)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Admin>()
-                .Property(e => e.updated_by)
-                .IsUnicode(false);
         }
     }
 }

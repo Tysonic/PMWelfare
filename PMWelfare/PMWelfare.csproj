@@ -170,16 +170,15 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AdminsController.cs" />
     <Compile Include="Controllers\celebrationsController.cs" />
     <Compile Include="Controllers\chat_roomController.cs" />
     <Compile Include="Controllers\depositsController.cs" />
     <Compile Include="Controllers\expensController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\membersController.cs" />
     <Compile Include="Controllers\member_statusController.cs" />
     <Compile Include="Controllers\monthly_summaryController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\StatementController.cs" />
     <Compile Include="Controllers\subscriptionsController.cs" />
     <Compile Include="Controllers\suppliersController.cs" />
@@ -187,18 +186,24 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907040610376_pmwfare.cs" />
+    <Compile Include="Migrations\201907040610376_pmwfare.Designer.cs">
+      <DependentUpon>201907040610376_pmwfare.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\activity_logs.cs" />
-    <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\celebration.cs" />
     <Compile Include="Models\chat_room.cs" />
     <Compile Include="Models\deposit.cs" />
+    <Compile Include="Models\EventTypes.cs" />
     <Compile Include="Models\expens.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\member.cs" />
     <Compile Include="Models\member_status.cs" />
     <Compile Include="Models\monthly_summary.cs" />
+    <Compile Include="Models\Report.cs" />
     <Compile Include="Models\subscription.cs" />
     <Compile Include="Models\supplier.cs" />
     <Compile Include="Models\sup_products.cs" />
@@ -314,15 +319,14 @@
     <Content Include="Views\suppliers\Edit.cshtml" />
     <Content Include="Views\suppliers\Index.cshtml" />
     <Content Include="Views\Admins\Create - Copy.cshtml" />
-    <Content Include="Views\members\Create.cshtml" />
-    <Content Include="Views\members\Delete.cshtml" />
-    <Content Include="Views\members\Details.cshtml" />
-    <Content Include="Views\members\Edit.cshtml" />
-    <Content Include="Views\members\Index.cshtml" />
     <Content Include="Views\Statement\Index.cshtml" />
     <Content Include="Views\deposits\Collections.cshtml" />
     <Content Include="Views\deposits\total.cshtml" />
     <Content Include="Views\deposits\tot.cshtml" />
+    <Content Include="Views\expens\TotalExpenditure.cshtml" />
+    <Content Include="Views\expens\Totalee.cshtml" />
+    <Content Include="Views\celebrations\TotlaEvents.cshtml" />
+    <Content Include="Views\Reports\Total.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -339,6 +343,11 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201907040610376_pmwfare.resx">
+      <DependentUpon>201907040610376_pmwfare.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

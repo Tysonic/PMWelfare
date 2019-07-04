@@ -20,6 +20,19 @@ namespace PMWelfare.Controllers
             return View(db.celebrations.ToList());
         }
 
+
+        public ActionResult TotlaEvents()
+        {
+            var eventsum = db.celebrations.Where(s => s.event_date.Month == DateTime.Now.Month && s.event_date.Year == DateTime.Now.Year).Select(s=>s.event_name).Count();
+                ViewBag.total = eventsum;
+
+            var eventnames = db.celebrations.GroupBy(s => s.event_name).Count();
+            ViewBag.events = eventnames;
+            
+            
+            return View();
+        }
+        
         // GET: celebrations/Details/5
         public ActionResult Details(int? id)
         {
