@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PMWelfare.Models.subscription>
+﻿@model IEnumerable<PMWelfare.Models.Subscription>
 
 @{
     ViewBag.Title = "Index";
@@ -12,28 +12,28 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.member.first_name)
+            @Html.DisplayNameFor(model => model.Member.FirstName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.amount)
+            @Html.DisplayNameFor(model => model.Amount)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.sub_month)
+            @Html.DisplayNameFor(model => model.SubMonth)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.sub_year)
+            @Html.DisplayNameFor(model => model.SubYear)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.created_by)
+            @Html.DisplayNameFor(model => model.CreatedBy)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.created_at)
+            @Html.DisplayNameFor(model => model.CreatedAt)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.updated_by)
+            @Html.DisplayNameFor(model => model.UpdatedBy)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.updated_at)
+            @Html.DisplayNameFor(model => model.UpdatedAt)
         </th>
         <th></th>
     </tr>
@@ -41,33 +41,33 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.member.first_name)
+            @Html.DisplayFor(modelItem => item.Member.FirstName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.amount)
+            @Html.DisplayFor(modelItem => item.Amount)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.sub_month)
+            @Html.DisplayFor(modelItem => item.SubMonth)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.sub_year)
+            @Html.DisplayFor(modelItem => item.SubYear)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.created_by)
+            @Html.DisplayFor(modelItem => item.CreatedBy)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.created_at)
+            @Html.DisplayFor(modelItem => item.CreatedAt)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.updated_by)
+            @Html.DisplayFor(modelItem => item.UpdatedBy)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.updated_at)
+            @Html.DisplayFor(modelItem => item.UpdatedAt)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.sub_id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.sub_id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.sub_id })
+            @Html.ActionLink("Edit", "Edit", new { id=item.SubId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.SubId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.SubId })
         </td>
     </tr>
 }

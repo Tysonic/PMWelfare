@@ -6,63 +6,62 @@ namespace PMWelfare.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class member
+    public partial class Member
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public member()
+        public Member()
         {
-            activity_logs = new HashSet<activity_logs>();
-            chat_room = new HashSet<chat_room>();
-            deposits = new HashSet<deposit>();
-            subscriptions = new HashSet<subscription>();
+            ActivityLogs = new HashSet<ActivityLogs>();
+            ChatRoom = new HashSet<ChatRoom>();
+            Deposits = new HashSet<Deposit>();
+            Subscriptions = new HashSet<Subscription>();
         }
 
         [Key]
         [StringLength(40)]
-        public string user_name { get; set; }
+        public string UserName { get; set; }
 
         [StringLength(40)]
-        public string first_name { get; set; }
+        public string FirstName { get; set; }
 
         [StringLength(40)]
-        public string other_name { get; set; }
+        public string OtherName { get; set; }
 
         [Required]
         [StringLength(40)]
-        public string email { get; set; }
+        public string Email { get; set; }
 
         [Column(TypeName = "date")]
-        public DateTime dob { get; set; }
+        public DateTime DOB { get; set; }
 
-        public int? member_status { get; set; }
+        public int? MemberStatus { get; set; }
 
-        public bool is_admin { get; set; }
+        public bool IsAdmin { get; set; }
 
         [Required]
         [StringLength(40)]
-        public string created_by { get; set; }
+        public string CreatedBy { get; set; }
 
-
-        public DateTime? created_at { get; set; }
+        public DateTime? CreatedAt { get; set; }
 
         [StringLength(40)]
-        public string updated_by { get; set; }
+        public string UpdatedBy { get; set; }
 
-        public DateTime? updated_at { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<activity_logs> activity_logs { get; set; }
+        public DateTime? UpdatedAt { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<chat_room> chat_room { get; set; }
+        public virtual ICollection<ActivityLogs> ActivityLogs { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<deposit> deposits { get; set; }
-
-        public virtual member_status member_status1 { get; set; }
+        public virtual ICollection<ChatRoom> ChatRoom { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<subscription> subscriptions { get; set; }
+        public virtual ICollection<Deposit> Deposits { get; set; }
+
+        public virtual MemberStatus MemberStatus1 { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Subscription> Subscriptions { get; set; }
 
     }
 }

@@ -6,7 +6,7 @@ namespace PMWelfare.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class sysdiagram
+    public partial class Sysdiagram
     {
         [Required]
         [StringLength(128)]

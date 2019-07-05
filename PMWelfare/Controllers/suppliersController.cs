@@ -10,24 +10,24 @@ using PMWelfare.Models;
 
 namespace PMWelfare.Controllers
 {
-    public class suppliersController : Controller
+    public class SuppliersController : Controller
     {
         private welfare db = new welfare();
 
-        // GET: suppliers
+        // GET: Suppliers
         public ActionResult Index()
         {
-            return View(db.suppliers.ToList());
+            return View(db.Suppliers.ToList());
         }
 
-        // GET: suppliers/Details/5
+        // GET: Suppliers/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            supplier supplier = db.suppliers.Find(id);
+            Supplier supplier = db.Suppliers.Find(id);
             if (supplier == null)
             {
                 return HttpNotFound();
@@ -35,22 +35,22 @@ namespace PMWelfare.Controllers
             return View(supplier);
         }
 
-        // GET: suppliers/Create
+        // GET: Suppliers/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: suppliers/Create
+        // POST: Suppliers/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "sup_id,sup_tel,sup_name,email,created_by,created_at,updated_by,updated_at")] supplier supplier)
+        public ActionResult Create([Bind(Include = "SupId,SupTel,SupName,Email,CreatedBy,CreatedAt,UpdatedBy,UpdatedAt")] Supplier supplier)
         {
             if (ModelState.IsValid)
             {
-                db.suppliers.Add(supplier);
+                db.Suppliers.Add(supplier);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -58,14 +58,14 @@ namespace PMWelfare.Controllers
             return View(supplier);
         }
 
-        // GET: suppliers/Edit/5
+        // GET: Suppliers/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            supplier supplier = db.suppliers.Find(id);
+            Supplier supplier = db.Suppliers.Find(id);
             if (supplier == null)
             {
                 return HttpNotFound();
@@ -73,12 +73,12 @@ namespace PMWelfare.Controllers
             return View(supplier);
         }
 
-        // POST: suppliers/Edit/5
+        // POST: Suppliers/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "sup_id,sup_tel,sup_name,email,created_by,created_at,updated_by,updated_at")] supplier supplier)
+        public ActionResult Edit([Bind(Include = "SupId,SupTel,SupName,Email,CreatedBy,CreatedAt,UpdatedBy,UpdatedAt")] Supplier supplier)
         {
             if (ModelState.IsValid)
             {
@@ -89,14 +89,14 @@ namespace PMWelfare.Controllers
             return View(supplier);
         }
 
-        // GET: suppliers/Delete/5
+        // GET: Suppliers/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            supplier supplier = db.suppliers.Find(id);
+            Supplier supplier = db.Suppliers.Find(id);
             if (supplier == null)
             {
                 return HttpNotFound();
@@ -104,13 +104,13 @@ namespace PMWelfare.Controllers
             return View(supplier);
         }
 
-        // POST: suppliers/Delete/5
+        // POST: Suppliers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            supplier supplier = db.suppliers.Find(id);
-            db.suppliers.Remove(supplier);
+            Supplier supplier = db.Suppliers.Find(id);
+            db.Suppliers.Remove(supplier);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
