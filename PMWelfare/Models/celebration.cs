@@ -6,35 +6,40 @@ namespace PMWelfare.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class celebration
+    public partial class Celebration
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public celebration()
+        public Celebration()
         {
-            sup_products = new HashSet<sup_products>();
+            Celebrants = new HashSet<Celebrant>();
+            SupProducts = new HashSet<SupProducts>();
         }
 
         [Key]
-        public int event_id { get; set; }
+        public int EventId { get; set; }
 
         [Required]
         [StringLength(40)]
-        public string event_name { get; set; }
+        public string EventName { get; set; }
 
-        public DateTime event_date { get; set; }
+        public DateTime EventDate { get; set; }
 
         [Required]
         [StringLength(40)]
-        public string created_by { get; set; }
+        public string CreatedBy { get; set; }
 
-        public DateTime? created_at { get; set; }
+        public DateTime? CreatedAt { get; set; }
 
         [StringLength(40)]
-        public string updated_by { get; set; }
+        public string UpdatedBy { get; set; }
 
-        public DateTime? updated_at { get; set; }
+        public DateTime? UpdatedAt { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<sup_products> sup_products { get; set; }
+        public virtual ICollection<SupProducts> SupProducts { get; set; }
+
+        public virtual ICollection<Celebrant> Celebrants { get; set; }
+        public int EventTypeId { get; set; }
+        public virtual EventType EventType { get; set; }
     }
 }

@@ -6,40 +6,40 @@ namespace PMWelfare.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class supplier
+    public partial class Supplier
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public supplier()
+        public Supplier()
         {
-            sup_products = new HashSet<sup_products>();
+            SupProducts = new HashSet<SupProducts>();
         }
 
         [Key]
-        public int sup_id { get; set; }
+        public int SupId { get; set; }
 
         [StringLength(10)]
-        public string sup_tel { get; set; }
+        public string SupTel { get; set; }
 
         [Required]
         [StringLength(40)]
-        public string sup_name { get; set; }
+        public string SupName { get; set; }
 
         [Required]
         [StringLength(40)]
-        public string email { get; set; }
+        public string Email { get; set; }
 
         [Required]
         [StringLength(40)]
-        public string created_by { get; set; }
+        public string CreatedBy { get; set; }
 
-        public DateTime? created_at { get; set; }
+        public DateTime? CreatedAt { get; set; }
 
         [StringLength(40)]
-        public string updated_by { get; set; }
+        public string UpdatedBy { get; set; }
 
-        public DateTime? updated_at { get; set; }
+        public DateTime? UpdatedAt { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<sup_products> sup_products { get; set; }
+        public virtual ICollection<SupProducts> SupProducts { get; set; }
     }
 }

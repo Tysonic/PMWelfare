@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PMWelfare.Models.celebration>
+﻿@model IEnumerable<PMWelfare.Models.Celebration>
 
 @{
     ViewBag.Title = "Index";
@@ -12,22 +12,25 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.event_name)
+            @Html.DisplayNameFor(model => model.EventType.Type)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.event_date)
+            @Html.DisplayNameFor(model => model.EventName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.created_by)
+            @Html.DisplayNameFor(model => model.EventDate)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.created_at)
+            @Html.DisplayNameFor(model => model.CreatedBy)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.updated_by)
+            @Html.DisplayNameFor(model => model.CreatedAt)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.updated_at)
+            @Html.DisplayNameFor(model => model.UpdatedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdatedAt)
         </th>
         <th></th>
     </tr>
@@ -35,27 +38,30 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.event_name)
+            @Html.DisplayFor(modelItem => item.EventType.Type)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.event_date)
+            @Html.DisplayFor(modelItem => item.EventName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.created_by)
+            @Html.DisplayFor(modelItem => item.EventDate)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.created_at)
+            @Html.DisplayFor(modelItem => item.CreatedBy)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.updated_by)
+            @Html.DisplayFor(modelItem => item.CreatedAt)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.updated_at)
+            @Html.DisplayFor(modelItem => item.UpdatedBy)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.event_id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.event_id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.event_id })
+            @Html.DisplayFor(modelItem => item.UpdatedAt)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.EventId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.EventId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.EventId })
         </td>
     </tr>
 }

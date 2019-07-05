@@ -6,7 +6,7 @@ namespace PMWelfare.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class deposit
+    public partial class Deposit
     {
         [Key]
         public int dep_id { get; set; }
@@ -16,18 +16,17 @@ namespace PMWelfare.Models
 
         [Column(TypeName = "money")]
         public decimal amount { get; set; }
-
         [Required]
         [StringLength(40)]
-        public string created_by { get; set; }
+        public string CreatedBy { get; set; }
 
-        public DateTime? created_at { get; set; }
+        public DateTime? CreatedAt { get; set; }
 
         [StringLength(40)]
-        public string updated_by { get; set; }
+        public string UpdatedBy { get; set; }
 
-        public DateTime? updated_at { get; set; }
+        public DateTime? UpdatedAt { get; set; }
 
-        public virtual member member { get; set; }
+        public virtual Member member { get; set; }
     }
 }

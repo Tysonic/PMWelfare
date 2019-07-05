@@ -12,185 +12,188 @@ namespace PMWelfare.Models
         {
         }
 
-        public virtual DbSet<activity_logs> activity_logs { get; set; }
-        public virtual DbSet<celebration> celebrations { get; set; }
-        public virtual DbSet<chat_room> chat_room { get; set; }
-        public virtual DbSet<deposit> deposits { get; set; }
-        public virtual DbSet<expens> expenses { get; set; }
-        public virtual DbSet<member_status> member_status { get; set; }
-        public virtual DbSet<member> members { get; set; }
-        public virtual DbSet<monthly_summary> monthly_summary { get; set; }
-        public virtual DbSet<subscription> subscriptions { get; set; }
-        public virtual DbSet<sup_products> sup_products { get; set; }
-        public virtual DbSet<supplier> suppliers { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<ActivityLogs> ActivityLogs { get; set; }
+        public virtual DbSet<Celebration> Celebrations { get; set; }
+        public virtual DbSet<ChatRoom> chatRoom { get; set; }
+        public virtual DbSet<Deposit> Deposits { get; set; }
+        public virtual DbSet<Expense> Expenses { get; set; }
+        public virtual DbSet<Celebrant> Celebrants { get; set; }
+        public virtual DbSet<EventType> EventTypes { get; set; }
+        public virtual DbSet<MemberStatus> Member_Status { get; set; }
+        public virtual DbSet<Member> Members { get; set; }
+        public virtual DbSet<MonthlySummary> Monthlysummary { get; set; }
+        public virtual DbSet<Subscription> Subscriptions { get; set; }
+        public virtual DbSet<SupProducts> SupProducts { get; set; }
+        public virtual DbSet<Supplier> Suppliers { get; set; }
+        public virtual DbSet<Sysdiagram> Sysdiagrams { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<activity_logs>()
+
+            modelBuilder.Entity<ActivityLogs>()
+                .Property(e => e.UserName)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ActivityLogs>()
+                .Property(e => e.DeviceIp)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ActivityLogs>()
+                .Property(e => e.DeviceMac)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Celebration>()
+                .Property(e => e.EventName)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Celebration>()
+                .Property(e => e.CreatedBy)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Celebration>()
+                .Property(e => e.UpdatedBy)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ChatRoom>()
                 .Property(e => e.user_name)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<activity_logs>()
-                .Property(e => e.device_ip)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<activity_logs>()
-                .Property(e => e.device_mac)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<celebration>()
-                .Property(e => e.event_name)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<celebration>()
-                .Property(e => e.created_by)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<celebration>()
-                .Property(e => e.updated_by)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<chat_room>()
-                .Property(e => e.user_name)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<chat_room>()
+            modelBuilder.Entity<ChatRoom>()
                 .Property(e => e.message)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<chat_room>()
+            modelBuilder.Entity<ChatRoom>()
                 .Property(e => e.updated_by)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<deposit>()
+            modelBuilder.Entity<Deposit>()
                 .Property(e => e.user_name)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<deposit>()
+            modelBuilder.Entity<Deposit>()
                 .Property(e => e.amount)
                 .HasPrecision(19, 4);
 
-            modelBuilder.Entity<deposit>()
-                .Property(e => e.created_by)
+            modelBuilder.Entity<Deposit>()
+                .Property(e => e.CreatedBy)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<deposit>()
-                .Property(e => e.updated_by)
+            modelBuilder.Entity<Deposit>()
+                .Property(e => e.UpdatedBy)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<expens>()
-                .Property(e => e.created_by)
+            modelBuilder.Entity<Expense>()
+                .Property(e => e.CreatedBy)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<expens>()
-                .Property(e => e.updated_by)
+            modelBuilder.Entity<Expense>()
+                .Property(e => e.UpdatedBy)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<member_status>()
-                .Property(e => e.member_status1)
+            modelBuilder.Entity<MemberStatus>()
+                .Property(e => e.MemberStatus1)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<member_status>()
-                .Property(e => e.created_by)
+            modelBuilder.Entity<MemberStatus>()
+                .Property(e => e.CreatedBy)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<member_status>()
-                .Property(e => e.updated_by)
+            modelBuilder.Entity < MemberStatus > ()
+                .Property(e => e.UpdatedBy)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<member_status>()
-                .HasMany(e => e.members)
-                .WithOptional(e => e.member_status1)
-                .HasForeignKey(e => e.member_status);
+            modelBuilder.Entity<MemberStatus>()
+                .HasMany(e => e.Members)
+                .WithOptional(e => e.MemberStatus1)
+                .HasForeignKey(e => e.MemberStatus);
 
-            modelBuilder.Entity<member>()
-                .Property(e => e.user_name)
+            modelBuilder.Entity<Member>()
+                .Property(e => e.UserName)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<member>()
-                .Property(e => e.first_name)
+            modelBuilder.Entity<Member>()
+                .Property(e => e.FirstName)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<member>()
-                .Property(e => e.other_name)
+            modelBuilder.Entity<Member>()
+                .Property(e => e.OtherName)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<member>()
-                .Property(e => e.email)
+            modelBuilder.Entity<Member>()
+                .Property(e => e.Email)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<member>()
-                .Property(e => e.created_by)
+            modelBuilder.Entity<Member>()
+                .Property(e => e.CreatedBy)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<member>()
-                .Property(e => e.updated_by)
+            modelBuilder.Entity<Member>()
+                .Property(e => e.UpdatedBy)
                 .IsUnicode(false);
 
 
-            modelBuilder.Entity<monthly_summary>()
-                .Property(e => e.closing_balance)
+            modelBuilder.Entity<MonthlySummary>()
+                .Property(e => e.ClosingBalance)
                 .HasPrecision(19, 4);
 
-            modelBuilder.Entity<monthly_summary>()
-                .Property(e => e.created_by)
+            modelBuilder.Entity<MonthlySummary>()
+                .Property(e => e.CreatedBy)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<monthly_summary>()
-                .Property(e => e.updated_by)
+            modelBuilder.Entity<MonthlySummary>()
+                .Property(e => e.UpdatedBy)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<subscription>()
-                .Property(e => e.user_name)
+            modelBuilder.Entity<Subscription>()
+                .Property(e => e.UserName)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<subscription>()
-                .Property(e => e.amount)
+            modelBuilder.Entity<Subscription>()
+                .Property(e => e.Amount)
                 .HasPrecision(19, 4);
 
-            modelBuilder.Entity<subscription>()
-                .Property(e => e.created_by)
+            modelBuilder.Entity<Subscription>()
+                .Property(e => e.CreatedBy)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<subscription>()
-                .Property(e => e.updated_by)
+            modelBuilder.Entity<Subscription>()
+                .Property(e => e.UpdatedBy)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<sup_products>()
-                .Property(e => e.prod_name)
+            modelBuilder.Entity<SupProducts>()
+                .Property(e => e.ProductName)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<sup_products>()
-                .Property(e => e.price)
+            modelBuilder.Entity<SupProducts>()
+                .Property(e => e.UnitPrice)
                 .HasPrecision(19, 4);
 
-            modelBuilder.Entity<sup_products>()
-                .Property(e => e.created_by)
+            modelBuilder.Entity<SupProducts>()
+                .Property(e => e.CreatedBy)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<sup_products>()
-                .Property(e => e.updated_by)
+            modelBuilder.Entity<SupProducts>()
+                .Property(e => e.UpdatedBy)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<supplier>()
-                .Property(e => e.sup_tel)
+            modelBuilder.Entity<Supplier>()
+                .Property(e => e.SupTel)
                 .IsFixedLength();
 
-            modelBuilder.Entity<supplier>()
-                .Property(e => e.sup_name)
+            modelBuilder.Entity<Supplier>()
+                .Property(e => e.SupName)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<supplier>()
-                .Property(e => e.email)
+            modelBuilder.Entity<Supplier>()
+                .Property(e => e.Email)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<supplier>()
-                .Property(e => e.created_by)
+            modelBuilder.Entity<Supplier>()
+                .Property(e => e.CreatedBy)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<supplier>()
-                .Property(e => e.updated_by)
+            modelBuilder.Entity<Supplier>()
+                .Property(e => e.UpdatedBy)
                 .IsUnicode(false);
 
         }

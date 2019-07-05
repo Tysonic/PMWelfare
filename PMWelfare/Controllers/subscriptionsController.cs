@@ -10,25 +10,25 @@ using PMWelfare.Models;
 
 namespace PMWelfare.Controllers
 {
-    public class subscriptionsController : Controller
+    public class SubscriptionsController : Controller
     {
         private welfare db = new welfare();
 
-        // GET: subscriptions
+        // GET: Subscriptions
         public ActionResult Index()
         {
-            var subscriptions = db.subscriptions.Include(s => s.member);
+            var subscriptions = db.Subscriptions.Include(s => s.Member);
             return View(subscriptions.ToList());
         }
 
-        // GET: subscriptions/Details/5
+        // GET: Subscriptions/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            subscription subscription = db.subscriptions.Find(id);
+            Subscription subscription = db.Subscriptions.Find(id);
             if (subscription == null)
             {
                 return HttpNotFound();
@@ -36,53 +36,53 @@ namespace PMWelfare.Controllers
             return View(subscription);
         }
 
-        // GET: subscriptions/Create
+        // GET: Subscriptions/Create
         public ActionResult Create()
         {
-            ViewBag.user_name = new SelectList(db.members, "user_name", "first_name");
+            ViewBag.UserName = new SelectList(db.Members, "UserName", "FirstName");
             return View();
         }
 
-        // POST: subscriptions/Create
+        // POST: Subscriptions/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "sub_id,user_name,amount,sub_month,sub_year,created_by,created_at,updated_by,updated_at")] subscription subscription)
+        public ActionResult Create([Bind(Include = "SubId,UserName,Amount,SubMonth,SubYear,CreatedBy,CreatedAt,UpdatedBy,UpdatedAt")] Subscription subscription)
         {
             if (ModelState.IsValid)
             {
-                db.subscriptions.Add(subscription);
+                db.Subscriptions.Add(subscription);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.user_name = new SelectList(db.members, "user_name", "first_name", subscription.user_name);
+            ViewBag.UserName = new SelectList(db.Members, "UserName", "FirstName", subscription.UserName);
             return View(subscription);
         }
 
-        // GET: subscriptions/Edit/5
+        // GET: Subscriptions/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            subscription subscription = db.subscriptions.Find(id);
+            Subscription subscription = db.Subscriptions.Find(id);
             if (subscription == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.user_name = new SelectList(db.members, "user_name", "first_name", subscription.user_name);
+            ViewBag.UserName = new SelectList(db.Members, "UserName", "FirstName", subscription.UserName);
             return View(subscription);
         }
 
-        // POST: subscriptions/Edit/5
+        // POST: Subscriptions/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "sub_id,user_name,amount,sub_month,sub_year,created_by,created_at,updated_by,updated_at")] subscription subscription)
+        public ActionResult Edit([Bind(Include = "SubId,UserName,Amount,SubMonth,SubYear,CreatedBy,CreatedAt,UpdatedBy,UpdatedAt")] Subscription subscription)
         {
             if (ModelState.IsValid)
             {
@@ -90,18 +90,18 @@ namespace PMWelfare.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.user_name = new SelectList(db.members, "user_name", "first_name", subscription.user_name);
+            ViewBag.UserName = new SelectList(db.Members, "UserName", "FirstName", subscription.UserName);
             return View(subscription);
         }
 
-        // GET: subscriptions/Delete/5
+        // GET: Subscriptions/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            subscription subscription = db.subscriptions.Find(id);
+            Subscription subscription = db.Subscriptions.Find(id);
             if (subscription == null)
             {
                 return HttpNotFound();
@@ -109,13 +109,13 @@ namespace PMWelfare.Controllers
             return View(subscription);
         }
 
-        // POST: subscriptions/Delete/5
+        // POST: Subscriptions/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            subscription subscription = db.subscriptions.Find(id);
-            db.subscriptions.Remove(subscription);
+            Subscription subscription = db.Subscriptions.Find(id);
+            db.Subscriptions.Remove(subscription);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -10,32 +10,24 @@ using PMWelfare.Models;
 
 namespace PMWelfare.Controllers
 {
-    public class depositsController : Controller
+    public class DepositsController : Controller
     {
         private welfare db = new welfare();
 
-        // GET: deposits
+        // GET: Deposits
         public ActionResult Index()
         {
-            var deposits = db.deposits.Include(s => s.member);
-            return View(deposits.ToList());
+            return View(db.Deposits.ToList());
         }
-          
-        //public ActionResult Collections()
-        //{
-        //    var coll = db.deposits.SqlQuery("select *  from deposits ");
 
-        //    return View(coll.ToList());
-        //}
-
-        // GET: deposits/Details/5
+        // GET: Deposits/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            deposit deposit = db.deposits.Find(id);
+            Deposit deposit = db.Deposits.Find(id);
             if (deposit == null)
             {
                 return HttpNotFound();
@@ -43,53 +35,50 @@ namespace PMWelfare.Controllers
             return View(deposit);
         }
 
-        // GET: deposits/Create
+        // GET: Deposits/Create
         public ActionResult Create()
         {
-            ViewBag.user_name = new SelectList(db.members, "user_name", "first_name");
             return View();
         }
 
-        // POST: deposits/Create
+        // POST: Deposits/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "dep_id,user_name,amount,created_by,created_at,updated_by,updated_at")] deposit deposit)
+        public ActionResult Create([Bind(Include = "dep_id,user_name,amount,CreatedBy,CreatedAt,UpdatedBy,UpdatedAt")] Deposit deposit)
         {
             if (ModelState.IsValid)
             {
-                db.deposits.Add(deposit);
+                db.Deposits.Add(deposit);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.user_name = new SelectList(db.members, "user_name", "first_name", deposit.user_name);
             return View(deposit);
         }
 
-        // GET: deposits/Edit/5
+        // GET: Deposits/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            deposit deposit = db.deposits.Find(id);
+            Deposit deposit = db.Deposits.Find(id);
             if (deposit == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.user_name = new SelectList(db.members, "user_name", "first_name", deposit.user_name);
             return View(deposit);
         }
 
-        // POST: deposits/Edit/5
+        // POST: Deposits/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "dep_id,user_name,amount,created_by,created_at,updated_by,updated_at")] deposit deposit)
+        public ActionResult Edit([Bind(Include = "dep_id,user_name,amount,CreatedBy,CreatedAt,UpdatedBy,UpdatedAt")] Deposit deposit)
         {
             if (ModelState.IsValid)
             {
@@ -97,18 +86,17 @@ namespace PMWelfare.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.user_name = new SelectList(db.members, "user_name", "first_name", deposit.user_name);
             return View(deposit);
         }
 
-        // GET: deposits/Delete/5
+        // GET: Deposits/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            deposit deposit = db.deposits.Find(id);
+            Deposit deposit = db.Deposits.Find(id);
             if (deposit == null)
             {
                 return HttpNotFound();
@@ -116,13 +104,13 @@ namespace PMWelfare.Controllers
             return View(deposit);
         }
 
-        // POST: deposits/Delete/5
+        // POST: Deposits/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            deposit deposit = db.deposits.Find(id);
-            db.deposits.Remove(deposit);
+            Deposit deposit = db.Deposits.Find(id);
+            db.Deposits.Remove(deposit);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
