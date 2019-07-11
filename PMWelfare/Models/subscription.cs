@@ -8,14 +8,25 @@ namespace PMWelfare.Models
 
     public partial class Subscription
     {
+
+       
+        private string s;
+
+        public Subscription() { }
+
         [Key]
         public int SubId { get; set; }
 
         [StringLength(40)]
         public string UserName { get; set; }
 
+        public Subscription(string s)
+        {
+            this.UserName = s;
+        }
+
         [Column(TypeName = "money")]
-        public decimal Amount { get; set; }
+        public decimal? Amount { get; set; }
 
         public byte SubMonth { get; set; }
 
@@ -33,5 +44,12 @@ namespace PMWelfare.Models
         public DateTime? UpdatedAt { get; set; }
 
         public virtual Member Member { get; set; }
+        public class SubscriberViewModel
+            {
+             public String Username { get; set; }
+            public Decimal? Amount { get; set; }
+
+
+}
     }
 }

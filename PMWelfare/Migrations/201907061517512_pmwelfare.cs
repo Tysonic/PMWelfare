@@ -3,7 +3,7 @@ namespace PMWelfare.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class PmWelfare : DbMigration
+    public partial class pmwelfare : DbMigration
     {
         public override void Up()
         {
@@ -62,18 +62,17 @@ namespace PMWelfare.Migrations
                 "dbo.Deposits",
                 c => new
                     {
-                        dep_id = c.Int(nullable: false, identity: true),
-                        user_name = c.String(maxLength: 40, unicode: false),
-                        amount = c.Decimal(nullable: false, storeType: "money"),
+                        DepositId = c.Int(nullable: false, identity: true),
+                        UserName = c.String(maxLength: 40, unicode: false),
+                        Amount = c.Decimal(nullable: false, storeType: "money"),
                         CreatedBy = c.String(nullable: false, maxLength: 40, unicode: false),
                         CreatedAt = c.DateTime(),
                         UpdatedBy = c.String(maxLength: 40, unicode: false),
                         UpdatedAt = c.DateTime(),
-                        member_UserName = c.String(maxLength: 40, unicode: false),
                     })
-                .PrimaryKey(t => t.dep_id)
-                .ForeignKey("dbo.Members", t => t.member_UserName)
-                .Index(t => t.member_UserName);
+                .PrimaryKey(t => t.DepositId)
+                .ForeignKey("dbo.Members", t => t.UserName)
+                .Index(t => t.UserName);
             
             CreateTable(
                 "dbo.MemberStatus",
@@ -131,11 +130,11 @@ namespace PMWelfare.Migrations
                         CreatedAt = c.DateTime(),
                         UpdatedBy = c.String(maxLength: 40, unicode: false),
                         UpdatedAt = c.DateTime(),
-                        EventType_Id = c.Int(),
+                        EventTypeId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.EventId)
-                .ForeignKey("dbo.EventType", t => t.EventType_Id)
-                .Index(t => t.EventType_Id);
+                .ForeignKey("dbo.EventType", t => t.EventTypeId, cascadeDelete: true)
+                .Index(t => t.EventTypeId);
             
             CreateTable(
                 "dbo.EventType",
@@ -237,21 +236,21 @@ namespace PMWelfare.Migrations
             DropForeignKey("dbo.SupProducts", "SupId", "dbo.Suppliers");
             DropForeignKey("dbo.expenses", "ProductId", "dbo.SupProducts");
             DropForeignKey("dbo.SupProducts", "EventId", "dbo.Celebrations");
-            DropForeignKey("dbo.Celebrations", "EventType_Id", "dbo.EventType");
+            DropForeignKey("dbo.Celebrations", "EventTypeId", "dbo.EventType");
             DropForeignKey("dbo.Celebrants", "EventId", "dbo.Celebrations");
             DropForeignKey("dbo.Subscriptions", "UserName", "dbo.Members");
             DropForeignKey("dbo.Members", "MemberStatus", "dbo.MemberStatus");
-            DropForeignKey("dbo.Deposits", "member_UserName", "dbo.Members");
+            DropForeignKey("dbo.Deposits", "UserName", "dbo.Members");
             DropForeignKey("dbo.ChatRooms", "member_UserName", "dbo.Members");
             DropForeignKey("dbo.ActivityLogs", "UserName", "dbo.Members");
             DropIndex("dbo.expenses", new[] { "ProductId" });
             DropIndex("dbo.SupProducts", new[] { "SupId" });
             DropIndex("dbo.SupProducts", new[] { "EventId" });
-            DropIndex("dbo.Celebrations", new[] { "EventType_Id" });
+            DropIndex("dbo.Celebrations", new[] { "EventTypeId" });
             DropIndex("dbo.Celebrants", new[] { "EventId" });
             DropIndex("dbo.Celebrants", new[] { "UserName" });
             DropIndex("dbo.Subscriptions", new[] { "UserName" });
-            DropIndex("dbo.Deposits", new[] { "member_UserName" });
+            DropIndex("dbo.Deposits", new[] { "UserName" });
             DropIndex("dbo.ChatRooms", new[] { "member_UserName" });
             DropIndex("dbo.Members", new[] { "MemberStatus" });
             DropIndex("dbo.ActivityLogs", new[] { "UserName" });

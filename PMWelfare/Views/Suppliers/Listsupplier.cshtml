@@ -1,0 +1,45 @@
+﻿@model IEnumerable<PMWelfare.Models.Supplier.supplierlistViewModel>
+
+@{
+    ViewBag.Title = "Listsupplier";
+}
+
+<h2>Listsupplier</h2>
+
+<p>
+    @Html.ActionLink("Back", "Index")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.supplier_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.product_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.product_price)
+
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.supplier_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.product_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.product_price)
+            </td>
+
+
+        </tr>
+    }
+
+</table>
+
+

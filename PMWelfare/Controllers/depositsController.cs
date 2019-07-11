@@ -17,7 +17,8 @@ namespace PMWelfare.Controllers
         // GET: Deposits
         public ActionResult Index()
         {
-            return View(db.Deposits.ToList());
+            var deposits = db.Deposits.Include(d => d.Member);
+            return View(deposits.ToList());
         }
 
         // GET: Deposits/Details/5
@@ -38,6 +39,7 @@ namespace PMWelfare.Controllers
         // GET: Deposits/Create
         public ActionResult Create()
         {
+            ViewBag.UserName = new SelectList(db.Members, "UserName", "UserName");
             return View();
         }
 
@@ -46,7 +48,7 @@ namespace PMWelfare.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "dep_id,user_name,amount,CreatedBy,CreatedAt,UpdatedBy,UpdatedAt")] Deposit deposit)
+        public ActionResult Create([Bind(Include = "DepositId,UserName,Amount,CreatedBy,CreatedAt,UpdatedBy,UpdatedAt")] Deposit deposit)
         {
             if (ModelState.IsValid)
             {
@@ -55,6 +57,7 @@ namespace PMWelfare.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.UserName = new SelectList(db.Members, "UserName", "UserName", deposit.UserName);
             return View(deposit);
         }
 
@@ -70,6 +73,7 @@ namespace PMWelfare.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.UserName = new SelectList(db.Members, "UserName", "FirstName", deposit.UserName);
             return View(deposit);
         }
 
@@ -78,7 +82,7 @@ namespace PMWelfare.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "dep_id,user_name,amount,CreatedBy,CreatedAt,UpdatedBy,UpdatedAt")] Deposit deposit)
+        public ActionResult Edit([Bind(Include = "DepositId,UserName,Amount,CreatedBy,CreatedAt,UpdatedBy,UpdatedAt")] Deposit deposit)
         {
             if (ModelState.IsValid)
             {
@@ -86,6 +90,7 @@ namespace PMWelfare.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.UserName = new SelectList(db.Members, "UserName", "FirstName", deposit.UserName);
             return View(deposit);
         }
 
@@ -123,5 +128,9 @@ namespace PMWelfare.Controllers
             }
             base.Dispose(disposing);
         }
+        // public ActionResult TotalDeposits()
+        //{
+        //    var  
+        //}
     }
 }

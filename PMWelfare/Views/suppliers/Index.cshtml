@@ -35,35 +35,38 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.SupTel)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SupName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedBy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedAt)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UpdatedBy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UpdatedAt)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.SupId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.SupId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.SupId })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SupTel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SupName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdatedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdatedAt)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.SupId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.SupId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.SupId })
+            </td>
+        </tr>
+    }
 
 </table>
+
+

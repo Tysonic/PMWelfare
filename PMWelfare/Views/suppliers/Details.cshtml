@@ -67,6 +67,9 @@
         </dd>
 
     </dl>
+    @{
+        Html.RenderAction("CurrentAdvances", "Subscriptions");
+    };
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.SupId }) |

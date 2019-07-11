@@ -7,13 +7,13 @@ namespace PMWelfare.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class PmWelfare : IMigrationMetadata
+    public sealed partial class welfare : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(PmWelfare));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(welfare));
         
         string IMigrationMetadata.Id
         {
-            get { return "201907051007506_PmWelfare"; }
+            get { return "201907090847496_welfare"; }
         }
         
         string IMigrationMetadata.Source

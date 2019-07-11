@@ -67,11 +67,11 @@ namespace PMWelfare.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<Deposit>()
-                .Property(e => e.user_name)
+                .Property(e => e.UserName)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Deposit>()
-                .Property(e => e.amount)
+                .Property(e => e.Amount)
                 .HasPrecision(19, 4);
 
             modelBuilder.Entity<Deposit>()

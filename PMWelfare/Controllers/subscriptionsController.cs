@@ -119,7 +119,83 @@ namespace PMWelfare.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        [ChildActionOnly]
+        public ActionResult CurrentAdvances()
+        {
+            var ad = (from t1 in db.Subscriptions
+                      where ((t1.SubMonth > DateTime.Now.Month && t1.SubYear == DateTime.Now.Year)
+                      || t1.SubYear > DateTime.Now.Year)
+                      select t1.Amount).DefaultIfEmpty().Sum();
 
+            var advance = db.Subscriptions.Where(s => (s.SubMonth > DateTime.Now.Month && s.SubYear == DateTime.Now.Year)
+           || s.SubYear > DateTime.Now.Year).DefaultIfEmpty().Sum(s => s.Amount);
+
+            ViewBag.Advances = advance;
+
+            return PartialView();
+        }
+        public ActionResult Arrears() {
+            //var today = DateTime.Now;
+            //int month = today.Month;
+            //int year = today.Year;
+            //int monthFour = today.AddMonths(-4).Month;//this gets the last 4th month
+            //List<string> subscriber = db.Subscriptions
+            //              .Where(s => s.SubMonth <= month && s.SubMonth >= monthFour && s.SubYear == year)
+            //              .Select(s => s.UserName).ToList();
+            //var all = db.Members.Select(s => s.UserName).ToList();
+            //List<Subscription> play = new List<Subscription>();
+            //List<Subscription> user = new List<Subscription>();
+            //subscriber.ForEach(s => play.Add(new Subscription(s)));
+            //List<string> notsub = all.Except(subscriber).ToList();
+            //notsub.ForEach(s => user.Add(new Subscription(s)));
+
+            //{ int month = DateTime.Now.Month;
+            //    int year = DateTime.Now.Year;
+            //if () { }
+            //var subscribers = db.Subscriptions
+            //   .Where(s => s.SubMonth == month && s.SubYear == year)
+            //   .Select(s => s.UserName).Distinct().ToList();
+            //var all = db.Members.Select(s => s.UserName).Distinct().ToList();
+
+            //List<string> notsub = all.Except(subscribers).ToList();
+
+            //List<Subscription> user = new List<Subscription>();
+            //List<Subscription> queries = new List<Subscription>();
+            //notsub.ForEach(s => user.Add(new Subscription(s)));
+
+            List<Subscription> user = new List<Subscription>();
+            DateTime iterationDate = DateTime.UtcNow;
+            var subscribers =
+                db.Subscriptions.Where(
+                    s => s.SubMonth == iterationDate.Month
+                        && s.SubYear == iterationDate.Year);
+
+            for (int i = 5; i != 0; i--)
+            {
+                iterationDate = iterationDate.AddMonths(-1);
+                subscribers = subscribers.Union(
+                    db.Subscriptions.Where(
+                    s => s.SubMonth == iterationDate.Month
+                        && s.SubYear == iterationDate.Year).ToList()
+                );
+
+            }
+            var subscriberNames = subscribers.Select(s => s.UserName).ToList();
+            var sub = db.Members.Select(m => m.UserName)
+           .Where(u => subscriberNames.All(s => s != u))
+           .ToList();
+            sub.ForEach(s => user.Add(new Subscription(s)));
+              foreach(var m in user)
+            {
+                var u = m.UserName.ToString();
+                
+
+            }
+
+            return View(user);
+ 
+
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -128,5 +204,12 @@ namespace PMWelfare.Controllers
             }
             base.Dispose(disposing);
         }
+        //private  string  GetArrears()
+
+        //{
+            
+            
+        //}
+
     }
 }

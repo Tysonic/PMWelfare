@@ -35,6 +35,31 @@ namespace PMWelfare.Controllers
             }
             return View(expense);
         }
+       
+        public ActionResult MonthlyExpenses()
+        {
+          var expenses = from t1 in db.Expenses
+                         join t2 in db.SupProducts on t1.ProductId equals t2.ProductId
+                         join t3 in db.Celebrations on t2.EventId equals t3.EventId
+                         where t3.EventDate.Month == DateTime.Now.Month
+                         select new Expense.MonthlyExpensesViewModel
+                            {
+                               quantity = t1.Quantity,
+                               product_name = t2.ProductName,
+                               event_name = t3.EventName,
+                               productprice = t2.UnitPrice,
+                               TotalPrice = t1.Quantity * t2.UnitPrice
+
+                              };
+            var totalexpenses = (from t4 in db.Expenses
+                                 join t5 in db.SupProducts on t4.ProductId equals t5.ProductId
+                                 join t6 in db.Celebrations on t5.EventId equals t6.EventId
+                                 where t6.EventDate.Month == DateTime.Now.Month
+                                 select
+                                (t5.UnitPrice * t4.Quantity)).DefaultIfEmpty().Sum();
+            ViewBag.TotalExpenses = totalexpenses;
+            return View(expenses);
+        }
 
         // GET: Expenses/Create
         public ActionResult Create()

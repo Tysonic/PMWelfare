@@ -22,22 +22,25 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Add Staff", "Create", "Members")</li>
-                    <li>@Html.ActionLink("Deposits", "Create", "deposits")</li>
+                    <li>@Html.ActionLink("Deposits", "Create", "Deposits")</li>
                     <li>@Html.ActionLink("Events", "Create", "Celebrations")</li>
-                    <li>@Html.ActionLink("Monthly Summery", "index", "monthly_summary")</li>
-                    <li>@Html.ActionLink("Celebration products", "Create", "sup_products")</li>
-                    <li>@Html.ActionLink("memberstatus", "Create", "member_status")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Supplier products", "Create", "SupProducts")</li>
+                    <li>@Html.ActionLink("memberstatus", "Create", "MemberStatus")</li>
+                    <li>@Html.ActionLink("Expenses", "Create", "Expenses")</li>
+                    <li>@Html.ActionLink("MonthlySummary", "MonthlySummary", "Subscriptions")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
+   
     <div class="container body-content">
         @RenderBody()
         <hr />
+
+        @Html.Partial("_CurrentAdvances")
         <footer>
+
             <p>&copy; @DateTime.Now.Year - URA PMW_welfare</p>
         </footer>
     </div>
