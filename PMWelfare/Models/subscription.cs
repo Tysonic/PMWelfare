@@ -8,30 +8,36 @@ namespace PMWelfare.Models
 
     public partial class Subscription
     {
+        private string s;
+
+        public Subscription() { }
+
+
+        public Subscription(string s)
+        {
+            this.UserName = s;
+        }
+
+
         [Key]
         public int SubId { get; set; }
 
         [StringLength(40)]
         public string UserName { get; set; }
 
-        [Column(TypeName = "money")]
-        public decimal Amount { get; set; }
+ 
 
-        public byte SubMonth { get; set; }
+
+        [Column(TypeName = "money")]
+        public decimal? Amount { get; set; }
+
+        public int SubMonth { get; set; }
 
         public int SubYear { get; set; }
 
-        [Required]
-        [StringLength(40)]
-        public string CreatedBy { get; set; }
-
-        public DateTime? CreatedAt { get; set; }
-
-        [StringLength(40)]
-        public string UpdatedBy { get; set; }
-
-        public DateTime? UpdatedAt { get; set; }
 
         public virtual Member Member { get; set; }
+
     }
+
 }

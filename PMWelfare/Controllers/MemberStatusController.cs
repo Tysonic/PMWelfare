@@ -17,7 +17,7 @@ namespace PMWelfare.Controllers
         // GET: MemberStatus
         public ActionResult Index()
         {
-            return View(db.Member_Status.ToList());
+            return View(db.MemberStatus.ToList());
         }
 
         // GET: MemberStatus/Details/5
@@ -27,7 +27,7 @@ namespace PMWelfare.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MemberStatus memberStatus = db.Member_Status.Find(id);
+            MemberStatus memberStatus = db.MemberStatus.Find(id);
             if (memberStatus == null)
             {
                 return HttpNotFound();
@@ -50,7 +50,7 @@ namespace PMWelfare.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Member_Status.Add(memberStatus);
+                db.MemberStatus.Add(memberStatus);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -65,7 +65,7 @@ namespace PMWelfare.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MemberStatus memberStatus = db.Member_Status.Find(id);
+            MemberStatus memberStatus = db.MemberStatus.Find(id);
             if (memberStatus == null)
             {
                 return HttpNotFound();
@@ -96,7 +96,7 @@ namespace PMWelfare.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MemberStatus memberStatus = db.Member_Status.Find(id);
+            MemberStatus memberStatus = db.MemberStatus.Find(id);
             if (memberStatus == null)
             {
                 return HttpNotFound();
@@ -109,8 +109,8 @@ namespace PMWelfare.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            MemberStatus memberStatus = db.Member_Status.Find(id);
-            db.Member_Status.Remove(memberStatus);
+            MemberStatus memberStatus = db.MemberStatus.Find(id);
+            db.MemberStatus.Remove(memberStatus);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -123,5 +123,11 @@ namespace PMWelfare.Controllers
             }
             base.Dispose(disposing);
         }
+        //public ActionResult CashAt()
+        //{
+        //    var cash = db.Monthlysummary.Where(s => s.CreatedAt.Value.Month == DateTime.Now.Month
+        //    && s.CreatedAt.Value.Year == DateTime.Now.Year).SelectMany(s => s.Split(''));
+        //    return View();
+        //}
     }
 }

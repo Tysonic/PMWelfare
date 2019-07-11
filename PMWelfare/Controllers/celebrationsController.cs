@@ -128,5 +128,32 @@ namespace PMWelfare.Controllers
             }
             base.Dispose(disposing);
         }
+        public ActionResult Events()
+        {
+            var events = db.Celebrations.Join(db.Celebrants, s =>
+            s.EventId, m => m.EventId, (s, m) => new { s.EventType, s.EventDate, m.UserName, s.CreatedAt, s.Celebrants }).Where(s => 
+            s.CreatedAt.Value.Month == DateTime.Now.Month
+            && s.CreatedAt.Value.Year == DateTime.Now.Year)
+            .Select(s => new { s.EventType, s.Celebrants,s.EventDate })
+            .ToList();
+
+            ViewBag.events = events;
+            return View();
+        }
+        public ActionResult Totalevents()
+        {
+           var events = db.Celebrations.Where(s => s.CreatedAt
+           .Value.Month == DateTime.Now.Month
+            && s.CreatedAt.Value.Year == DateTime.Now.Year)
+            .Select(s => s.EventId).Count();
+            ViewBag.events = events;
+            return View();
+        }
+        //public ActionResult Events()
+        //{
+        //    var events = db.Celebrations.Where(s => s.CreatedAt.Value.Month == DateTime.Now.Month
+        //    && s.CreatedAt.Value.Year == DateTime.Now.Year).SelectMany(s=>s.Celebrants);
+        //    return View();
+        //}
     }
 }

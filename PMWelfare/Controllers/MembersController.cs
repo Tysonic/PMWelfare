@@ -39,7 +39,7 @@ namespace PMWelfare.Controllers
         // GET: Members/Create
         public ActionResult Create()
         {
-            ViewBag.MemberStatus = new SelectList(db.Member_Status, "id", "MemberStatus1");
+            ViewBag.MemberStatus = new SelectList(db.MemberStatus, "MembersStatusID", "MemberStatus1");
             return View();
         }
 
@@ -57,7 +57,7 @@ namespace PMWelfare.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.MemberStatus = new SelectList(db.Member_Status, "id", "MemberStatus1", member.MemberStatus);
+            ViewBag.MemberStatus = new SelectList(db.MemberStatus, "MembersStatusID", "MemberStatus1", member.MemberStatus);
             return View(member);
         }
 
@@ -73,7 +73,7 @@ namespace PMWelfare.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.MemberStatus = new SelectList(db.Member_Status, "id", "MemberStatus1", member.MemberStatus);
+            ViewBag.MemberStatus = new SelectList(db.MemberStatus, "MembersStatusID", "MemberStatus1", member.MemberStatus);
             return View(member);
         }
 
@@ -90,7 +90,7 @@ namespace PMWelfare.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.MemberStatus = new SelectList(db.Member_Status, "id", "MemberStatus1", member.MemberStatus);
+            ViewBag.MemberStatus = new SelectList(db.MemberStatus, "MembersStatusID", "MemberStatus1", member.MemberStatus);
             return View(member);
         }
 

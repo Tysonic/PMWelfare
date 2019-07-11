@@ -14,7 +14,8 @@ namespace PMWelfare.Models
             Members = new HashSet<Member>();
         }
 
-        public int id { get; set; }
+        [Key]
+        public int MembersStatusID { get; set; }
 
         [Column("MemberStatus")]
         [Required]

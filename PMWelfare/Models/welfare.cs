@@ -14,12 +14,12 @@ namespace PMWelfare.Models
 
         public virtual DbSet<ActivityLogs> ActivityLogs { get; set; }
         public virtual DbSet<Celebration> Celebrations { get; set; }
-        public virtual DbSet<ChatRoom> chatRoom { get; set; }
+        public virtual DbSet<ChatRoom> ChatRoom { get; set; }
         public virtual DbSet<Deposit> Deposits { get; set; }
         public virtual DbSet<Expense> Expenses { get; set; }
         public virtual DbSet<Celebrant> Celebrants { get; set; }
         public virtual DbSet<EventType> EventTypes { get; set; }
-        public virtual DbSet<MemberStatus> Member_Status { get; set; }
+        public virtual DbSet<MemberStatus> MemberStatus { get; set; }
         public virtual DbSet<Member> Members { get; set; }
         public virtual DbSet<MonthlySummary> Monthlysummary { get; set; }
         public virtual DbSet<Subscription> Subscriptions { get; set; }
@@ -67,11 +67,11 @@ namespace PMWelfare.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<Deposit>()
-                .Property(e => e.user_name)
+                .Property(e => e.UserName)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Deposit>()
-                .Property(e => e.amount)
+                .Property(e => e.Amount)
                 .HasPrecision(19, 4);
 
             modelBuilder.Entity<Deposit>()
@@ -152,13 +152,6 @@ namespace PMWelfare.Models
                 .Property(e => e.Amount)
                 .HasPrecision(19, 4);
 
-            modelBuilder.Entity<Subscription>()
-                .Property(e => e.CreatedBy)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Subscription>()
-                .Property(e => e.UpdatedBy)
-                .IsUnicode(false);
 
             modelBuilder.Entity<SupProducts>()
                 .Property(e => e.ProductName)
