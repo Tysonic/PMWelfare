@@ -1,12 +1,11 @@
-﻿using System;
+﻿using PMWelfare.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using PMWelfare.Models;
 
 namespace PMWelfare.Controllers
 {
@@ -61,50 +60,55 @@ namespace PMWelfare.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "DepositID,UserName,Amount,CreatedBy,CreatedAt,UpdatedBy,UpdatedAt")]
-        Deposit deposit, Subscription subscriptions,  Member member=null)
+        Deposit deposit, Subscription subscriptions )
         {
 
-
-
-            decimal? SubAmount = 20000;
-            var users = db.Subscriptions.Select
-                    (s => s.UserName).ToList();
-            decimal? amount = deposit.Amount;
+            
             
 
+                decimal? SubAmount = 20000;
+                var users = db.Subscriptions.Select
+                        (s => s.UserName).ToList();
+                decimal? amount = deposit.Amount;
 
 
+            int year;
+            int month;
+
+            if (amount > 0 && amount != null)
+            {
 
                 if (amount <= SubAmount)
                 {
-                subscriptions.UserName = deposit.UserName;
+                    subscriptions.UserName = deposit.UserName;
 
                     if (users.Contains(deposit.UserName))
                     {
-                     int year = db.Subscriptions.Where
-                       (s => s.UserName == deposit.UserName)
-                        .Select(s => s.SubYear).Max();
+                        year = db.Subscriptions.Where
+                          (s => s.UserName == deposit.UserName)
+                           .Select(s => s.SubYear).Max();
 
-                     int month = db.Subscriptions.Where
-                     (s => s.UserName == deposit.UserName && s.SubYear == year)
-                     .Select(s => s.SubMonth).Max();
+                        month = db.Subscriptions.Where
+                        (s => s.UserName == deposit.UserName && s.SubYear == year)
+                        .Select(s => s.SubMonth).Max();
 
-                    decimal? AmountSubscribed = db.Subscriptions.Where
-                    (s => s.UserName == deposit.UserName && s.SubYear == year 
-                    && s.SubMonth == month).Select(m => m.Amount).Single();
+                        decimal? AmountSubscribed = db.Subscriptions.Where
+                        (s => s.UserName == deposit.UserName && s.SubYear == year
+                        && s.SubMonth == month).Select(m => m.Amount).Single();
 
 
-                    if (AmountSubscribed < SubAmount)
+                        if (AmountSubscribed < SubAmount)
                         {
-                        amount = amount - (SubAmount - AmountSubscribed);
-                        subscriptions.Amount = amount;
-                        subscriptions.SubYear = year;
-                        subscriptions.SubMonth = month;
+                            //amount = amount - (SubAmount - AmountSubscribed);
+                            //subscriptions.Amount = amount;
+                            //subscriptions.SubYear = year;
+                            //subscriptions.SubMonth = month;
 
-                    }
+
+                        }
                         else
                         {
-                        subscriptions.Amount = deposit.Amount;
+                            subscriptions.Amount = deposit.Amount;
 
                         }
 
@@ -114,69 +118,126 @@ namespace PMWelfare.Controllers
                             subscriptions.SubMonth = ++month;
                             subscriptions.SubYear = year;
                         }
-                            else
-                            {
+                        else
+                        {
                             subscriptions.SubMonth = 1;
                             subscriptions.SubYear = ++year;
-                            }
                         }
+                    }
                     else
-                {
-                    
-                    //subscriptions.SubMonth = member.CreatedAt.Value.Month;
-                    //subscriptions.SubYear = member.CreatedAt.Value.Year;
-                    //subscriptions.Amount = amount;
+                    {
+                        month = db.Members.Where(s => deposit.UserName == s.UserName)
+                           .Select(s => s.CreatedAt).Single().Value.Month;
+                        year = db.Members.Where(s => deposit.UserName == s.UserName)
+                       .Select(s => s.CreatedAt).Single().Value.Year;
+
+                        subscriptions.SubMonth = month;
+                        subscriptions.SubYear = year;
+                        subscriptions.Amount = amount;
+                        db.Subscriptions.Add(subscriptions);
+
 
                     }
+
                 }
                 else
                 {
-                     int year = db.Subscriptions.Where
-                       (s => s.UserName == deposit.UserName)
-                        .Select(s => s.SubYear).Max();
 
-                     int month = db.Subscriptions.Where
-                     (s => s.UserName == deposit.UserName && s.SubYear == year)
-                     .Select(s => s.SubMonth).Max();
-
-                for (decimal? x=amount; x >=SubAmount ; x -= SubAmount) {
-                    subscriptions.UserName = deposit.UserName;
-                    if (month < 12)
+                    if (users.Contains(deposit.UserName))
                     {
+                        year = db.Subscriptions.Where
+                      (s => s.UserName == deposit.UserName)
+                       .Select(s => s.SubYear).Max();
 
-                        subscriptions.SubMonth = ++month;
-                        subscriptions.SubYear = year;
+                        month = db.Subscriptions.Where
+                        (s => s.UserName == deposit.UserName && s.SubYear == year)
+                        .Select(s => s.SubMonth).Max();
+
+
+
+                        for (decimal? x = amount; x >= SubAmount; x -= SubAmount)
+                        {
+                            subscriptions.UserName = deposit.UserName;
+
+
+                            if (month < 12)
+                            {
+
+                                subscriptions.SubMonth = ++month;
+                                subscriptions.SubYear = year;
+                            }
+                            else
+                            {
+                                month = 0;
+                                ++month;
+                                subscriptions.SubMonth = month;
+                                subscriptions.SubYear = ++year;
+
+                            }
+                            if (x >= SubAmount)
+                            {
+
+                                subscriptions.Amount = SubAmount;
+                                db.Subscriptions.Add(subscriptions);
+                                db.SaveChanges();
+
+                            }
+                            if (x < SubAmount && x > 0)
+                            {
+                                subscriptions.Amount = x;
+                                db.Subscriptions.Add(subscriptions);
+
+                            }
+                        }
                     }
                     else
                     {
-                        month = 0;
-                        ++month;
-                        subscriptions.SubMonth = month;
-                        subscriptions.SubYear = ++year;
-                        
-                    }
-                    if (x >= SubAmount)
-                    {
-                        
-                        subscriptions.Amount = SubAmount;
-                        db.Subscriptions.Add(subscriptions);
-                        db.SaveChanges();
-                    }
-                    if (x < SubAmount && x>0)
-                    {
-                        subscriptions.Amount = x;
-                        db.Subscriptions.Add(subscriptions);
-                        db.SaveChanges();
+                        month = db.Members.Where(s => deposit.UserName == s.UserName)
+                           .Select(s => s.CreatedAt).Single().Value.Month;
+                        year = db.Members.Where(s => deposit.UserName == s.UserName)
+                       .Select(s => s.CreatedAt).Single().Value.Year;
+
+
+                        for (decimal? x = amount; x >= SubAmount; x -= SubAmount)
+                        {
+                            subscriptions.UserName = deposit.UserName;
+                            if (month < 12)
+                            {
+                                subscriptions.SubMonth = ++month;
+                                subscriptions.SubYear = year;    
+                            }
+                            else
+                            {
+                                month = 0;
+                                ++month;
+                                subscriptions.SubMonth = month;
+                                subscriptions.SubYear = ++year;
+                                
+
+                            }
+                            if (x >= SubAmount)
+                            {
+
+                                subscriptions.Amount = SubAmount;
+                                db.Subscriptions.Add(subscriptions);
+                                db.SaveChanges();
+
+                            }
+                            if (x < SubAmount && x > 0)
+                            {
+                                subscriptions.Amount = x;
+                                db.Subscriptions.Add(subscriptions);
+
+                            }
+
+                        }
+
                     }
                 }
-
-                }
-
+            }
 
 
-
-
-            if (ModelState.IsValid)
+            if (ModelState.IsValid )
             {
 
 
