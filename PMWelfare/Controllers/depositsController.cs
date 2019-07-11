@@ -61,63 +61,116 @@ namespace PMWelfare.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "DepositID,UserName,Amount,CreatedBy,CreatedAt,UpdatedBy,UpdatedAt")]
-        Deposit deposit, Subscription subscriptions)
+        Deposit deposit, Subscription subscriptions,  Member member=null)
         {
 
 
-            subscriptions.UserName = deposit.UserName;
-            subscriptions.Amount = deposit.Amount;
 
-           
-                int month;
-                int year;
-
-                var users = db.Subscriptions.Select
+            decimal? SubAmount = 20000;
+            var users = db.Subscriptions.Select
                     (s => s.UserName).ToList();
+            decimal? amount = deposit.Amount;
+            
 
-                string user = subscriptions.UserName;
 
-                if (users.Contains(user))
+
+
+                if (amount <= SubAmount)
                 {
-                    var curr_year = db.Subscriptions.Where
-                            (s => s.UserName == deposit.UserName)
-                            .Select(s => s.SubYear).Max();
+                subscriptions.UserName = deposit.UserName;
 
-                    var cur_month = db.Subscriptions.Where
-                        (s => s.UserName == deposit.UserName && s.SubYear == curr_year)
-                        .Select(s => s.SubMonth).Max();
-                    if (cur_month < 12)
+                    if (users.Contains(deposit.UserName))
                     {
-                        year = db.Subscriptions.Where
-                             (s => s.UserName == deposit.UserName)
-                             .Select(s => s.SubYear).Max();
-                        subscriptions.SubMonth = cur_month + 1;
+                     int year = db.Subscriptions.Where
+                       (s => s.UserName == deposit.UserName)
+                        .Select(s => s.SubYear).Max();
+
+                     int month = db.Subscriptions.Where
+                     (s => s.UserName == deposit.UserName && s.SubYear == year)
+                     .Select(s => s.SubMonth).Max();
+
+                    decimal? AmountSubscribed = db.Subscriptions.Where
+                    (s => s.UserName == deposit.UserName && s.SubYear == year 
+                    && s.SubMonth == month).Select(m => m.Amount).Single();
+
+
+                    if (AmountSubscribed < SubAmount)
+                        {
+                        amount = amount - (SubAmount - AmountSubscribed);
+                        subscriptions.Amount = amount;
                         subscriptions.SubYear = year;
+                        subscriptions.SubMonth = month;
 
                     }
-                    else
-                    {
-                        year = db.Subscriptions.Where
-                            (s => s.UserName == deposit.UserName)
-                            .Select(s => s.SubYear).Max();
+                        else
+                        {
+                        subscriptions.Amount = deposit.Amount;
 
-                        subscriptions.SubMonth = 1;
-                        subscriptions.SubYear = year + 1;
-                    };
+                        }
+
+                        if (month < 12)
+                        {
+
+                            subscriptions.SubMonth = ++month;
+                            subscriptions.SubYear = year;
+                        }
+                            else
+                            {
+                            subscriptions.SubMonth = 1;
+                            subscriptions.SubYear = ++year;
+                            }
+                        }
+                    else
+                {
+                    
+                    //subscriptions.SubMonth = member.CreatedAt.Value.Month;
+                    //subscriptions.SubYear = member.CreatedAt.Value.Year;
+                    //subscriptions.Amount = amount;
+
+                    }
                 }
                 else
                 {
+                     int year = db.Subscriptions.Where
+                       (s => s.UserName == deposit.UserName)
+                        .Select(s => s.SubYear).Max();
 
-                    month = db.Members.Where(s => s.UserName == deposit.UserName)
-                        .Select(s => s.CreatedAt.Value.Month).FirstOrDefault();
-                    subscriptions.SubMonth = month;
+                     int month = db.Subscriptions.Where
+                     (s => s.UserName == deposit.UserName && s.SubYear == year)
+                     .Select(s => s.SubMonth).Max();
+
+                for (decimal? x=amount; x >=SubAmount ; x -= SubAmount) {
+                    subscriptions.UserName = deposit.UserName;
+                    if (month < 12)
+                    {
+
+                        subscriptions.SubMonth = ++month;
+                        subscriptions.SubYear = year;
+                    }
+                    else
+                    {
+                        month = 0;
+                        ++month;
+                        subscriptions.SubMonth = month;
+                        subscriptions.SubYear = ++year;
+                        
+                    }
+                    if (x >= SubAmount)
+                    {
+                        
+                        subscriptions.Amount = SubAmount;
+                        db.Subscriptions.Add(subscriptions);
+                        db.SaveChanges();
+                    }
+                    if (x < SubAmount && x>0)
+                    {
+                        subscriptions.Amount = x;
+                        db.Subscriptions.Add(subscriptions);
+                        db.SaveChanges();
+                    }
                 }
 
-
-
-
-
-
+                }
 
 
 
@@ -126,11 +179,13 @@ namespace PMWelfare.Controllers
             if (ModelState.IsValid)
             {
 
-                db.Subscriptions.Add(subscriptions);
+
                 db.Deposits.Add(deposit);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
+
 
             ViewBag.UserName = new SelectList
                 (db.Members, "UserName", "FirstName", deposit.UserName);
@@ -230,17 +285,6 @@ namespace PMWelfare.Controllers
             ViewBag.total = Cash;
             return View();
         }
-        //public ActionResult Subscribe()
-        //{
-        //    var sub = db.Deposits.Select(s => new { s.UserName }).ToList();
 
-
-        //    List<string> subs = sub.Except(db.Subscriptions.Select(s => s.UserName).ToList());
-        //    List<Deposit> ss = new List<Deposit>();
-        //    subs.ForEach(s => ss.Add(new Deposit(s)));
-
-
-        //    return View();
-        //}
     }
 }

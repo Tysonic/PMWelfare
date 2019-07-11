@@ -183,7 +183,7 @@ namespace PMWelfare.Controllers
             //    } while (loop != 0);
             //}
 
-            public ActionResult areas()
+            public ActionResult Arrears()
             {
                 var subscribers = db.Subscriptions.Where(s => s.SubMonth == month
                 && s.SubYear == year).Select(s => s.UserName).Distinct().ToList();
