@@ -40,7 +40,7 @@ namespace PMWelfare.Controllers
         public ActionResult Create()
         {
             ViewBag.EventId = new SelectList(db.Celebrations, "EventId", "EventName");
-            ViewBag.SupId = new SelectList(db.Suppliers, "SupId", "SupTel");
+            ViewBag.SupId = new SelectList(db.Suppliers, "SupId", "SupName");
             return View();
         }
 
@@ -59,7 +59,7 @@ namespace PMWelfare.Controllers
             }
 
             ViewBag.EventId = new SelectList(db.Celebrations, "EventId", "EventName", supProducts.EventId);
-            ViewBag.SupId = new SelectList(db.Suppliers, "SupId", "SupTel", supProducts.SupId);
+            ViewBag.SupId = new SelectList(db.Suppliers, "SupId", "SupName", supProducts.SupId);
             return View(supProducts);
         }
 

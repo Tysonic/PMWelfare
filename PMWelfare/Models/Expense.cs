@@ -32,37 +32,37 @@ namespace PMWelfare.Models
 
         public virtual SupProducts sup_products { get; set; }
 
-        public class ReportViewModel
+        public class MonthlyExpensesViewModel
         {
-            public decimal price { get; internal set; }
-
             [Key]
-            public int exp_id { get; set; }
+            public int celeb_product_id { get; set; }
 
             [Column(TypeName = "date")]
-            public DateTime exp_date { get; set; }
+            public DateTime? expense_date { get; set; }
 
-            public int? prod_id { get; set; }
+            [StringLength(20)]
+            public string product_name { get; set; }
 
-            public int quantity { get; set; }
+            public int? quantity { get; set; }
 
-            public int event_id { get; set; }
+            public int? supplier_product_id { get; set; }
 
-            [Required]
-            [StringLength(40)]
+            public int? event_id { get; set; }
+            [StringLength(50)]
             public string event_name { get; set; }
 
-            public DateTime event_date { get; set; }
+            [Column(TypeName = "date")]
+            public DateTime? event__date { get; set; }
+
+
+            [Column(TypeName = "money")]
+            public decimal? productprice { get; set; }
+
+            [Column(TypeName = "money")]
+            public decimal? TotalPrice { get; set; }
 
 
 
-            [Required]
-            [StringLength(40)]
-            public string prod_name { get; set; }
-
-
-
-            public int? sup_id { get; set; }
         }
     }
     

@@ -55,15 +55,15 @@ namespace PMWelfare.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<ChatRoom>()
-                .Property(e => e.user_name)
+                .Property(e => e.UserName)
                 .IsUnicode(false);
 
             modelBuilder.Entity<ChatRoom>()
-                .Property(e => e.message)
+                .Property(e => e.Message)
                 .IsUnicode(false);
 
             modelBuilder.Entity<ChatRoom>()
-                .Property(e => e.updated_by)
+                .Property(e => e.UpdatedBy)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Deposit>()
