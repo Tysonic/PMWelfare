@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.Ajax.Utilities;
 using PMWelfare.Models;
 
 namespace PMWelfare.Controllers
@@ -132,7 +133,7 @@ namespace PMWelfare.Controllers
 
             ViewBag.Advances = advance;
 
-            return PartialView();
+            return PartialView(advance);
         }
         public ActionResult Arrears() {
             //var today = DateTime.Now;
@@ -142,57 +143,123 @@ namespace PMWelfare.Controllers
             //List<string> subscriber = db.Subscriptions
             //              .Where(s => s.SubMonth <= month && s.SubMonth >= monthFour && s.SubYear == year)
             //              .Select(s => s.UserName).ToList();
-            //var all = db.Members.Select(s => s.UserName).ToList();
-            //List<Subscription> play = new List<Subscription>();
-            //List<Subscription> user = new List<Subscription>();
-            //subscriber.ForEach(s => play.Add(new Subscription(s)));
-            //List<string> notsub = all.Except(subscriber).ToList();
-            //notsub.ForEach(s => user.Add(new Subscription(s)));
+           
 
-            //{ int month = DateTime.Now.Month;
-            //    int year = DateTime.Now.Year;
-            //if () { }
-            //var subscribers = db.Subscriptions
-            //   .Where(s => s.SubMonth == month && s.SubYear == year)
-            //   .Select(s => s.UserName).Distinct().ToList();
-            //var all = db.Members.Select(s => s.UserName).Distinct().ToList();
+             int month = DateTime.Now.Month;
+                int year = DateTime.Now.Year;
 
-            //List<string> notsub = all.Except(subscribers).ToList();
-
-            //List<Subscription> user = new List<Subscription>();
-            //List<Subscription> queries = new List<Subscription>();
-            //notsub.ForEach(s => user.Add(new Subscription(s)));
-
-            List<Subscription> user = new List<Subscription>();
-            DateTime iterationDate = DateTime.UtcNow;
-            var subscribers =
-                db.Subscriptions.Where(
-                    s => s.SubMonth == iterationDate.Month
-                        && s.SubYear == iterationDate.Year);
-
-            for (int i = 5; i != 0; i--)
+                var subscribers = db.Subscriptions
+                   .Where(s => s.SubMonth == month && s.SubYear == year)
+                   .Select(s => s.UserName).Distinct().ToList();
+                var all = db.Members.Select(s => s.UserName).Distinct().ToList();
+                List<string> notsub = all.Except(subscribers).ToList();
+                List<Subscription> user = new List<Subscription>();
+            List<Subscription> arrears = new List<Subscription>();
+            List<Subscription> subs = new List<Subscription>();
+            List<Subscription> newmemb = new List<Subscription>();
+            notsub.ForEach(s => user.Add(new Subscription(s)));
+            var jr = db.Subscriptions.Select(s => s.UserName);
+       
+            foreach (var m in user)
             {
-                iterationDate = iterationDate.AddMonths(-1);
-                subscribers = subscribers.Union(
-                    db.Subscriptions.Where(
-                    s => s.SubMonth == iterationDate.Month
-                        && s.SubYear == iterationDate.Year).ToList()
-                );
+                var jrm = db.Subscriptions.Select(s => s.UserName);
+                //ViewBag.u = user;
+                if (jrm.Contains(m.UserName))
+                {
+                    int maxmonth = db.Subscriptions
+                        .Where(s => s.UserName == m.UserName).Select(s => s.SubMonth).Max();
+                    int months = DateTime.Now.Month - maxmonth;
+                    int arrearAmount = months * 20000;
+                    arrears.Add(new Subscription(m.UserName, arrearAmount));
+                    //ViewBag.k = arrearAmount;
+
+
+                }
+               
 
             }
-            var subscriberNames = subscribers.Select(s => s.UserName).ToList();
-            var sub = db.Members.Select(m => m.UserName)
-           .Where(u => subscriberNames.All(s => s != u))
-           .ToList();
-            sub.ForEach(s => user.Add(new Subscription(s)));
-              foreach(var m in user)
+          
+            //new member who have not subscribed yet
+            var ful = all.Except(jr);
+            ful.ForEach(h => newmemb.Add(new Subscription(h)));
+            foreach (var mmm in newmemb)
             {
-                var u = m.UserName.ToString();
-                
+
+                int max = db.Members.
+                    Where(d => d.UserName == mmm.UserName)
+                    .Select(d => d.CreatedAt.Value.Month).Max();
+                int yea = db.Members.Where(d => d.UserName == mmm.UserName)
+                           .Select(d => d.CreatedAt.Value.Year).Max();
+                if (yea == DateTime.Now.Year)
+                {
+                    int month1 = DateTime.Now.Month - max;
+                    int arrearAm = month1 * 20000;
+                    arrears.Add(new Subscription(mmm.UserName, arrearAm));
+                }
+                if (DateTime.Now.Year > yea)
+                {
+                    int ju = DateTime.Now.Year - yea;
+                    int month1 = DateTime.Now.Month - max + 12 * ju;
+                    int arrearAm = month1 * 20000;
+                    arrears.Add(new Subscription(mmm.UserName, arrearAm));
+
+                }
+
+
+
+            }
+            //get the partial arrears of a subscriber
+            subscribers.ForEach(hm => subs.Add(new Subscription(hm)));
+            foreach (var jt in subs)
+            {
+                decimal? amount = db.Subscriptions
+                        .Where(s => s.UserName == jt.UserName && s.SubMonth == month && s.SubYear == year)
+                        .Select(s => s.Amount).Single();
+                decimal? subamount = 20000;
+                if (amount < subamount)
+                {
+                    decimal? subamount1 = subamount - amount;
+
+                    arrears.Add(new Subscription(jt.UserName, subamount1));
+                }
 
             }
 
-            return View(user);
+
+
+            ViewBag.are = arrears.Sum(x => x.Amount);
+
+
+            
+            //for (int i = 5; i > 0; i--)
+            //{
+            //    iterationDate = iterationDate - 1;
+            //    subscribers = subscribers.Union(
+            //        db.Subscriptions.Where(
+            //        s => s.SubMonth == iterationDate
+            //            && s.SubYear == year).AsEnumerable()
+            //    );
+
+            //}
+            //var subscriberNames = subscribers.Select(s =>new { s.UserName,s.SubMonth }).ToList();
+            //foreach(var u   in subscriberNames){
+
+            //    subsiber.Add(new Subscription(u.UserName,u.SubMonth) );
+            //}
+            // var sub = db.Members.Select(m => m.UserName)
+            //.Where(u => subscriberNames.All(s => s.UserName != u)).ToList();
+            //foreach(string sx in subscriberNames)
+            //{
+            //    user.Add(new Subscription(sx));
+            //    ViewBag.k = sx.Distinct().Count();
+
+
+
+            //}
+            // sub.ForEach(s => user.Count().Add(new Subscription(s)));
+
+
+            return View(arrears);
  
 
         }

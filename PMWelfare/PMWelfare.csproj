@@ -408,7 +408,6 @@
     <Content Include="Views\SupProducts\Details.cshtml" />
     <Content Include="Views\SupProducts\Edit.cshtml" />
     <Content Include="Views\SupProducts\Index.cshtml" />
-    <Content Include="Views\Expenses\MonthlyExpenses.cshtml" />
     <Content Include="Views\Suppliers\Listsupplier.cshtml" />
     <Content Include="Views\Subscriptions\Create.cshtml" />
     <Content Include="Views\Subscriptions\Delete.cshtml" />
@@ -418,6 +417,11 @@
     <Content Include="Views\Shared\_CurrentAdvances.cshtml" />
     <Content Include="Views\Subscriptions\CurrentAdvances.cshtml" />
     <Content Include="Views\Subscriptions\Arrears.cshtml" />
+    <Content Include="Views\Monthly.cshtml" />
+    <Content Include="Views\Shared\_monthlyExpenses.cshtml" />
+    <Content Include="Views\Expenses\MonthlyExpenses.cshtml" />
+    <Content Include="Views\Expenses\TotalExpenses.cshtml" />
+    <Content Include="Views\Shared\_totalExpenses.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

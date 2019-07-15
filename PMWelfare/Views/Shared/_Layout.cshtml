@@ -27,7 +27,7 @@
                     <li>@Html.ActionLink("Supplier products", "Create", "SupProducts")</li>
                     <li>@Html.ActionLink("memberstatus", "Create", "MemberStatus")</li>
                     <li>@Html.ActionLink("Expenses", "Create", "Expenses")</li>
-                    <li>@Html.ActionLink("MonthlySummary", "MonthlySummary", "Subscriptions")</li>
+                    <li>@Html.ActionLink("MonthlySummary", "Monthly", "Subscriptions")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -38,7 +38,7 @@
         @RenderBody()
         <hr />
 
-        @Html.Partial("_CurrentAdvances")
+       
         <footer>
 
             <p>&copy; @DateTime.Now.Year - URA PMW_welfare</p>

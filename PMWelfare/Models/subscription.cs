@@ -25,10 +25,16 @@ namespace PMWelfare.Models
             this.UserName = s;
         }
 
+        public Subscription(string u, decimal? a )
+        {
+            UserName = u;
+            Amount = a;
+        }
+
         [Column(TypeName = "money")]
         public decimal? Amount { get; set; }
 
-        public byte SubMonth { get; set; }
+        public int SubMonth { get; set; }
 
         public int SubYear { get; set; }
 
