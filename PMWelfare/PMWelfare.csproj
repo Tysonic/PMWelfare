@@ -361,7 +361,6 @@
     <Content Include="Views\Subscriptions\Advances.cshtml" />
     <Content Include="Views\MonthlySummary\Areas.cshtml" />
     <Content Include="Views\Subscriptions\areas.cshtml" />
-    <Content Include="Views\Deposits\Subscribe.cshtml" />
     <Content Include="Views\Deposits\Create.cshtml" />
     <Content Include="Views\Deposits\Delete.cshtml" />
     <Content Include="Views\Deposits\Details.cshtml" />
