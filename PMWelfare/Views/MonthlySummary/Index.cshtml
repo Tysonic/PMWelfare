@@ -9,7 +9,42 @@
 <table class="table row-no">
 
 
-    <tr>@{Html.RenderAction("Advances", "Subscriptions");}</tr>  
+    <tr>
+        <td>
+            <h2>
+                Advance Collections
+            </h2>
+        </td>
+        <td>
+            <h2>
+                @{Html.RenderAction("Advances", "Subscriptions");}
+            </h2>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <h2>
+                Cash At Hand
+            </h2>
+        </td>
+        <td>
+            <h2>
+                @{Html.RenderAction("CashAtHand", "Deposits");}
+            </h2>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <h2>
+                Total Expenditure
+            </h2>
+        </td>
+        <td>
+            <h2>
+                @{Html.RenderAction("TotalExpense", "Expenses");}
+            </h2>
+        </td>
+    </tr>
 
 </table>
 

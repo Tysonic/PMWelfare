@@ -166,7 +166,8 @@ namespace PMWelfare.Controllers
             s.ProductId, e => e.ProductId, (s, e) =>
             new { u = e.UnitPrice, q = s.Quantity, s.ExpenseDate })
             .Where(s => s.ExpenseDate.Month == DateTime.Now.Month
-             && s.ExpenseDate.Year == DateTime.Now.Year).Select(s=> s.u*s.q).DefaultIfEmpty().Sum();
+             && s.ExpenseDate.Year == DateTime.Now.Year).Select(s=> s.u*s.q)
+             .DefaultIfEmpty().Sum();
 
             ViewBag.total = expense;
 
