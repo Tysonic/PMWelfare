@@ -136,13 +136,7 @@ namespace PMWelfare.Controllers
             return PartialView(advance);
         }
         public ActionResult Arrears() {
-            //var today = DateTime.Now;
-            //int month = today.Month;
-            //int year = today.Year;
-            //int monthFour = today.AddMonths(-4).Month;//this gets the last 4th month
-            //List<string> subscriber = db.Subscriptions
-            //              .Where(s => s.SubMonth <= month && s.SubMonth >= monthFour && s.SubYear == year)
-            //              .Select(s => s.UserName).ToList();
+            
            
 
              int month = DateTime.Now.Month;
