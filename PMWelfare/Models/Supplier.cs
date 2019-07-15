@@ -41,5 +41,14 @@ namespace PMWelfare.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SupProducts> SupProducts { get; set; }
+        public class supplierlistViewModel
+        {
+
+
+            public string supplier_name { get; set; }
+            public string product_name { get; set; }
+            public Decimal? product_price { get; set; }
+
+        }
     }
 }

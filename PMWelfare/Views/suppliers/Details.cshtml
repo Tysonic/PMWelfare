@@ -67,6 +67,34 @@
         </dd>
 
     </dl>
+
+    @{
+        Html.RenderPartial("_CurrentAdvances", "Shared");
+    }
+    @{
+        Html.RenderPartial("_totalExpenses");
+    }
+    @*<div>
+            <div class="panel panel-default text-left">
+                <div class="panelheaderGreen">
+                    Popular Articles
+                </div>
+                <div class="panel-body">
+                    <div id="dvHomePopularPostBind">
+                        <div class="loaderCenter">
+                            <span class="loadingText">Popular Articles Loading....</span>
+                            @{
+                                Html.RenderAction("MonthlyExpenses", "Expenses");
+                            };
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+
+
+
+
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.SupId }) |
