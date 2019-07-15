@@ -1,4 +1,4 @@
-namespace PMWelfare.Models
+﻿namespace PMWelfare.Models
 {
     using System;
     using System.Collections.Generic;
@@ -8,6 +8,14 @@ namespace PMWelfare.Models
 
     public partial class Deposit
     {
+        private string s;
+        public Deposit() { }
+
+        public Deposit(string s)
+        {
+            this.UserName = s;
+        }
+
         [Key]
         public int DepositId { get; set; }
 
@@ -15,13 +23,14 @@ namespace PMWelfare.Models
         public string UserName { get; set; }
 
         [Column(TypeName = "money")]
-        public decimal Amount { get; set; }
+        public decimal? Amount { get; set; }
+
         [Required]
         [StringLength(40)]
         public string CreatedBy { get; set; }
 
         public DateTime? CreatedAt { get; set; }
-
+        
         [StringLength(40)]
         public string UpdatedBy { get; set; }
 

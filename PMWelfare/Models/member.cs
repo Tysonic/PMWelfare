@@ -8,6 +8,8 @@ namespace PMWelfare.Models
 
     public partial class Member
     {
+        private string s;
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Member()
         {
@@ -15,6 +17,11 @@ namespace PMWelfare.Models
             ChatRoom = new HashSet<ChatRoom>();
             Deposits = new HashSet<Deposit>();
             Subscriptions = new HashSet<Subscription>();
+        }
+
+        public Member(string s)
+        {
+            this.UserName = s;
         }
 
         [Key]
@@ -32,7 +39,7 @@ namespace PMWelfare.Models
         public string Email { get; set; }
 
         [Column(TypeName = "date")]
-        public DateTime DOB { get; set; }
+        public DateTime? DOB { get; set; }
 
         public int? MemberStatus { get; set; }
 

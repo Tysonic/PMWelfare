@@ -46,16 +46,16 @@ namespace PMWelfare.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Type,CreatedBy,CreatedAt,UpdatedBy,UpdatedAt")] EventType eventType)
+        public ActionResult Create([Bind(Include = "Id,Type,CreatedBy,CreatedAt,UpdatedBy,UpdatedAt")] EventType EventType)
         {
             if (ModelState.IsValid)
             {
-                db.EventTypes.Add(eventType);
+                db.EventTypes.Add(EventType);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(eventType);
+            return View(EventType);
         }
 
         // GET: EventTypes/Edit/5

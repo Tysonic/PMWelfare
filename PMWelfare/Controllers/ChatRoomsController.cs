@@ -17,7 +17,7 @@ namespace PMWelfare.Controllers
         // GET: ChatRooms
         public ActionResult Index()
         {
-            return View(db.chatRoom.ToList());
+            return View(db.ChatRoom.ToList());
         }
 
         // GET: ChatRooms/Details/5
@@ -27,7 +27,7 @@ namespace PMWelfare.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ChatRoom chatRoom = db.chatRoom.Find(id);
+            ChatRoom chatRoom = db.ChatRoom.Find(id);
             if (chatRoom == null)
             {
                 return HttpNotFound();
@@ -50,7 +50,7 @@ namespace PMWelfare.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.chatRoom.Add(chatRoom);
+                db.ChatRoom.Add(chatRoom);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -65,7 +65,7 @@ namespace PMWelfare.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ChatRoom chatRoom = db.chatRoom.Find(id);
+            ChatRoom chatRoom = db.ChatRoom.Find(id);
             if (chatRoom == null)
             {
                 return HttpNotFound();
@@ -96,7 +96,7 @@ namespace PMWelfare.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ChatRoom chatRoom = db.chatRoom.Find(id);
+            ChatRoom chatRoom = db.ChatRoom.Find(id);
             if (chatRoom == null)
             {
                 return HttpNotFound();
@@ -109,8 +109,8 @@ namespace PMWelfare.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            ChatRoom chatRoom = db.chatRoom.Find(id);
-            db.chatRoom.Remove(chatRoom);
+            ChatRoom chatRoom = db.ChatRoom.Find(id);
+            db.ChatRoom.Remove(chatRoom);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
