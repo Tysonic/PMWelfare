@@ -132,70 +132,23 @@ namespace PMWelfare.Controllers
         {
             var advances = db.Subscriptions.Where(s => (s.SubMonth
             > DateTime.Now.Month && s.SubYear == DateTime.Now.Year)
-             || s.SubYear> DateTime.Now.Year).DefaultIfEmpty().Sum(a => a.Amount);
+             || s.SubYear > DateTime.Now.Year).DefaultIfEmpty().
+             Select(s => new { s.Amount, s.UserName });
+
+             decimal? amount = advances.Sum(a => a.Amount);
             ViewBag.advance = advances;
-            return View();
+            return View(ViewBag.advance);
         }
 
-        int month = DateTime.Now.Month;
-        int year =DateTime.Now.Year;
+        public ActionResult Advancelist()
+        {
+            var advances = db.Subscriptions.Where(s => (s.SubMonth
+            > DateTime.Now.Month && s.SubYear == DateTime.Now.Year)
+             || s.SubYear > DateTime.Now.Year).
+             Select(s => new { s.Amount, s.UserName }).ToList();
+            return View(advances);
+        }
 
-        //public string Arrears()
-        //{
-        //    var subscribers = db.Subscriptions.Where(s => s.SubMonth == month
-        //    && s.SubYear == year).Select(s => s.UserName).Distinct().ToList();
-
-        //    var all = db.Members.Select(s => s.UserName).ToList();
-        //    List<string> notSubscribed_ = all.Except(subscribers).ToList();
-
-        //    List<Subscription> dz = new List<Subscription>();
-        //    notSubscribed_.ForEach(s => dz.Add(new Subscription(s)));
-
-        //    return dz.ToString();
-
-        //}
-
-        //public ActionResult areas()
-        //{
-            //    int loop = Arrears().Count();
-
-            //    do
-            //    {
-            //        var arr = Arrears();
-
-            //        //if (month > 1)
-            //        //{
-            //        //    month--;
-            //        //}
-            //        //else
-            //        //{
-            //            month = 12;
-            //            year--;
-            //        //}
-            //        //arr += arr;
-
-            //        //List<string>arrr = arr.ToString().ToList();
-
-
-            //        //List<Subscription> dz = new List<Subscription>();
-            //        //arrr.ForEach(s => dz.Add(new Subscription(s)));
-            //        return View(arr);
-            //    } while (loop != 0);
-            //}
-
-            public ActionResult Arrears()
-            {
-                var subscribers = db.Subscriptions.Where(s => s.SubMonth == month
-                && s.SubYear == year).Select(s => s.UserName).Distinct().ToList();
-
-                var all = db.Members.Select(s => s.UserName).ToList();
-                List<string> notSubscribed_ = all.Except(subscribers).ToList();
-
-                List<Subscription> dz = new List<Subscription>();
-                notSubscribed_.ForEach(s => dz.Add(new Subscription(s)));
-                return View(dz);
-
-            }
         }
     }
 

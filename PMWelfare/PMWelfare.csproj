@@ -366,6 +366,8 @@
     <Content Include="Views\Deposits\Details.cshtml" />
     <Content Include="Views\Deposits\Edit.cshtml" />
     <Content Include="Views\Deposits\Index.cshtml" />
+    <Content Include="Views\Shared\_Advances.cshtml" />
+    <Content Include="Views\Subscriptions\AdvanceList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

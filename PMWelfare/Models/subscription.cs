@@ -9,6 +9,7 @@ namespace PMWelfare.Models
     public partial class Subscription
     {
         private string s;
+        private String k;
 
         public Subscription() { }
 
@@ -16,6 +17,11 @@ namespace PMWelfare.Models
         public Subscription(string s)
         {
             this.UserName = s;
+        }
+        public Subscription(string k, decimal a)
+        {
+            this.UserName = k;
+            this.Amount = a;
         }
 
 
