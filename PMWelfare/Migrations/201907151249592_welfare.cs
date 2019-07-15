@@ -46,23 +46,22 @@ namespace PMWelfare.Migrations
                 "dbo.ChatRooms",
                 c => new
                     {
-                        chat_id = c.Int(nullable: false, identity: true),
-                        user_name = c.String(maxLength: 40, unicode: false),
-                        message = c.String(nullable: false, maxLength: 250, unicode: false),
-                        posted_at = c.DateTime(),
-                        updated_by = c.String(maxLength: 40, unicode: false),
-                        updated_at = c.DateTime(),
-                        member_UserName = c.String(maxLength: 40, unicode: false),
+                        ChatId = c.Int(nullable: false, identity: true),
+                        UserName = c.String(maxLength: 40, unicode: false),
+                        Message = c.String(nullable: false, maxLength: 250, unicode: false),
+                        PostedAt = c.DateTime(),
+                        UpdatedBy = c.String(maxLength: 40, unicode: false),
+                        UpdatedAt = c.DateTime(),
                     })
-                .PrimaryKey(t => t.chat_id)
-                .ForeignKey("dbo.Members", t => t.member_UserName)
-                .Index(t => t.member_UserName);
+                .PrimaryKey(t => t.ChatId)
+                .ForeignKey("dbo.Members", t => t.UserName)
+                .Index(t => t.UserName);
             
             CreateTable(
                 "dbo.Deposits",
                 c => new
                     {
-                        DepositID = c.Int(nullable: false, identity: true),
+                        DepositId = c.Int(nullable: false, identity: true),
                         UserName = c.String(maxLength: 40, unicode: false),
                         Amount = c.Decimal(storeType: "money"),
                         CreatedBy = c.String(nullable: false, maxLength: 40, unicode: false),
@@ -70,7 +69,7 @@ namespace PMWelfare.Migrations
                         UpdatedBy = c.String(maxLength: 40, unicode: false),
                         UpdatedAt = c.DateTime(),
                     })
-                .PrimaryKey(t => t.DepositID)
+                .PrimaryKey(t => t.DepositId)
                 .ForeignKey("dbo.Members", t => t.UserName)
                 .Index(t => t.UserName);
             
@@ -237,7 +236,7 @@ namespace PMWelfare.Migrations
             DropForeignKey("dbo.Subscriptions", "UserName", "dbo.Members");
             DropForeignKey("dbo.Members", "MemberStatus", "dbo.MemberStatus");
             DropForeignKey("dbo.Deposits", "UserName", "dbo.Members");
-            DropForeignKey("dbo.ChatRooms", "member_UserName", "dbo.Members");
+            DropForeignKey("dbo.ChatRooms", "UserName", "dbo.Members");
             DropForeignKey("dbo.ActivityLogs", "UserName", "dbo.Members");
             DropIndex("dbo.expenses", new[] { "ProductId" });
             DropIndex("dbo.SupProducts", new[] { "SupId" });
@@ -247,7 +246,7 @@ namespace PMWelfare.Migrations
             DropIndex("dbo.Celebrants", new[] { "UserName" });
             DropIndex("dbo.Subscriptions", new[] { "UserName" });
             DropIndex("dbo.Deposits", new[] { "UserName" });
-            DropIndex("dbo.ChatRooms", new[] { "member_UserName" });
+            DropIndex("dbo.ChatRooms", new[] { "UserName" });
             DropIndex("dbo.Members", new[] { "MemberStatus" });
             DropIndex("dbo.ActivityLogs", new[] { "UserName" });
             DropTable("dbo.Sysdiagrams");

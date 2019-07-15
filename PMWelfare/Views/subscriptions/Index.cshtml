@@ -12,7 +12,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.UserName)
+            @Html.DisplayNameFor(model => model.Member.FirstName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Amount)
@@ -41,18 +41,6 @@
             @Html.DisplayFor(modelItem => item.SubYear)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CreatedBy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedAt)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UpdatedBy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UpdatedAt)
-        </td>
-        <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.SubId }) |
             @Html.ActionLink("Details", "Details", new { id=item.SubId }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.SubId })
@@ -61,4 +49,3 @@
 }
 
 </table>
-

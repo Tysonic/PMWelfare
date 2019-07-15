@@ -23,7 +23,7 @@
         public string UserName { get; set; }
 
         [Column(TypeName = "money")]
-        public decimal amount { get; set; }
+        public decimal? Amount { get; set; }
         [Required]
         [StringLength(40)]
         public string CreatedBy { get; set; }
