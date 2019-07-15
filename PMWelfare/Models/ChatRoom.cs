@@ -9,22 +9,22 @@ namespace PMWelfare.Models
     public partial class ChatRoom
     {
         [Key]
-        public int chat_id { get; set; }
+        public int ChatId { get; set; }
 
         [StringLength(40)]
-        public string user_name { get; set; }
+        public string UserName { get; set; }
 
         [Required]
         [StringLength(250)]
-        public string message { get; set; }
+        public string Message { get; set; }
 
-        public DateTime? posted_at { get; set; }
+        public DateTime? PostedAt { get; set; }
 
         [StringLength(40)]
-        public string updated_by { get; set; }
+        public string UpdatedBy { get; set; }
 
-        public DateTime? updated_at { get; set; }
+        public DateTime? UpdatedAt { get; set; }
 
-        public virtual Member member { get; set; }
+        public virtual Member Member { get; set; }
     }
 }

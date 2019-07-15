@@ -137,7 +137,7 @@ namespace PMWelfare.Controllers
 
              decimal? amount = advances.Sum(a => a.Amount);
             ViewBag.advance = advances;
-            return View(ViewBag.advance);
+            return View();
         }
 
         public ActionResult Advancelist()

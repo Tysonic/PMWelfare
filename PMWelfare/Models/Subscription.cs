@@ -28,10 +28,6 @@ namespace PMWelfare.Models
         [StringLength(40)]
         public string UserName { get; set; }
 
-        public Subscription(string s)
-        {
-            this.UserName = s;
-        }
 
         public Subscription(string u, decimal? a )
         {
@@ -45,17 +41,6 @@ namespace PMWelfare.Models
         public int SubMonth { get; set; }
 
         public int SubYear { get; set; }
-
-        [Required]
-        [StringLength(40)]
-        public string CreatedBy { get; set; }
-
-        public DateTime? CreatedAt { get; set; }
-
-        [StringLength(40)]
-        public string UpdatedBy { get; set; }
-
-        public DateTime? UpdatedAt { get; set; }
 
         public virtual Member Member { get; set; }
         public class SubscriberViewModel
