@@ -55,7 +55,7 @@ namespace PMWelfare.Controllers
             {
                 db.Celebrations.Add(celebration);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Create","Celebrants", new {area= "" });
             }
 
             ViewBag.EventTypeId = new SelectList(db.EventTypes, "Id", "Type", celebration.EventTypeId);

@@ -59,7 +59,7 @@ namespace PMWelfare.Models
 
             public string supplier_name { get; set; }
             public string product_name { get; set; }
-            public Decimal? product_price { get; set; }
+            public decimal? product_price { get; set; }
 
         }
     }
