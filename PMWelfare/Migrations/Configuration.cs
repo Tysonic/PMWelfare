@@ -5,14 +5,14 @@ namespace PMWelfare.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<PMWelfare.Models.welfare>
+    internal sealed class Configuration : DbMigrationsConfiguration<PMWelfare.Models.ApplicationDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(PMWelfare.Models.welfare context)
+        protected override void Seed(PMWelfare.Models.ApplicationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

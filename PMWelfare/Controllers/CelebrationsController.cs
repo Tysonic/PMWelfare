@@ -142,12 +142,12 @@ namespace PMWelfare.Controllers
         }
         public ActionResult Totalevents()
         {
-           var events = db.Celebrations.Where(s => s.CreatedAt
+           int events = db.Celebrations.Where(s => s.CreatedAt
            .Value.Month == DateTime.Now.Month
             && s.CreatedAt.Value.Year == DateTime.Now.Year)
             .Select(s => s.EventId).Count();
             ViewBag.events = events;
-            return View();
+            return View(ViewBag.events);
         }
     }
 }
