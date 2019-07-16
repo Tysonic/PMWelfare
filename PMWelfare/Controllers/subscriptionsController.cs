@@ -120,7 +120,7 @@ namespace PMWelfare.Controllers
             return RedirectToAction("Index");
         }
         [ChildActionOnly]
-        public ActionResult CurrentAdvances()
+        public ActionResult Advances()
         {
             var ad = (from t1 in db.Subscriptions
                       where ((t1.SubMonth > DateTime.Now.Month && t1.SubYear == DateTime.Now.Year)
