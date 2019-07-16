@@ -6,44 +6,10 @@
 }
 
 <h2>Summary of previous month</h2>
-<table class="table">
+<table class="table row-no">
 
-    <tr>
-        <td>
-            <h2>
-                Closing Balance
-            </h2>
-        </td>
-        <td>
-            <h2>
-                @ViewBag.balance
-            </h2>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <h2>
-                Advances
-            </h2>
-        </td>
-        <td>
-            <h2>
-                @Html.Partial("~/Views/Subscriptions/Advances.cshtml");
-            </h2>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <h2>
-                Areas
-            </h2>
-        </td>
-        <td>
-            <h2>
-                @ViewBag.balance
-            </h2>
-        </td>
-    </tr>
+
+    <tr>@{Html.RenderAction("Advances", "Subscriptions");}</tr>  
 
 </table>
 

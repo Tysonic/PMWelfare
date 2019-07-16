@@ -149,11 +149,5 @@ namespace PMWelfare.Controllers
             ViewBag.events = events;
             return View();
         }
-        //public ActionResult Events()
-        //{
-        //    var events = db.Celebrations.Where(s => s.CreatedAt.Value.Month == DateTime.Now.Month
-        //    && s.CreatedAt.Value.Year == DateTime.Now.Year).SelectMany(s=>s.Celebrants);
-        //    return View();
-        //}
     }
 }
