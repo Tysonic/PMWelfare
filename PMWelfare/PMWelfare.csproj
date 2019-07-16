@@ -324,10 +324,6 @@
     <Content Include="Views\Expenses\Details.cshtml" />
     <Content Include="Views\Expenses\Edit.cshtml" />
     <Content Include="Views\Expenses\Index.cshtml" />
-    <Content Include="Views\Subscriptions\Create.cshtml" />
-    <Content Include="Views\Subscriptions\Delete.cshtml" />
-    <Content Include="Views\Subscriptions\Details.cshtml" />
-    <Content Include="Views\Subscriptions\Edit.cshtml" />
     <Content Include="Views\Subscriptions\Index.cshtml" />
     <Content Include="Views\SupProducts\Create.cshtml" />
     <Content Include="Views\SupProducts\Delete.cshtml" />
@@ -348,7 +344,6 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Celebrations\Totalevents.cshtml" />
     <Content Include="Views\MonthlySummary\Index.cshtml" />
     <Content Include="Views\Deposits\TotalCollection.cshtml" />
     <Content Include="Views\Members\Create.cshtml" />
@@ -359,7 +354,6 @@
     <Content Include="Views\Expenses\TotalExpense.cshtml" />
     <Content Include="Views\Deposits\CashAtHand.cshtml" />
     <Content Include="Views\Subscriptions\Advances.cshtml" />
-    <Content Include="Views\MonthlySummary\Areas.cshtml" />
     <Content Include="Views\Deposits\Create.cshtml" />
     <Content Include="Views\Deposits\Delete.cshtml" />
     <Content Include="Views\Deposits\Details.cshtml" />
@@ -367,6 +361,7 @@
     <Content Include="Views\Deposits\Index.cshtml" />
     <Content Include="Views\Shared\_Advances.cshtml" />
     <Content Include="Views\Subscriptions\AdvanceList.cshtml" />
+    <Content Include="Views\Celebrations\Totalevents.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

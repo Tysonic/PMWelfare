@@ -136,7 +136,7 @@ namespace PMWelfare.Controllers
              Select(s => new { s.Amount, s.UserName });
 
              decimal? amount = advances.Sum(a => a.Amount);
-            ViewBag.advance = advances;
+            ViewBag.advance = amount;
             return View(ViewBag.advance);
         }
 

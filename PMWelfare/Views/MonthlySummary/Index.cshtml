@@ -6,20 +6,18 @@
 }
 
 <h2>Summary of previous month</h2>
-<table class="table row-no">
-
-
-    <tr>
-        <td>
-            <h2>
-                Advance Collections
+<table class="table">
+    <tr class=" active">
+        <th>
+            <h2 class="">
+                Particulars
             </h2>
-        </td>
-        <td>
+        </th>
+        <th>
             <h2>
-                @{Html.RenderAction("Advances", "Subscriptions");}
+                Amount
             </h2>
-        </td>
+        </th>
     </tr>
     <tr>
         <td>
@@ -36,12 +34,49 @@
     <tr>
         <td>
             <h2>
+                Total Collections
+            </h2>
+        </td>
+        <td>
+            <h2>
+                @{Html.RenderAction("TotalCollection", "Deposits");}
+            </h2>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <h2>
+                Advance Collections
+            </h2>
+        </td>
+        <td>
+            <h2>
+                @{Html.RenderAction("Advances", "Subscriptions");}
+            </h2>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <h2>
                 Total Expenditure
             </h2>
         </td>
         <td>
             <h2>
                 @{Html.RenderAction("TotalExpense", "Expenses");}
+            </h2>
+        </td>
+    </tr>
+        <tr>
+        <td>
+            <h2>
+                Cash At Hand 
+            </h2>
+        </td>
+        <td>
+            <h2>
+                @{Html.RenderAction("Totalevents", "Celebrations");}
             </h2>
         </td>
     </tr>
