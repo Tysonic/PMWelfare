@@ -298,7 +298,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Statement\Index.cshtml" />
     <Content Include="Views\EventTypes\Create.cshtml" />
     <Content Include="Views\EventTypes\Delete.cshtml" />
     <Content Include="Views\EventTypes\Details.cshtml" />
@@ -308,7 +307,6 @@
     <Content Include="Views\Celebrations\Delete.cshtml" />
     <Content Include="Views\Celebrations\Details.cshtml" />
     <Content Include="Views\Celebrations\Edit.cshtml" />
-    <Content Include="Views\Celebrations\Index.cshtml" />
     <Content Include="Views\MemberStatus\Create.cshtml" />
     <Content Include="Views\MemberStatus\Delete.cshtml" />
     <Content Include="Views\MemberStatus\Details.cshtml" />
@@ -325,16 +323,6 @@
     <Content Include="Views\Expenses\Edit.cshtml" />
     <Content Include="Views\Expenses\Index.cshtml" />
     <Content Include="Views\Subscriptions\Index.cshtml" />
-    <Content Include="Views\SupProducts\Create.cshtml" />
-    <Content Include="Views\SupProducts\Delete.cshtml" />
-    <Content Include="Views\SupProducts\Details.cshtml" />
-    <Content Include="Views\SupProducts\Edit.cshtml" />
-    <Content Include="Views\SupProducts\Index.cshtml" />
-    <Content Include="Views\Suppliers\Create.cshtml" />
-    <Content Include="Views\Suppliers\Delete.cshtml" />
-    <Content Include="Views\Suppliers\Details.cshtml" />
-    <Content Include="Views\Suppliers\Edit.cshtml" />
-    <Content Include="Views\Suppliers\Index.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper-utils.min.js.map" />
@@ -361,6 +349,24 @@
     <Content Include="Views\Deposits\Index.cshtml" />
     <Content Include="Views\Subscriptions\AdvanceList.cshtml" />
     <Content Include="Views\Celebrations\Totalevents.cshtml" />
+    <Content Include="Views\Celebrants\Index.cshtml" />
+    <Content Include="Views\Celebrants\Details.cshtml" />
+    <Content Include="Views\Celebrants\Create.cshtml" />
+    <Content Include="Views\Celebrants\Edit.cshtml" />
+    <Content Include="Views\Celebrants\Delete.cshtml" />
+    <Content Include="Views\Celebrants\Events.cshtml" />
+    <Content Include="Views\SupProducts\Create.cshtml" />
+    <Content Include="Views\SupProducts\Delete.cshtml" />
+    <Content Include="Views\SupProducts\Details.cshtml" />
+    <Content Include="Views\SupProducts\Edit.cshtml" />
+    <Content Include="Views\SupProducts\Index.cshtml" />
+    <Content Include="Views\Suppliers\Create.cshtml" />
+    <Content Include="Views\Suppliers\Delete.cshtml" />
+    <Content Include="Views\Suppliers\Details.cshtml" />
+    <Content Include="Views\Suppliers\Edit.cshtml" />
+    <Content Include="Views\Suppliers\Index.cshtml" />
+    <Content Include="Views\Expenses\MonthlyExpenses.cshtml" />
+    <Content Include="Views\Celebrations\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

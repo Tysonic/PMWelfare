@@ -41,13 +41,14 @@ namespace PMWelfare.Controllers
           var expenses = from t1 in db.Expenses
                          join t2 in db.SupProducts on t1.ProductId equals t2.ProductId
                          join t3 in db.Celebrations on t2.EventId equals t3.EventId
-                         where t3.EventDate.Month == DateTime.Now.Month
+                         join t4 in db.EventTypes on t3.EventTypeId equals t4.Id
+                         where t3.EventDate.Month == DateTime.Now.Month-1
                          select new Expense.MonthlyExpensesViewModel
                             {
-                               quantity = t1.Quantity,
-                               product_name = t2.ProductName,
-                               event_name = t3.EventName,
-                               productprice = t2.UnitPrice,
+                               Quantity = t1.Quantity,
+                               ProductName = t2.ProductName,
+                               EventType = t4.Type,
+                               UnitPrice = t2.UnitPrice,
                                TotalPrice = t1.Quantity * t2.UnitPrice
 
                               };
@@ -55,18 +56,6 @@ namespace PMWelfare.Controllers
             return View(expenses);
         }
         [ChildActionOnly]
-        public ActionResult TotalExpenses()
-        {
-            var totalexpenses = (from t4 in db.Expenses
-                                 join t5 in db.SupProducts on t4.ProductId equals t5.ProductId
-                                 join t6 in db.Celebrations on t5.EventId equals t6.EventId
-                                 where t6.EventDate.Month == DateTime.Now.Month
-                                 select
-                                (t5.UnitPrice * t4.Quantity)).DefaultIfEmpty().Sum();
-            ViewBag.TotalExpenses = totalexpenses;
-            return PartialView(totalexpenses);
-        }
-        // GET: Expenses/Create
         public ActionResult Create()
         {
             ViewBag.ProductId = new SelectList(db.SupProducts, "ProductId", "ProductName");
@@ -171,7 +160,7 @@ namespace PMWelfare.Controllers
 
             ViewBag.total = expense;
 
-            return View();
+            return View(ViewBag.total);
         }
     }
 }

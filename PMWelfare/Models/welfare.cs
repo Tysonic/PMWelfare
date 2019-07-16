@@ -42,9 +42,6 @@ namespace PMWelfare.Models
                 .Property(e => e.DeviceMac)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Celebration>()
-                .Property(e => e.EventName)
-                .IsUnicode(false);
 
             modelBuilder.Entity<Celebration>()
                 .Property(e => e.CreatedBy)

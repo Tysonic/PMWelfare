@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PMWelfare.Models;
+using static PMWelfare.Models.Celebrant;
 
 namespace PMWelfare.Controllers
 {
@@ -134,16 +135,19 @@ namespace PMWelfare.Controllers
         }
         public ActionResult Events()
         {
-            var events = db.Celebrations.Join(db.Celebrants, s =>
-            s.EventId, m => m.EventId, (s, m) => new { s.EventType,
-                s.EventDate, m.UserName, s.CreatedAt, s.Celebrants }).Where(s =>
-            s.CreatedAt.Value.Month == DateTime.Now.Month
-            && s.CreatedAt.Value.Year == DateTime.Now.Year)
-            .Select(s => new { s.EventType, s.Celebrants, s.EventDate })
-            .ToList();
+
+            var events = db.Celebrants.Join(db.Celebrations, m =>
+            m.EventId, s => s.EventId, (m, s) => new Celebransviewmodel
+            {
+                EventType = s.EventType.Type,
+                EventDate = s.EventDate,
+                UserName = m.UserName
+            });
+            //    .Where(s =>
+            //DbFunctions.DiffDays(DateTime.Now , s.EventDate) <=10 ).DefaultIfEmpty().ToList();
 
             ViewBag.events = events;
-            return View();
+            return View(events);
         }
     }
 }

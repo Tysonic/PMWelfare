@@ -106,10 +106,10 @@ namespace PMWelfare.Migrations
                     {
                         CelebId = c.Int(nullable: false, identity: true),
                         UserName = c.String(maxLength: 40, unicode: false),
-                        EventId = c.Int(),
+                        EventId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.CelebId)
-                .ForeignKey("dbo.Celebrations", t => t.EventId)
+                .ForeignKey("dbo.Celebrations", t => t.EventId, cascadeDelete: true)
                 .ForeignKey("dbo.Members", t => t.UserName)
                 .Index(t => t.UserName)
                 .Index(t => t.EventId);
@@ -119,13 +119,12 @@ namespace PMWelfare.Migrations
                 c => new
                     {
                         EventId = c.Int(nullable: false, identity: true),
-                        EventName = c.String(nullable: false, maxLength: 40, unicode: false),
+                        EventTypeId = c.Int(nullable: false),
                         EventDate = c.DateTime(nullable: false),
                         CreatedBy = c.String(nullable: false, maxLength: 40, unicode: false),
                         CreatedAt = c.DateTime(),
                         UpdatedBy = c.String(maxLength: 40, unicode: false),
                         UpdatedAt = c.DateTime(),
-                        EventTypeId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.EventId)
                 .ForeignKey("dbo.EventType", t => t.EventTypeId, cascadeDelete: true)

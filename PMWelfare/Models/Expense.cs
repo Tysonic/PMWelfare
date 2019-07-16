@@ -35,28 +35,28 @@ namespace PMWelfare.Models
         public class MonthlyExpensesViewModel
         {
             [Key]
-            public int celeb_product_id { get; set; }
+            public int CelebrationsId { get; set; }
 
             [Column(TypeName = "date")]
-            public DateTime? expense_date { get; set; }
+            public DateTime? ExpenseDate { get; set; }
 
             [StringLength(20)]
-            public string product_name { get; set; }
+            public string ProductName { get; set; }
 
-            public int? quantity { get; set; }
+            public int? Quantity { get; set; }
 
-            public int? supplier_product_id { get; set; }
+            public int? SupProductId { get; set; }
 
-            public int? event_id { get; set; }
+            public int? EventId { get; set; }
             [StringLength(50)]
-            public string event_name { get; set; }
+            public string EventType { get; set; }
 
             [Column(TypeName = "date")]
-            public DateTime? event__date { get; set; }
+            public DateTime? EventDate { get; set; }
 
 
             [Column(TypeName = "money")]
-            public decimal? productprice { get; set; }
+            public decimal? UnitPrice { get; set; }
 
             [Column(TypeName = "money")]
             public decimal? TotalPrice { get; set; }

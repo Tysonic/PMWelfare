@@ -2,59 +2,60 @@
 
 @{
     ViewBag.Title = "MonthlyExpenses";
+
 }
 
-<h2>MonthlyExpenses</h2>
+<h2>Expenses for @String.Format("{0:MMMM}", DateTime.Now.AddMonths(-1))</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.product_name)
+            @Html.DisplayNameFor(model => model.EventType)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.event_name)
+            @Html.DisplayNameFor(model => model.ProductName)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.ExpenseDate)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.quantity)
+            @Html.DisplayNameFor(model => model.Quantity)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.productprice)
+            @Html.DisplayNameFor(model => model.UnitPrice)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.TotalPrice)
         </th>
 
+
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.product_name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.event_name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.quantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.productprice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalPrice)
-            </td>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.EventType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExpenseDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UnitPrice)
+        </td>
 
-
-        </tr>
-    }
-
-</table>
-@{
-    Html.RenderAction("TotalExpenses", "Expenses");
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalPrice)
+        </td>
+    </tr>
 }
 
+</table>

@@ -48,7 +48,7 @@ namespace PMWelfare.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "EventId,EventName,EventDate,CreatedBy,CreatedAt,UpdatedBy,UpdatedAt,EventTypeId")] Celebration celebration)
+        public ActionResult Create([Bind(Include = "EventId,EventDate,CreatedBy,CreatedAt,UpdatedBy,UpdatedAt,EventTypeId")] Celebration celebration)
         {
             if (ModelState.IsValid)
             {
@@ -82,7 +82,7 @@ namespace PMWelfare.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "EventId,EventName,EventDate,CreatedBy,CreatedAt,UpdatedBy,UpdatedAt,EventTypeId")] Celebration celebration)
+        public ActionResult Edit([Bind(Include = "EventId,EventDate,CreatedBy,CreatedAt,UpdatedBy,UpdatedAt,EventTypeId")] Celebration celebration)
         {
             if (ModelState.IsValid)
             {
@@ -131,7 +131,8 @@ namespace PMWelfare.Controllers
         public ActionResult Events()
         {
             var events = db.Celebrations.Join(db.Celebrants, s =>
-            s.EventId, m => m.EventId, (s, m) => new { s.EventType, s.EventDate, m.UserName, s.CreatedAt, s.Celebrants }).Where(s => 
+            s.EventId, m => m.EventId, (s, m) => new { s.EventType,
+                s.EventDate, m.UserName, s.CreatedAt, s.Celebrants }).Where(s => 
             s.CreatedAt.Value.Month == DateTime.Now.Month
             && s.CreatedAt.Value.Year == DateTime.Now.Year)
             .Select(s => new { s.EventType, s.Celebrants,s.EventDate })
