@@ -119,12 +119,12 @@ namespace PMWelfare.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-        [ChildActionOnly]
+        
         public ActionResult Advances()
         {
             decimal? advance = db.Subscriptions.Where(s => 
             (s.SubMonth > DateTime.Now.Month && s.SubYear == DateTime.Now.Year)
-           || s.SubYear > DateTime.Now.Year).Sum(s => s.Amount);
+           || s.SubYear > DateTime.Now.Year).DefaultIfEmpty().Sum(s => s.Amount);
 
             ViewBag.Advances = advance;
 
@@ -225,6 +225,7 @@ namespace PMWelfare.Controllers
              Select(s => new { s.Amount, s.UserName }).ToList();
             return View(advances);
         }
+        [ChildActionOnly]
         protected override void Dispose(bool disposing)
         {
             if (disposing)
