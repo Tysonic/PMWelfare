@@ -54,18 +54,7 @@ namespace PMWelfare.Controllers
             
             return View(expenses);
         }
-        [ChildActionOnly]
-        public ActionResult TotalExpenses()
-        {
-            var totalexpenses = (from t4 in db.Expenses
-                                 join t5 in db.SupProducts on t4.ProductId equals t5.ProductId
-                                 join t6 in db.Celebrations on t5.EventId equals t6.EventId
-                                 where t6.EventDate.Month == DateTime.Now.Month
-                                 select
-                                (t5.UnitPrice * t4.Quantity)).DefaultIfEmpty().Sum();
-            ViewBag.TotalExpenses = totalexpenses;
-            return PartialView(totalexpenses);
-        }
+      
         // GET: Expenses/Create
         public ActionResult Create()
         {

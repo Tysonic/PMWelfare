@@ -119,7 +119,7 @@ namespace PMWelfare.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-        [ChildActionOnly]
+   
         public ActionResult Advances()
         {
             var ad = (from t1 in db.Subscriptions
@@ -128,7 +128,7 @@ namespace PMWelfare.Controllers
                       select t1.Amount).DefaultIfEmpty().Sum();
 
             var advance = db.Subscriptions.Where(s => (s.SubMonth > DateTime.Now.Month && s.SubYear == DateTime.Now.Year)
-           || s.SubYear > DateTime.Now.Year).DefaultIfEmpty().Sum(s => s.Amount);
+           || s.SubYear > DateTime.Now.Year).Sum(s => s.Amount);
 
             ViewBag.Advances = advance;
 
