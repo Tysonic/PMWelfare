@@ -127,12 +127,9 @@ namespace PMWelfare.Controllers
                       || t1.SubYear > DateTime.Now.Year)
                       select t1.Amount).DefaultIfEmpty().Sum();
 
-            var advance = db.Subscriptions.Where(s => (s.SubMonth > DateTime.Now.Month && s.SubYear == DateTime.Now.Year)
-           || s.SubYear > DateTime.Now.Year).Sum(s => s.Amount);
+            ViewBag.Advance = ad;
 
-            ViewBag.Advances = advance;
-
-            return PartialView(advance);
+            return View();
         }
         public ActionResult Arrears() {
   
@@ -150,7 +147,7 @@ namespace PMWelfare.Controllers
             List<Subscription> newmemb = new List<Subscription>();
             notsub.ForEach(s => user.Add(new Subscription(s)));
             var jr = db.Subscriptions.Select(s => s.UserName);
-       
+            
             foreach (var m in user)
             {
                 var jrm = db.Subscriptions.Select(s => s.UserName);
@@ -200,16 +197,18 @@ namespace PMWelfare.Controllers
 
             }
             //get the partial arrears of a subscriber
+
             subscribers.ForEach(hm => subs.Add(new Subscription(hm)));
+           
             foreach (var jt in subs)
             {
-                decimal? amount = db.Subscriptions
+                decimal amount = db.Subscriptions
                         .Where(s => s.UserName == jt.UserName && s.SubMonth == month && s.SubYear == year)
-                        .Select(s => s.Amount).Single();
-                decimal? subamount = 20000;
+                        .DefaultIfEmpty().Select(s => s.Amount).Single();
+                decimal subamount = 20000;
                 if (amount < subamount)
                 {
-                    decimal? subamount1 = subamount - amount;
+                    decimal subamount1 = subamount - amount;
 
                     arrears.Add(new Subscription(jt.UserName, subamount1));
                 }

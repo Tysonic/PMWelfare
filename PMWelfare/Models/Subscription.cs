@@ -11,7 +11,7 @@ namespace PMWelfare.Models
         private string s;
         public Subscription() { }
 
-        public Subscription(string s ,decimal? a)
+        public Subscription(string s ,decimal a)
         {
             UserName = s;
             Amount = a;
@@ -30,7 +30,7 @@ namespace PMWelfare.Models
         public string UserName { get; set; }
 
         [Column(TypeName = "money")]
-        public decimal? Amount { get; set; }
+        public decimal Amount { get; set; }
 
         public int SubMonth { get; set; }
 

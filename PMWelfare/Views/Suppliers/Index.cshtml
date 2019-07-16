@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PMWelfare.Models.MemberStatus>
+﻿@model IEnumerable<PMWelfare.Models.Supplier>
 
 @{
     ViewBag.Title = "Index";
@@ -12,7 +12,13 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.MemberStatus1)
+            @Html.DisplayNameFor(model => model.SupTel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SupName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.CreatedBy)
@@ -26,12 +32,19 @@
         <th>
             @Html.DisplayNameFor(model => model.UpdatedAt)
         </th>
+        <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.MemberStatus1)
+            @Html.DisplayFor(modelItem => item.SupTel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SupName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.CreatedBy)
@@ -46,9 +59,9 @@
             @Html.DisplayFor(modelItem => item.UpdatedAt)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.MembersStatusID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.MembersStatusID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.MembersStatusID })
+            @Html.ActionLink("Edit", "Edit", new { id=item.SupId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.SupId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.SupId })
         </td>
     </tr>
 }

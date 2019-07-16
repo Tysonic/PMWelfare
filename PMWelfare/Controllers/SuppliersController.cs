@@ -88,20 +88,6 @@ namespace PMWelfare.Controllers
             }
             return View(supplier);
         }
-        public ActionResult Listsupplier()
-        {
-            var Suplist = from t1 in db.Suppliers
-                          join t2 in db.SupProducts on t1.SupId equals t2.SupId
-                          select new Supplier.supplierlistViewModel
-                          {
-                              product_name = t2.ProductName,
-                              product_price = t2.UnitPrice,
-                              supplier_name = t1.SupName
-
-                          };
-
-            return View(Suplist);
-        }
 
         // GET: Suppliers/Delete/5
         public ActionResult Delete(int? id)
@@ -127,6 +113,20 @@ namespace PMWelfare.Controllers
             db.Suppliers.Remove(supplier);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+        public ActionResult Listsupplier()
+        {
+            var Suplist = from t1 in db.Suppliers
+                          join t2 in db.SupProducts on t1.SupId equals t2.SupId
+                          select new Supplier.supplierlistViewModel
+                          {
+                              product_name = t2.ProductName,
+                              product_price = t2.UnitPrice,
+                              supplier_name = t1.SupName
+
+                          };
+
+            return View(Suplist);
         }
 
         protected override void Dispose(bool disposing)
