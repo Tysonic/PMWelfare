@@ -433,7 +433,7 @@ namespace PMWelfare.Controllers
             var ClosingBalance = db.Monthlysummary.Where(s => s.CreatedAt.Value.Month == DateTime.Now.Month - 1
             && s.CreatedAt.Value.Year == DateTime.Now.Year).Select(s => s.ClosingBalance).FirstOrDefault();
 
-            var Cash = Total + ClosingBalance - expense;
+           decimal Cash = Total + ClosingBalance - expense;
             ViewBag.total = Cash;
             return View();
         }

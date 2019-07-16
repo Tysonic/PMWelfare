@@ -187,9 +187,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201907151220575_welfare.cs" />
-    <Compile Include="Migrations\201907151220575_welfare.Designer.cs">
-      <DependentUpon>201907151220575_welfare.cs</DependentUpon>
+    <Compile Include="Migrations\201907160623012_welfare.cs" />
+    <Compile Include="Migrations\201907160623012_welfare.Designer.cs">
+      <DependentUpon>201907160623012_welfare.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -359,7 +359,6 @@
     <Content Include="Views\Deposits\Details.cshtml" />
     <Content Include="Views\Deposits\Edit.cshtml" />
     <Content Include="Views\Deposits\Index.cshtml" />
-    <Content Include="Views\Shared\_Advances.cshtml" />
     <Content Include="Views\Subscriptions\AdvanceList.cshtml" />
     <Content Include="Views\Celebrations\Totalevents.cshtml" />
   </ItemGroup>
@@ -376,8 +375,8 @@
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201907151220575_welfare.resx">
-      <DependentUpon>201907151220575_welfare.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201907160623012_welfare.resx">
+      <DependentUpon>201907160623012_welfare.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

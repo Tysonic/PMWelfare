@@ -13,7 +13,7 @@ namespace PMWelfare.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201907151249592_welfare"; }
+            get { return "201907160623012_welfare"; }
         }
         
         string IMigrationMetadata.Source

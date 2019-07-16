@@ -120,20 +120,17 @@ namespace PMWelfare.Controllers
             return RedirectToAction("Index");
         }
         [ChildActionOnly]
-        public ActionResult CurrentAdvances()
+        public ActionResult Advances()
         {
-            var ad = (from t1 in db.Subscriptions
-                      where ((t1.SubMonth > DateTime.Now.Month && t1.SubYear == DateTime.Now.Year)
-                      || t1.SubYear > DateTime.Now.Year)
-                      select t1.Amount).DefaultIfEmpty().Sum();
-
-            var advance = db.Subscriptions.Where(s => (s.SubMonth > DateTime.Now.Month && s.SubYear == DateTime.Now.Year)
-           || s.SubYear > DateTime.Now.Year).DefaultIfEmpty().Sum(s => s.Amount);
+            decimal? advance = db.Subscriptions.Where(s => 
+            (s.SubMonth > DateTime.Now.Month && s.SubYear == DateTime.Now.Year)
+           || s.SubYear > DateTime.Now.Year).Sum(s => s.Amount);
 
             ViewBag.Advances = advance;
 
-            return PartialView(advance);
+            return View();
         }
+
         public ActionResult Arrears() {
   
              int month = DateTime.Now.Month;
