@@ -133,21 +133,9 @@ namespace PMWelfare.Controllers
             }
             base.Dispose(disposing);
         }
-        public ActionResult Events()
-        {
 
-            var events = db.Celebrants.Join(db.Celebrations, m =>
-            m.EventId, s => s.EventId, (m, s) => new Celebransviewmodel
-            {
-                EventType = s.EventType.Type,
-                EventDate = s.EventDate,
-                UserName = m.UserName
-            });
-            //    .Where(s =>
-            //DbFunctions.DiffDays(DateTime.Now , s.EventDate) <=10 ).DefaultIfEmpty().ToList();
 
-            ViewBag.events = events;
-            return View(events);
-        }
+
+
     }
 }

@@ -133,13 +133,6 @@ namespace PMWelfare.Models
                 .Property(e => e.ClosingBalance)
                 .HasPrecision(19, 4);
 
-            modelBuilder.Entity<MonthlySummary>()
-                .Property(e => e.CreatedBy)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<MonthlySummary>()
-                .Property(e => e.UpdatedBy)
-                .IsUnicode(false);
 
             modelBuilder.Entity<Subscription>()
                 .Property(e => e.UserName)

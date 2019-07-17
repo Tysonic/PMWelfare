@@ -123,5 +123,9 @@ namespace PMWelfare.Controllers
             }
             base.Dispose(disposing);
         }
+        public ActionResult Supplierlist()
+        {
+            return View();
+        }
     }
 }

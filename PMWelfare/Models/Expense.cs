@@ -24,19 +24,29 @@ namespace PMWelfare.Models
         public string CreatedBy { get; set; }
 
         public DateTime? CreatedAt { get; set; }
+        public DateTime TimeStamp
+        {
+            get
+            {
+                if (CreatedAt == null)
+                {
+                    CreatedAt = DateTime.Now;
+                }
+                return CreatedAt.Value;
+            }
+            private set { CreatedAt = value; }
+        }
 
         [StringLength(40)]
         public string UpdatedBy { get; set; }
 
         public DateTime? UpdatedAt { get; set; }
 
-        public virtual SupProducts sup_products { get; set; }
+        public virtual SupProducts SupProducts { get; set; }
 
         public class MonthlyExpensesViewModel
         {
-            [Key]
-            public int CelebrationsId { get; set; }
-
+            
             [Column(TypeName = "date")]
             public DateTime? ExpenseDate { get; set; }
 
@@ -44,10 +54,7 @@ namespace PMWelfare.Models
             public string ProductName { get; set; }
 
             public int? Quantity { get; set; }
-
-            public int? SupProductId { get; set; }
-
-            public int? EventId { get; set; }
+            
             [StringLength(50)]
             public string EventType { get; set; }
 
@@ -65,9 +72,4 @@ namespace PMWelfare.Models
 
         }
     }
-    
-
-
-
-
     }

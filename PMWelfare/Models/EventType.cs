@@ -25,6 +25,18 @@
         public string CreatedBy { get; set; }
 
         public DateTime? CreatedAt { get; set; }
+        public DateTime TimeStamp
+        {
+            get
+            {
+                if (CreatedAt == null)
+                {
+                    CreatedAt = DateTime.Now;
+                }
+                return CreatedAt.Value;
+            }
+            private set { CreatedAt = value; }
+        }
 
         [StringLength(40)]
         public string UpdatedBy { get; set; }

@@ -10,22 +10,9 @@ namespace PMWelfare.Models
     {
         public int Id { get; set; }
 
-        public DateTime? StartAt { get; set; }
-
-        public DateTime? EndAt { get; set; }
+        public DateTime EndDate { get; set; }
 
         [Column(TypeName = "money")]
         public decimal ClosingBalance { get; set; }
-
-        [Required]
-        [StringLength(40)]
-        public string CreatedBy { get; set; }
-
-        public DateTime? CreatedAt { get; set; }
-
-        [StringLength(40)]
-        public string UpdatedBy { get; set; }
-
-        public DateTime? UpdatedAt { get; set; }
     }
 }

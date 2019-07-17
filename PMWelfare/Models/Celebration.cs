@@ -29,12 +29,30 @@ namespace PMWelfare.Models
 
         [DefaultValue(typeof(DateTime), "")]
         public DateTime? CreatedAt { get; set; }
+        public DateTime TimeStamp
+        {
+            get
+            {
+                if (CreatedAt == null)
+                {
+                    CreatedAt = DateTime.Now;
+                }
+                return CreatedAt.Value;
+            }
+            private set { CreatedAt = value; }
+        }
 
         [StringLength(40)]
         public string UpdatedBy { get; set; }
 
         public DateTime? UpdatedAt { get; set; }
-        
+        public class Celebrationsviewmodel
+        {
+            public string UserName { set; get; }
+            public DateTime EventDate { set; get; }
+            public string EventType { set; get; }
+        }
+
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SupProducts> SupProducts { get; set; }

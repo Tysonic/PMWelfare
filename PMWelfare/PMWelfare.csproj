@@ -191,6 +191,7 @@
     <Compile Include="Migrations\201907160623012_welfare.Designer.cs">
       <DependentUpon>201907160623012_welfare.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907170912224_welfare1.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ActivityLogs.cs" />
@@ -205,7 +206,6 @@
     <Compile Include="Models\Member.cs" />
     <Compile Include="Models\MemberStatus.cs" />
     <Compile Include="Models\MonthlySummary.cs" />
-    <Compile Include="Models\Report.cs" />
     <Compile Include="Models\Subscription.cs" />
     <Compile Include="Models\Supplier.cs" />
     <Compile Include="Models\SupProducts.cs" />
@@ -215,6 +215,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\nice.jpg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -262,6 +263,8 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Views\MonthlySummary\ura1.jpg" />
+    <Content Include="Views\MonthlySummary\ura2.png" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -348,13 +351,12 @@
     <Content Include="Views\Deposits\Edit.cshtml" />
     <Content Include="Views\Deposits\Index.cshtml" />
     <Content Include="Views\Subscriptions\AdvanceList.cshtml" />
-    <Content Include="Views\Celebrations\Totalevents.cshtml" />
+    <Content Include="Views\Celebrations\TotaleventsOfPreviousMonth.cshtml" />
     <Content Include="Views\Celebrants\Index.cshtml" />
     <Content Include="Views\Celebrants\Details.cshtml" />
     <Content Include="Views\Celebrants\Create.cshtml" />
     <Content Include="Views\Celebrants\Edit.cshtml" />
     <Content Include="Views\Celebrants\Delete.cshtml" />
-    <Content Include="Views\Celebrants\Events.cshtml" />
     <Content Include="Views\SupProducts\Create.cshtml" />
     <Content Include="Views\SupProducts\Delete.cshtml" />
     <Content Include="Views\SupProducts\Details.cshtml" />
@@ -367,10 +369,10 @@
     <Content Include="Views\Suppliers\Index.cshtml" />
     <Content Include="Views\Expenses\MonthlyExpenses.cshtml" />
     <Content Include="Views\Celebrations\Index.cshtml" />
+    <Content Include="Views\Celebrations\EventsOfProviousMonth.cshtml" />
+    <Content Include="Views\Celebrations\UpComingEvents.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
@@ -383,6 +385,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201907160623012_welfare.resx">
       <DependentUpon>201907160623012_welfare.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907170912224_welfare1.resx">
+      <DependentUpon>201907170912224_welfare1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

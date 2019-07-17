@@ -300,7 +300,7 @@ namespace PMWelfare.Controllers
                                 subscriptions.SubYear = ++year;
                             }
                             {
-                                if (x >= SubAmount)
+                                if (x >= SubAmount )
                                 {
                                     Subscription subs = new Subscription();
                                     subs.Amount = SubAmount;
@@ -311,7 +311,7 @@ namespace PMWelfare.Controllers
                                         db.SaveChanges();
                                     }
                                 }
-                                if (x < SubAmount)
+                                if (x < SubAmount && x<0)
                                 {
                                     subscriptions.Amount = x;
                                     db.Subscriptions.Add(subscriptions);
@@ -432,8 +432,9 @@ namespace PMWelfare.Controllers
             .Where(s => s.ExpenseDate.Month == DateTime.Now.Month
              && s.ExpenseDate.Year == DateTime.Now.Year).Select(s => s.u * s.q).DefaultIfEmpty().Sum();
 
-            decimal? ClosingBalance = db.Monthlysummary.Where(s => s.CreatedAt.Value.Month == DateTime.Now.Month - 1
-            && s.CreatedAt.Value.Year == DateTime.Now.Year).Select(s => s.ClosingBalance).FirstOrDefault();
+            decimal? ClosingBalance = db.Monthlysummary
+                .Where(s => s.EndDate.Month == DateTime.Now.Month - 1
+            && s.EndDate.Year == DateTime.Now.Year).Select(s => s.ClosingBalance).FirstOrDefault();
 
            decimal? Cash = Total + ClosingBalance - expense;
             ViewBag.total = Cash;

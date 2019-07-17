@@ -17,11 +17,6 @@ namespace PMWelfare.Models
         public virtual Celebration Celebration { get; set; }
 
         public virtual Member Member { get; set; }
-        public class Celebransviewmodel
-        {
-            public string UserName { set; get; }
-            public DateTime EventDate { set; get; }
-            public string EventType { set; get; }
-        }
+
     }
 }

@@ -15,8 +15,8 @@ namespace PMWelfare.Controllers
 
         public ActionResult Index()
         {
-            var ClosingBalance = db.Monthlysummary.Where(s => s.CreatedAt.Value.Month == DateTime.Now.Month
-            && s.CreatedAt.Value.Year == DateTime.Now.Year).Select(s => s.ClosingBalance).FirstOrDefault();
+            var ClosingBalance = db.Monthlysummary.Where(s => s.EndDate.Month == DateTime.Now.Month
+            && s.EndDate.Year == DateTime.Now.Year).Select(s => s.ClosingBalance).FirstOrDefault();
             ViewBag.balance = ClosingBalance;
             return View();
         }

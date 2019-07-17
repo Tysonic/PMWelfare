@@ -39,7 +39,7 @@ namespace PMWelfare.Controllers
         // GET: SupProducts/Create
         public ActionResult Create()
         {
-            ViewBag.EventId = new SelectList(db.Celebrations, "EventId", "EventName");
+            ViewBag.EventId = new SelectList(db.Celebrations, "EventId", "EventType");
             ViewBag.SupId = new SelectList(db.Suppliers, "SupId", "SupTel");
             return View();
         }
@@ -49,7 +49,8 @@ namespace PMWelfare.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductId,ProductName,UnitPrice,EventId,SupId,CreatedBy,CreatedAt,UpdatedBy,UpdatedAt")] SupProducts supProducts)
+        public ActionResult Create([Bind(Include = "ProductId,ProductName," +
+            "UnitPrice,EventId,SupId,CreatedBy,CreatedAt,UpdatedBy,UpdatedAt")] SupProducts supProducts)
         {
             if (ModelState.IsValid)
             {
@@ -58,8 +59,10 @@ namespace PMWelfare.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.EventId = new SelectList(db.Celebrations, "EventId", "EventName", supProducts.EventId);
-            ViewBag.SupId = new SelectList(db.Suppliers, "SupId", "SupTel", supProducts.SupId);
+            ViewBag.EventId = new SelectList(db.Celebrations, "EventId", "EventType.Type", 
+                supProducts.EventId);
+            ViewBag.SupId = new SelectList(db.Suppliers, "SupId", "SupTel",
+                supProducts.SupId);
             return View(supProducts);
         }
 
@@ -75,8 +78,10 @@ namespace PMWelfare.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.EventId = new SelectList(db.Celebrations, "EventId", "EventName", supProducts.EventId);
-            ViewBag.SupId = new SelectList(db.Suppliers, "SupId", "SupTel", supProducts.SupId);
+            ViewBag.EventId = new SelectList(db.Celebrations, "EventId", "EventType.Type",
+                supProducts.EventId);
+            ViewBag.SupId = new SelectList(db.Suppliers, "SupId",
+                "SupTel", supProducts.SupId);
             return View(supProducts);
         }
 
@@ -85,7 +90,8 @@ namespace PMWelfare.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductId,ProductName,UnitPrice,EventId,SupId,CreatedBy,CreatedAt,UpdatedBy,UpdatedAt")] SupProducts supProducts)
+        public ActionResult Edit([Bind(Include = "ProductId,ProductName,UnitPrice," +
+            "EventId,SupId,CreatedBy,CreatedAt,UpdatedBy,UpdatedAt")] SupProducts supProducts)
         {
             if (ModelState.IsValid)
             {
@@ -93,8 +99,10 @@ namespace PMWelfare.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.EventId = new SelectList(db.Celebrations, "EventId", "EventName", supProducts.EventId);
-            ViewBag.SupId = new SelectList(db.Suppliers, "SupId", "SupTel", supProducts.SupId);
+            ViewBag.EventId = new SelectList(db.Celebrations,
+                "EventId", "EventType.type", supProducts.EventId);
+            ViewBag.SupId = new SelectList(db.Suppliers, "SupId", 
+                "SupTel", supProducts.SupId);
             return View(supProducts);
         }
 

@@ -34,7 +34,7 @@ namespace PMWelfare.Migrations
                         MemberStatus = c.Int(),
                         IsAdmin = c.Boolean(nullable: false),
                         CreatedBy = c.String(nullable: false, maxLength: 40, unicode: false),
-                        CreatedAt = c.DateTime(),
+                        CreatedAt = c.DateTime(nullable: false),
                         UpdatedBy = c.String(maxLength: 40, unicode: false),
                         UpdatedAt = c.DateTime(),
                     })

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PMWelfare.Models;
+using static PMWelfare.Models.Celebration;
 
 namespace PMWelfare.Controllers
 {
@@ -128,24 +129,44 @@ namespace PMWelfare.Controllers
             }
             base.Dispose(disposing);
         }
-        public ActionResult Events()
+        public ActionResult EventsOfProviousMonth()
         {
-            var events = db.Celebrations.Join(db.Celebrants, s =>
-            s.EventId, m => m.EventId, (s, m) => new { s.EventType,
-                s.EventDate, m.UserName, s.CreatedAt, s.Celebrants }).Where(s => 
-            s.CreatedAt.Value.Month == DateTime.Now.Month
-            && s.CreatedAt.Value.Year == DateTime.Now.Year)
-            .Select(s => new { s.EventType, s.Celebrants,s.EventDate })
-            .ToList();
 
-            ViewBag.events = events;
-            return View();
+            var events = db.Celebrants.Join(db.Celebrations, m =>
+            m.EventId, s => s.EventId, (m, s) => new Celebrationsviewmodel
+            {
+                EventType = s.EventType.Type,
+                EventDate = s.EventDate,
+                UserName = m.UserName
+            }).Where(s =>
+            DbFunctions.DiffDays(DateTime.Now, s.EventDate)
+            == (DateTime.Now.Month - 1))
+            .DefaultIfEmpty().ToList();
+            return View(events);
         }
-        public ActionResult Totalevents()
+
+        public ActionResult UpComingEvents()
         {
-           int events = db.Celebrations.Where(s => s.CreatedAt
-           .Value.Month == DateTime.Now.Month
-            && s.CreatedAt.Value.Year == DateTime.Now.Year)
+
+            var events = db.Celebrants.Join(db.Celebrations, m =>
+            m.EventId, s => s.EventId, (m, s) => new Celebrationsviewmodel
+            {
+                EventType = s.EventType.Type,
+                EventDate = s.EventDate,
+                UserName = m.UserName
+            }).Where(s =>
+            DbFunctions.DiffDays(DateTime.Now, s.EventDate)
+            <= 10 && DbFunctions.DiffDays(DateTime.Now, s.EventDate) < 0)
+            .DefaultIfEmpty().ToList();
+            return View(events);
+        }
+
+
+        public ActionResult TotaleventsOfPreviousMonth()
+        {
+           int events = db.Celebrations.Where(s =>
+            DbFunctions.DiffDays(DateTime.Now, s.EventDate)
+            ==( s.EventDate.Month-1))
             .Select(s => s.EventId).Count();
             ViewBag.events = events;
             return View(ViewBag.events);

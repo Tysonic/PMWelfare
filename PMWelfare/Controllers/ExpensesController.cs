@@ -17,7 +17,7 @@ namespace PMWelfare.Controllers
         // GET: Expenses
         public ActionResult Index()
         {
-            var expenses = db.Expenses.Include(e => e.sup_products);
+            var expenses = db.Expenses.Include(e => e.SupProducts);
             return View(expenses.ToList());
         }
 

@@ -4,84 +4,55 @@
 @{
     ViewBag.Title = "Index";
 }
+<h2 style="text-align:center">Summary of
+    @String.Format("{0:MMMM}", DateTime.Now.AddMonths(-1))
+    </h2><br /><br />
 
-<h2>Summary of previous month</h2>
-<table class="table">
-    <tr class=" active">
-        <th>
-            <h2 class="">
-                Particulars
-            </h2>
-        </th>
-        <th>
-            <h2>
-                Amount
-            </h2>
-        </th>
-    </tr>
-    <tr>
-        <td>
-            <h2>
-                Cash At Hand
-            </h2>
-        </td>
-        <td>
-            <h2>
-                @{Html.RenderAction("CashAtHand", "Deposits");}
-            </h2>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <h2>
-                Total Collections
-            </h2>
-        </td>
-        <td>
-            <h2>
-                @{Html.RenderAction("TotalCollection", "Deposits");}
-            </h2>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <h2>
-                Advance Collections
-            </h2>
-        </td>
-        <td>
-            <h2>
-                @{Html.RenderAction("Advances", "Subscriptions");}
-            </h2>
-        </td>
-    </tr>
+<iframe src=""
+        frameborder="0" allowTransparency="true"
+         style=" float:right;width:60%; height:500px; " name="Details">
 
-    <tr>
-        <td>
-            <h2>
-                Total Expenditure
-            </h2>
-        </td>
-        <td>
-            <h2>
-                @{Html.RenderAction("TotalExpense", "Expenses");}
-            </h2>
-        </td>
-    </tr>
+</iframe>
+<div style="width:40%">
+
+    <table class="table">
+        <tr class=" active">
+            <th>Particulars</th>
+            <th> Amount</th>
+        </tr>
         <tr>
-        <td>
-            <h2>
-                Total no of events 
-            </h2>
+            <td> Cash At Hand</td>
+            <td>@{Html.RenderAction("CashAtHand", "Deposits");}</td>
+            
+        </tr>
+        <tr>
+            <td>Total Collections</td>
+            <td>@{Html.RenderAction("TotalCollection", "Deposits");}</td>
+        </tr>
+        <tr>
+            <td>Advance Collections</td>
+            <td>@{Html.RenderAction("Advances", "Subscriptions");}</td>
+        </tr>
+        <tr>
+            <td>Total Expenditure</td>
+            <td>@{Html.RenderAction("TotalExpense", "Expenses");}</td>
+        </tr>
+        <tr>
+            <td>Total no of events </td>
+            <td>
+                @{Html.RenderAction("TotaleventsOfPreviousMonth",
+                        "Celebrations");}
         </td>
-        <td>
-            <h2>
-                @{Html.RenderAction("Totalevents", "Celebrations");}
-            </h2>
-        </td>
-    </tr>
+            <td>
+                @Html.ActionLink("Details", "../Celebrations/eventsofproviousmonth",
+              null, new { target="Details"})
+            </td>
+        
+        </tr>
 
-</table>
+    </table>
+
+</div>
 
 
 
