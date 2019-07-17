@@ -45,6 +45,7 @@
                             <li>@Html.ActionLink("Add Staff", "Create", "Members")</li>
 
                         </ul>
+                    </li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             Events
@@ -57,14 +58,31 @@
 
                         </ul>
                     </li>
+                    <!--dropdown Menu End-->
+                    
+                   <li>@Html.ActionLink("Subscriptions", "Index", "Subscriptions")</li>
+                 
+               
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                           Expenses
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Expenses", "Create", "Expenses")</li>
+                         
+
+                        </ul>
+                    </li>
+                    <!--dropdown Menu End-->
                     <li>@Html.ActionLink("Deposits", "Create", "Deposits")</li>
-                  
-                    <li>@Html.ActionLink("Expenses", "Create", "Expenses")</li>
+
+                    
                     <li>@Html.ActionLink("MonthlySummary", "index", "MonthlySummary")</li>
 
 
-                    <li>@Html.ActionLink("Subscriptions", "Index", "Subscriptions")</li>
-                    <li>@Html.ActionLink("Eventtype", "Create", "EventTypes")</li>
+
+
 
                 </ul>
                 @Html.Partial("_LoginPartial")
