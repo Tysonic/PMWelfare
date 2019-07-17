@@ -2,52 +2,66 @@
 
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Summery Page";
 }
-<h2 style="text-align:center">Summary of
-    @String.Format("{0:MMMM}", DateTime.Now.AddMonths(-1))
-    </h2><br /><br />
+<h1 style="text-align:center">PM-Welfare summary page</h1><br /><br />
 
-<iframe src=""
-        frameborder="0" allowTransparency="true"
-         style=" float:right;width:60%; height:500px; " name="Details">
-
-</iframe>
+                                                                <iframe src=""
+                                                                        frameborder="0" allowTransparency="true"
+                                                                        style=" float:right;width:60%; height:700px;" name="Details">
+                                                                    ura1.jpg
+                                                                </iframe>
 <div style="width:40%">
+    <h2 style="text-align:center">
+        Current Ledger of
+        @String.Format("{0:MMMM,yyyy}", DateTime.Now)
+    </h2><br /><br />
+    <h3>At @DateTime.Now</h3>
 
     <table class="table">
         <tr class=" active">
             <th>Particulars</th>
-            <th> Amount</th>
+            <th> Total Value</th>
         </tr>
         <tr>
             <td> Cash At Hand</td>
             <td>@{Html.RenderAction("CashAtHand", "Deposits");}</td>
-            
         </tr>
         <tr>
             <td>Total Collections</td>
             <td>@{Html.RenderAction("TotalCollection", "Deposits");}</td>
+            <td>
+                @Html.ActionLink("Details", "../Deposits/Index",
+              null, new { target="Details"})
+            </td>
         </tr>
         <tr>
             <td>Advance Collections</td>
             <td>@{Html.RenderAction("Advances", "Subscriptions");}</td>
+            <td>
+                @Html.ActionLink("Details", "../Celebrations/eventsofproviousmonth",
+              null, new { target="Details"})
+            </td>
         </tr>
         <tr>
             <td>Total Expenditure</td>
             <td>@{Html.RenderAction("TotalExpense", "Expenses");}</td>
+            <td>
+                @Html.ActionLink("Details", "../Celebrations/eventsofproviousmonth",
+              null, new { target="Details"})
+            </td>
         </tr>
         <tr>
             <td>Total no of events </td>
             <td>
                 @{Html.RenderAction("TotaleventsOfPreviousMonth",
-                        "Celebrations");}
-        </td>
+                              "Celebrations");}
+            </td>
             <td>
                 @Html.ActionLink("Details", "../Celebrations/eventsofproviousmonth",
               null, new { target="Details"})
             </td>
-        
+
         </tr>
 
     </table>
@@ -56,3 +70,60 @@
 
 
 
+
+<div style="width:40%">
+    <h2 style="text-align:center">
+        Summary of
+        @String.Format("{0:MMMM}", DateTime.Now.AddMonths(-1))
+    </h2><br /><br />
+
+
+    <table class="table">
+        <tr class=" active">
+            <th>Particulars</th>
+            <th> Amount</th>
+        </tr>
+        <tr>
+            <td> Closing balance</td>
+            <td>@Viewbag.balance</td>
+        </tr>
+        <tr>
+            <td>Total Collections</td>
+            <td>@{Html.RenderAction("TotalCollection", "Deposits");}</td>
+            <td>
+                @Html.ActionLink("Details", "../Deposits/Index",
+              null, new { target="Details"})
+            </td>
+        </tr>
+        <tr>
+            <td>Advance Collections</td>
+            <td>@{Html.RenderAction("Advances", "Subscriptions");}</td>
+            <td>
+                @Html.ActionLink("Details", "../Celebrations/eventsofproviousmonth",
+              null, new { target="Details"})
+            </td>
+        </tr>
+        <tr>
+            <td>Total Expenditure</td>
+            <td>@{Html.RenderAction("TotalExpense", "Expenses");}</td>
+            <td>
+                @Html.ActionLink("Details", "../Celebrations/eventsofproviousmonth",
+              null, new { target="Details"})
+            </td>
+        </tr>
+        <tr>
+            <td>Total no of events </td>
+            <td>
+                @{Html.RenderAction("TotaleventsOfPreviousMonth",
+                            "Celebrations");}
+            </td>
+            <td>
+                @Html.ActionLink("Details", "../Celebrations/eventsofproviousmonth",
+              null, new { target="Details"})
+            </td>
+
+        </tr>
+
+    </table>
+
+</div>

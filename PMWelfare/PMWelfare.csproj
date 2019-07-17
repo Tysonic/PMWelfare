@@ -191,7 +191,6 @@
     <Compile Include="Migrations\201907160623012_welfare.Designer.cs">
       <DependentUpon>201907160623012_welfare.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201907170912224_welfare1.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ActivityLogs.cs" />
@@ -263,8 +262,6 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
-    <Content Include="Views\MonthlySummary\ura1.jpg" />
-    <Content Include="Views\MonthlySummary\ura2.png" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -371,6 +368,9 @@
     <Content Include="Views\Celebrations\Index.cshtml" />
     <Content Include="Views\Celebrations\EventsOfProviousMonth.cshtml" />
     <Content Include="Views\Celebrations\UpComingEvents.cshtml" />
+    <Content Include="Views\MonthlySummary\Closing.cshtml" />
+    <Content Include="Views\Subscriptions\Arrears.cshtml" />
+    <Content Include="Views\Subscriptions\TotalArrears.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -385,9 +385,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201907160623012_welfare.resx">
       <DependentUpon>201907160623012_welfare.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201907170912224_welfare1.resx">
-      <DependentUpon>201907170912224_welfare1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
