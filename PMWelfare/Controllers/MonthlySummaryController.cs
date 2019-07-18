@@ -20,13 +20,12 @@ namespace PMWelfare.Controllers
         }
         public ActionResult Closing()
         {
-            var Balance = db.Monthlysummary
-                .Where(s => DbFunctions.DiffDays(DateTime.Now, s.EndDate)
-            <= 10 && DbFunctions.DiffDays(DateTime.Now, s.EndDate) ==1)
-            .Select(s => s.ClosingBalance).FirstOrDefault();
+            decimal ClosingBalance = db.Monthlysummary
+                 .Where(s => s.EndDate.Month == DateTime.Now.Month - 1
+             && s.EndDate.Year == DateTime.Now.Year).Select(s => s.ClosingBalance).FirstOrDefault();
 
-            ViewBag.balance = Balance;
-            return View();
+            ViewBag.balance = ClosingBalance;
+            return View(ViewBag.balance);
         }
     }
 }

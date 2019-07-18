@@ -2,14 +2,12 @@
 
 @{
     ViewBag.Title = "Arrears";
+    Layout = null;
 }
 
 <h2>Arrears</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+<table style="width:100%">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.UserName)
@@ -18,22 +16,21 @@
             @Html.DisplayNameFor(model => model.UserName)
         </th>
 
-        <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
-            <td>
+            <th>
                 @Html.DisplayFor(modelItem => item.UserName)
-            </td>
-            <td>
+            </th>
+            <th>
                 @Html.DisplayFor(modelItem => item.Amount)
-            </td>
-            <td></td>
+            </th>
+
 
         </tr>
     }
 
 </table>
-@ViewBag.are
+
