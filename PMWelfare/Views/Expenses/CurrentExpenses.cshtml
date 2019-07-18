@@ -1,20 +1,23 @@
 ﻿@model IEnumerable<PMWelfare.Models.Expense.MonthlyExpensesViewModel>
 
 @{
-    ViewBag.Title = "MonthlyExpenses";
+    ViewBag.Title = "TotalCurrentExpenses";
 
 }
 
-<h2>Expenses for @String.Format("{0:MMMM}", DateTime.Now.AddMonths(-1))</h2>
+<h2>Expenses for @String.Format("{0:MMMM}", DateTime.Now)</h2>
 
 
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.EventType)
+            @Html.DisplayNameFor(model => model.EventName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SupplierName)
         </th>
 
         <th>
@@ -34,13 +37,17 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.EventType)
+            @Html.DisplayFor(modelItem => item.EventName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ProductName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SupplierName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ExpenseDate)
@@ -56,6 +63,6 @@
             @Html.DisplayFor(modelItem => item.TotalPrice)
         </td>
     </tr>
-}
+    }
 
 </table>

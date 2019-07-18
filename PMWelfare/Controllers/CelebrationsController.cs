@@ -40,7 +40,8 @@ namespace PMWelfare.Controllers
         // GET: Celebrations/Create
         public ActionResult Create()
         {
-            ViewBag.EventTypeId = new SelectList(db.EventTypes, "Id", "Type");
+            ViewBag.EventTypeId = new SelectList(db.EventTypes, 
+                "Id", "Type");
             return View();
         }
 
@@ -49,16 +50,20 @@ namespace PMWelfare.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "EventId,EventDate,CreatedBy,CreatedAt,UpdatedBy,UpdatedAt,EventTypeId")] Celebration celebration)
+        public ActionResult Create([Bind(Include = 
+            "EventId,EventDate,CreatedBy,CreatedAt,UpdatedBy," +
+            "UpdatedAt,EventTypeId,EventName")] Celebration celebration)
         {
             if (ModelState.IsValid)
             {
                 db.Celebrations.Add(celebration);
                 db.SaveChanges();
-                return RedirectToAction("Create","Celebrants", new {area= "" });
+                return RedirectToAction("Create","Celebrants", 
+                    new {area= "" });
             }
 
-            ViewBag.EventTypeId = new SelectList(db.EventTypes, "Id", "Type", celebration.EventTypeId);
+            ViewBag.EventTypeId = new SelectList(db.EventTypes, 
+                "Id", "Type", celebration.EventTypeId);
             return View(celebration);
         }
 
@@ -83,7 +88,7 @@ namespace PMWelfare.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "EventId,EventDate,CreatedBy,CreatedAt,UpdatedBy,UpdatedAt,EventTypeId")] Celebration celebration)
+        public ActionResult Edit([Bind(Include = "EventName,EventId,EventDate,CreatedBy,CreatedAt,UpdatedBy,UpdatedAt,EventTypeId")] Celebration celebration)
         {
             if (ModelState.IsValid)
             {
@@ -129,21 +134,6 @@ namespace PMWelfare.Controllers
             }
             base.Dispose(disposing);
         }
-        public ActionResult EventsOfProviousMonth()
-        {
-
-            var events = db.Celebrants.Join(db.Celebrations, m =>
-            m.EventId, s => s.EventId, (m, s) => new Celebrationsviewmodel
-            {
-                EventType = s.EventType.Type,
-                EventDate = s.EventDate,
-                UserName = m.UserName
-            }).Where(s =>
-            DbFunctions.DiffDays(DateTime.Now, s.EventDate)
-            == (DateTime.Now.Month - 1))
-            .DefaultIfEmpty().ToList();
-            return View(events);
-        }
 
         public ActionResult UpComingEvents()
         {
@@ -154,19 +144,43 @@ namespace PMWelfare.Controllers
                 EventType = s.EventType.Type,
                 EventDate = s.EventDate,
                 UserName = m.UserName
-            }).Where(s =>
-            DbFunctions.DiffDays(DateTime.Now, s.EventDate)
-            <= 10 && DbFunctions.DiffDays(DateTime.Now, s.EventDate) < 0)
+            }).Where(s => s.EventDate.Month == (DateTime.Now.Month))
             .DefaultIfEmpty().ToList();
             return View(events);
         }
 
+        public ActionResult TotalUpComingEvents()
+        {
+
+            var events = db.Celebrants.Join(db.Celebrations, m =>
+            m.EventId, s => s.EventId, (m,s)=> new { s.EventDate,s.EventId})
+            .Where(s =>s.EventDate.Month==DateTime.Now.Month)
+            .Select(s=>s.EventId).Count();
+            @ViewBag.total = events;
+            return View();
+        }
+
+        public ActionResult EventsOfProviousMonth()
+        {
+
+            var events = db.Celebrants.Join(db.Celebrations, m =>
+            m.EventId, s => s.EventId, (m, s) => new Celebrationsviewmodel
+            {
+                EventType = s.EventType.Type,
+                EventDate = s.EventDate,
+                UserName = m.UserName
+            }).Where(s => DbFunctions.DiffMonths(s.EventDate,DateTime.Now)==1)
+            .ToList();
+            return View(events);
+        }
+
+
+
 
         public ActionResult TotaleventsOfPreviousMonth()
         {
-           int events = db.Celebrations.Where(s =>
-            DbFunctions.DiffDays(DateTime.Now, s.EventDate)
-            ==( s.EventDate.Month-1))
+           int events = db.Celebrations.Where
+                (s =>s.EventDate.Month==(DateTime.Now.Month-1))
             .Select(s => s.EventId).Count();
             ViewBag.events = events;
             return View(ViewBag.events);

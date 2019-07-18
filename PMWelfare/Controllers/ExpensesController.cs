@@ -36,7 +36,7 @@ namespace PMWelfare.Controllers
             return View(expense);
         }
        
-        public ActionResult MonthlyExpenses()
+        public ActionResult PreviousMonthExpense()
         {
           var expenses = from t1 in db.Expenses
                          join t2 in db.SupProducts on t1.ProductId equals t2.ProductId
@@ -47,7 +47,7 @@ namespace PMWelfare.Controllers
                             {
                                Quantity = t1.Quantity,
                                ProductName = t2.ProductName,
-                               EventType = t4.Type,
+                               EventName = t4.Type,
                                UnitPrice = t2.UnitPrice,
                                TotalPrice = t1.Quantity * t2.UnitPrice
 
@@ -55,7 +55,20 @@ namespace PMWelfare.Controllers
             
             return View(expenses);
         }
-        [ChildActionOnly]
+        public ActionResult TotalPreviousMonthExpense()
+        {
+            var expenses = from t1 in db.Expenses
+                           join t2 in db.SupProducts on t1.ProductId equals t2.ProductId
+                           join t3 in db.Celebrations on t2.EventId equals t3.EventId
+                           where t3.EventDate.Month == DateTime.Now.Month - 1
+                           select (t1.Quantity * t2.UnitPrice);
+                           
+            ViewBag.Total = expenses.DefaultIfEmpty().Sum();
+
+            return View();
+        }
+
+
         public ActionResult Create()
         {
             ViewBag.ProductId = new SelectList(db.SupProducts, "ProductId", "ProductName");
@@ -156,11 +169,33 @@ namespace PMWelfare.Controllers
             new { u = e.UnitPrice, q = s.Quantity, s.ExpenseDate })
             .Where(s => s.ExpenseDate.Month == DateTime.Now.Month
              && s.ExpenseDate.Year == DateTime.Now.Year).Select(s=> s.u*s.q)
-             .DefaultIfEmpty().Sum();
+             ;
 
-            ViewBag.total = expense;
+            ViewBag.total = expense.DefaultIfEmpty().Sum();
 
             return View(ViewBag.total);
+        }
+        public ActionResult CurrentExpenses()
+        {
+            var expenses = from t1 in db.Expenses
+                           join t2 in db.SupProducts on t1.ProductId equals t2.ProductId
+                           join t5 in db.Suppliers on t2.SupId equals t5.SupId
+                           join t3 in db.Celebrations on t2.EventId equals t3.EventId
+                           join t4 in db.EventTypes on t3.EventTypeId equals t4.Id
+                           where t1.ExpenseDate.Month == DateTime.Now.Month
+                           select new Expense.MonthlyExpensesViewModel
+                           {
+                               Quantity = t1.Quantity,
+                               ProductName = t2.ProductName,
+                               ExpenseDate = t1.ExpenseDate,
+                               EventName = t3.EventName,
+                               SupplierName = t5.SupName,
+                               UnitPrice = t2.UnitPrice,
+                               TotalPrice = t1.Quantity * t2.UnitPrice
+
+                           };
+
+            return View(expenses);
         }
     }
 }

@@ -15,9 +15,11 @@
             @Html.DisplayNameFor(model => model.EventType.Type)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.EventName)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.EventDate)
         </th>
-       
     </tr>
 
 @foreach (var item in Model) {
@@ -26,14 +28,16 @@
             @Html.DisplayFor(modelItem => item.EventType.Type)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.EventName)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.EventDate)
         </td>
-
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.EventId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.EventId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.EventId })
-           
+            @Html.ActionLink("Edit", "Edit", new { id = item.EventId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.EventId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.EventId })
+
         </td>
     </tr>
 }

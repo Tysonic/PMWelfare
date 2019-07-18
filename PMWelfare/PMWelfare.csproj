@@ -364,13 +364,17 @@
     <Content Include="Views\Suppliers\Details.cshtml" />
     <Content Include="Views\Suppliers\Edit.cshtml" />
     <Content Include="Views\Suppliers\Index.cshtml" />
-    <Content Include="Views\Expenses\MonthlyExpenses.cshtml" />
+    <Content Include="Views\Expenses\PreviousMonthExpense.cshtml" />
     <Content Include="Views\Celebrations\Index.cshtml" />
     <Content Include="Views\Celebrations\EventsOfProviousMonth.cshtml" />
     <Content Include="Views\Celebrations\UpComingEvents.cshtml" />
     <Content Include="Views\MonthlySummary\Closing.cshtml" />
     <Content Include="Views\Subscriptions\Arrears.cshtml" />
     <Content Include="Views\Subscriptions\TotalArrears.cshtml" />
+    <Content Include="Views\Celebrations\TotalUpComingEvents.cshtml" />
+    <Content Include="Views\Expenses\CurrentExpenses.cshtml" />
+    <Content Include="Views\Suppliers\Listsupplier.cshtml" />
+    <Content Include="Views\Expenses\TotalPreviousMonthExpense.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201907180652348_welfare.resx">

@@ -52,11 +52,13 @@ namespace PMWelfare.Models
 
             [StringLength(20)]
             public string ProductName { get; set; }
+            [StringLength(20)]
+            public string SupplierName { get; set; }
 
             public int? Quantity { get; set; }
             
             [StringLength(50)]
-            public string EventType { get; set; }
+            public string EventName { get; set; }
 
             [Column(TypeName = "date")]
             public DateTime? EventDate { get; set; }

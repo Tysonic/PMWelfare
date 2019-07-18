@@ -23,7 +23,7 @@
             <th>Particulars</th>
             <th> Total Value</th>
         </tr>
-        <tr>
+        <tr class="info">
             <td> Cash At Hand</td>
             <td>@{Html.RenderAction("CashAtHand", "Deposits");}</td>
         </tr>
@@ -35,7 +35,7 @@
    null, new { target = "Details" })
             </td>
         </tr>
-        <tr>
+        <tr class="info">
             <td>Advance Collections</td>
             <td>@{Html.RenderAction("Advances", "Subscriptions");}</td>
             <td>
@@ -43,7 +43,7 @@
    null, new { target = "Details" })
             </td>
         </tr>
-        <tr>
+        <tr class="danger">
             <td>Arrears</td>
             <td>
                 @{Html.RenderAction("TotalArrears",
@@ -54,23 +54,23 @@
    null, new { target = "Details" })
             </td>
 
-        </tr>
-        <tr>
+        </tr >
+        <tr class="success">
             <td>Total Expenditure</td>
             <td>@{Html.RenderAction("TotalExpense", "Expenses");}</td>
             <td>
-                @Html.ActionLink("Details", "../Celebrations/eventsofproviousmonth",
+                @Html.ActionLink("Details", "../Expenses/TotalCurrentExpenses",
    null, new { target = "Details" })
             </td>
         </tr>
         <tr>
-            <td>Total no of events </td>
+            <td>Events of the month </td>
             <td>
-                @{Html.RenderAction("TotaleventsOfPreviousMonth",
+                @{Html.RenderAction("TotalUpComingEvents",
                 "Celebrations");}
             </td>
             <td>
-                @Html.ActionLink("Details", "../Celebrations/eventsofproviousmonth",
+                @Html.ActionLink("Details", "../Celebrations/UpcomingEvents",
    null, new { target = "Details" })
             </td>
 
@@ -102,7 +102,7 @@
         </tr>
         <tr>
             <td>Total Expenditure</td>
-            <td>@{Html.RenderAction("TotalExpense", "Expenses");}</td>
+            <td>@{Html.RenderAction("TotalxPreviousMonthExpense", "Expenses");}</td>
             <td>
                 @Html.ActionLink("Details", "../Celebrations/eventsofproviousmonth",
               null, new { target="Details"})
@@ -115,7 +115,7 @@
                             "Celebrations");}
             </td>
             <td>
-                @Html.ActionLink("Details", "../Celebrations/eventsofproviousmonth",
+                @Html.ActionLink("Details", "../Celebrations/EventsOfProviousmonth",
               null, new { target="Details"})
             </td>
 

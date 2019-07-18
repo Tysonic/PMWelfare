@@ -120,9 +120,9 @@ namespace PMWelfare.Controllers
                           join t2 in db.SupProducts on t1.SupId equals t2.SupId
                           select new Supplier.supplierlistViewModel
                           {
-                              product_name = t2.ProductName,
-                              product_price = t2.UnitPrice,
-                              supplier_name = t1.SupName
+                              ProductName = t2.ProductName,
+                             ProductPrice= t2.UnitPrice,
+                              SupplierName = t1.SupName
 
                           };
 

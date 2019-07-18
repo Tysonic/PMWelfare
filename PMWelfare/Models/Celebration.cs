@@ -19,6 +19,10 @@ namespace PMWelfare.Models
         [Key]
         public int EventId { get; set; }
 
+        [Required]
+        [StringLength(40)]
+        public string EventName { get; set; }
+
         public int EventTypeId { get; set; }
 
         public DateTime EventDate { get; set; }

@@ -9,7 +9,8 @@ namespace PMWelfare.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
+            
         }
 
         protected override void Seed(PMWelfare.Models.welfare context)
