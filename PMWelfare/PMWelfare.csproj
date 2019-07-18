@@ -415,6 +415,8 @@
     <Content Include="Views\Celebrants\Details.cshtml" />
     <Content Include="Views\Celebrants\Edit.cshtml" />
     <Content Include="Views\Celebrants\Index.cshtml" />
+    <Content Include="Views\Deposits\CashAtHand.cshtml" />
+    <Content Include="Views\Deposits\TotalCollection.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
