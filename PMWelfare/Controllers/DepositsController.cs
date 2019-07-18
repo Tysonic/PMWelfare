@@ -413,30 +413,32 @@ namespace PMWelfare.Controllers
         }
         public ActionResult TotalCollection()
         {
-            decimal? Total = db.Deposits.Where(s => s.CreatedAt.Value.Month == DateTime.Now.Month
-           && s.CreatedAt.Value.Year == DateTime.Now.Year).Sum(s => s.Amount).GetValueOrDefault();
+            decimal Total = db.Deposits.Where(s => s.CreatedAt
+            .Value.Month == DateTime.Now.Month
+           && s.CreatedAt.Value.Year == DateTime.Now.Year)
+           .Sum(s => s.Amount);
             ViewBag.total = Total;
             return View();
 
         }
         public ActionResult CashAtHand()
         {
-            decimal? Total = db.Deposits.Where(s => 
+            decimal Total = db.Deposits.Where(s => 
             s.CreatedAt.Value.Month == DateTime.Now.Month
             && s.CreatedAt.Value.Year == DateTime.Now.Year)
-            .Sum(s => s.Amount).GetValueOrDefault();
+            .Sum(s => s.Amount);
 
-            decimal? expense = db.Expenses.Join(db.SupProducts, s =>
+            decimal expense = db.Expenses.Join(db.SupProducts, s =>
             s.ProductId, e => e.ProductId, (s, e) =>
             new { u = e.UnitPrice, q = s.Quantity, s.ExpenseDate })
             .Where(s => s.ExpenseDate.Month == DateTime.Now.Month
              && s.ExpenseDate.Year == DateTime.Now.Year).Select(s => s.u * s.q).DefaultIfEmpty().Sum();
 
-            decimal? ClosingBalance = db.Monthlysummary
+            decimal ClosingBalance = db.Monthlysummary
                 .Where(s => s.EndDate.Month == DateTime.Now.Month - 1
             && s.EndDate.Year == DateTime.Now.Year).Select(s => s.ClosingBalance).FirstOrDefault();
 
-           decimal? Cash = Total + ClosingBalance - expense;
+           decimal Cash = Total + ClosingBalance - expense;
             ViewBag.total = Cash;
             return View();
         }
