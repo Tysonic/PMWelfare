@@ -19,6 +19,18 @@ namespace PMWelfare.Models
         public string Message { get; set; }
 
         public DateTime? PostedAt { get; set; }
+        public DateTime TimeStamp
+        {
+            get
+            {
+                if (PostedAt == null)
+                {
+                    PostedAt = DateTime.Now;
+                }
+                return PostedAt.Value;
+            }
+            private set { PostedAt = value; }
+        }
 
         [StringLength(40)]
         public string UpdatedBy { get; set; }

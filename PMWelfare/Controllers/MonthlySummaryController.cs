@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -15,10 +16,16 @@ namespace PMWelfare.Controllers
 
         public ActionResult Index()
         {
-            var ClosingBalance = db.Monthlysummary.Where(s => s.CreatedAt.Value.Month == DateTime.Now.Month
-            && s.CreatedAt.Value.Year == DateTime.Now.Year).Select(s => s.ClosingBalance).FirstOrDefault();
-            ViewBag.balance = ClosingBalance;
             return View();
+        }
+        public ActionResult Closing()
+        {
+            decimal ClosingBalance = db.Monthlysummary
+                 .Where(s => s.EndDate.Month == DateTime.Now.Month - 1
+             && s.EndDate.Year == DateTime.Now.Year).Select(s => s.ClosingBalance).FirstOrDefault();
+
+            ViewBag.balance = ClosingBalance;
+            return View(ViewBag.balance);
         }
     }
 }

@@ -7,39 +7,37 @@
 <h2>Listsupplier</h2>
 
 <p>
-    @Html.ActionLink("Back", "Index")
+    @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.supplier_name)
+            @Html.DisplayNameFor(model => model.SupplierName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.product_name)
+            @Html.DisplayNameFor(model => model.ProductName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.product_price)
-
-
+            @Html.DisplayNameFor(model => model.ProductPrice)
+        </th>
+    
+        <th></th>
     </tr>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.supplier_name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.product_name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.product_price)
-            </td>
-
-
-        </tr>
-    }
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SupplierName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductPrice)
+        </td>
+       
+       
+    </tr>
+}
 
 </table>
-
-

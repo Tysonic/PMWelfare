@@ -33,6 +33,18 @@ namespace PMWelfare.Models
         public string CreatedBy { get; set; }
 
         public DateTime? CreatedAt { get; set; }
+        public DateTime TimeStamp
+        {
+            get
+            {
+                if (CreatedAt == null)
+                {
+                    CreatedAt = DateTime.Now;
+                }
+                return CreatedAt.Value;
+            }
+            private set { CreatedAt = value; }
+        }
 
         [StringLength(40)]
         public string UpdatedBy { get; set; }
@@ -45,9 +57,9 @@ namespace PMWelfare.Models
         {
 
 
-            public string supplier_name { get; set; }
-            public string product_name { get; set; }
-            public decimal? product_price { get; set; }
+            public string SupplierName { get; set; }
+            public string ProductName { get; set; }
+            public decimal? ProductPrice { get; set; }
 
         }
     }

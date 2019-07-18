@@ -75,7 +75,7 @@ namespace PMWelfare.Controllers
             int year;
             int month;
 
-            if (amount > 0)
+            if (amount > 0 && amount != null)
             {
                 if (amount <= SubAmount)
                 {
@@ -300,7 +300,7 @@ namespace PMWelfare.Controllers
                                 subscriptions.SubYear = ++year;
                             }
                             {
-                                if (x >= SubAmount)
+                                if (x >= SubAmount )
                                 {
                                     Subscription subs = new Subscription();
                                     subs.Amount = SubAmount;
@@ -311,7 +311,7 @@ namespace PMWelfare.Controllers
                                         db.SaveChanges();
                                     }
                                 }
-                                if (x < SubAmount)
+                                if (x < SubAmount && x<0)
                                 {
                                     subscriptions.Amount = x;
                                     db.Subscriptions.Add(subscriptions);
@@ -413,27 +413,32 @@ namespace PMWelfare.Controllers
         }
         public ActionResult TotalCollection()
         {
-            var Total = db.Deposits.Where(s => s.CreatedAt.Value.Month == DateTime.Now.Month
-           && s.CreatedAt.Value.Year == DateTime.Now.Year).DefaultIfEmpty().Sum(s => s.Amount);
+            decimal Total = db.Deposits.Where(s => s.CreatedAt
+            .Value.Month == DateTime.Now.Month
+           && s.CreatedAt.Value.Year == DateTime.Now.Year)
+           .Sum(s => s.Amount);
             ViewBag.total = Total;
             return View();
 
         }
         public ActionResult CashAtHand()
         {
-            var Total = db.Deposits.Where(s => s.CreatedAt.Value.Month == DateTime.Now.Month
-            && s.CreatedAt.Value.Year == DateTime.Now.Year).DefaultIfEmpty().Sum(s => s.Amount);
+            decimal Total = db.Deposits.Where(s => 
+            s.CreatedAt.Value.Month == DateTime.Now.Month
+            && s.CreatedAt.Value.Year == DateTime.Now.Year)
+            .Sum(s => s.Amount);
 
-            var expense = db.Expenses.Join(db.SupProducts, s =>
+            decimal expense = db.Expenses.Join(db.SupProducts, s =>
             s.ProductId, e => e.ProductId, (s, e) =>
             new { u = e.UnitPrice, q = s.Quantity, s.ExpenseDate })
             .Where(s => s.ExpenseDate.Month == DateTime.Now.Month
              && s.ExpenseDate.Year == DateTime.Now.Year).Select(s => s.u * s.q).DefaultIfEmpty().Sum();
 
-            var ClosingBalance = db.Monthlysummary.Where(s => s.CreatedAt.Value.Month == DateTime.Now.Month - 1
-            && s.CreatedAt.Value.Year == DateTime.Now.Year).Select(s => s.ClosingBalance).FirstOrDefault();
+            decimal ClosingBalance = db.Monthlysummary
+                .Where(s => s.EndDate.Month == DateTime.Now.Month - 1
+            && s.EndDate.Year == DateTime.Now.Year).Select(s => s.ClosingBalance).FirstOrDefault();
 
-            var Cash = Total + ClosingBalance - expense;
+           decimal Cash = Total + ClosingBalance - expense;
             ViewBag.total = Cash;
             return View();
         }

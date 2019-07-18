@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PMWelfare.Models;
+using static PMWelfare.Models.Celebrant;
 
 namespace PMWelfare.Controllers
 {
@@ -132,5 +133,9 @@ namespace PMWelfare.Controllers
             }
             base.Dispose(disposing);
         }
+
+
+
+
     }
 }

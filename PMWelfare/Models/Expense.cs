@@ -24,39 +24,48 @@ namespace PMWelfare.Models
         public string CreatedBy { get; set; }
 
         public DateTime? CreatedAt { get; set; }
+        public DateTime TimeStamp
+        {
+            get
+            {
+                if (CreatedAt == null)
+                {
+                    CreatedAt = DateTime.Now;
+                }
+                return CreatedAt.Value;
+            }
+            private set { CreatedAt = value; }
+        }
 
         [StringLength(40)]
         public string UpdatedBy { get; set; }
 
         public DateTime? UpdatedAt { get; set; }
 
-        public virtual SupProducts sup_products { get; set; }
+        public virtual SupProducts SupProducts { get; set; }
 
         public class MonthlyExpensesViewModel
         {
-            [Key]
-            public int celeb_product_id { get; set; }
-
+            
             [Column(TypeName = "date")]
-            public DateTime? expense_date { get; set; }
+            public DateTime? ExpenseDate { get; set; }
 
             [StringLength(20)]
-            public string product_name { get; set; }
+            public string ProductName { get; set; }
+            [StringLength(20)]
+            public string SupplierName { get; set; }
 
-            public int? quantity { get; set; }
-
-            public int? supplier_product_id { get; set; }
-
-            public int? event_id { get; set; }
+            public int? Quantity { get; set; }
+            
             [StringLength(50)]
-            public string event_name { get; set; }
+            public string EventName { get; set; }
 
             [Column(TypeName = "date")]
-            public DateTime? event__date { get; set; }
+            public DateTime? EventDate { get; set; }
 
 
             [Column(TypeName = "money")]
-            public decimal? productprice { get; set; }
+            public decimal? UnitPrice { get; set; }
 
             [Column(TypeName = "money")]
             public decimal? TotalPrice { get; set; }
@@ -65,9 +74,4 @@ namespace PMWelfare.Models
 
         }
     }
-    
-
-
-
-
     }
