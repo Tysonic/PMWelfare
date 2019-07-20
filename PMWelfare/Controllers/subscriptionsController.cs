@@ -133,8 +133,8 @@ namespace PMWelfare.Controllers
 
         public ActionResult Arrears() {
   
-             int month = DateTime.Now.Month;
-                int year = DateTime.Now.Year;
+             int? month = DateTime.Now.Month;
+                int? year = DateTime.Now.Year;
 
                 var subscribers = db.Subscriptions
                    .Where(s => s.SubMonth == month && s.SubYear == year)
@@ -154,19 +154,19 @@ namespace PMWelfare.Controllers
                 //ViewBag.u = user;
                 if (jrm.Contains(m.UserName))
                 {
-                    int maxyear = db.Subscriptions
+                    int? maxyear = db.Subscriptions
                         .Where(s => s.UserName == m.UserName )
                         .Select(s => s.SubYear).Max();
                     int? yeardif = year - maxyear;
 
-                    int maxmonth = db.Subscriptions
+                    int? maxmonth = db.Subscriptions
                         .Where(s => s.UserName == m.UserName && s.SubYear == maxyear)
                         .Select(s => s.SubMonth).Max();
 
                     if (maxmonth < month && maxyear<=year)
                     {
-                        int months = DateTime.Now.Month - maxmonth;
-                        decimal arrearAmount = months * 20000;
+                        int? months = DateTime.Now.Month - maxmonth;
+                        decimal? arrearAmount = months * 20000;
                         arrears.Add(new Subscription(m.UserName, arrearAmount));
                         //ViewBag.k = arrearAmount;
                     }
@@ -187,11 +187,11 @@ namespace PMWelfare.Controllers
                     .Select(d => d.CreatedAt.Value.Month).Single();
                 int yea = db.Members.Where(d => d.UserName == mmm.UserName)
                            .Select(d => d.CreatedAt.Value.Year).Single();
-                    int ju = year - yea;
-                    int month1 = month - max + 12 * ju;
+                    int? ju = year - yea;
+                    int? month1 = month - max + 12 * ju;
                     if (month1 > 0)
                     {
-                        int arrearAm = month1 * 20000;
+                        int? arrearAm = month1 * 20000;
                         arrears.Add(new Subscription(mmm.UserName, arrearAm));
                     }
                 
@@ -252,19 +252,19 @@ namespace PMWelfare.Controllers
                 //ViewBag.u = user;
                 if (jrm.Contains(m.UserName))
                 {
-                    int maxyear = db.Subscriptions
+                    int? maxyear = db.Subscriptions
                         .Where(s => s.UserName == m.UserName)
                         .Select(s => s.SubYear).Max();
-                    int yeardif = year - maxyear;
+                    int? yeardif = year - maxyear;
 
-                    int maxmonth = db.Subscriptions
+                    int? maxmonth = db.Subscriptions
                         .Where(s => s.UserName == m.UserName && s.SubYear == maxyear)
                         .Select(s => s.SubMonth).Max();
 
                     if (maxmonth < month && maxyear <= year)
                     {
-                        int months = DateTime.Now.Month - maxmonth;
-                        decimal arrearAmount = months * 20000;
+                        int? months = DateTime.Now.Month - maxmonth;
+                        decimal? arrearAmount = months * 20000;
                         arrears.Add(new Subscription(m.UserName, arrearAmount));
                         //ViewBag.k = arrearAmount;
                     }
@@ -280,16 +280,16 @@ namespace PMWelfare.Controllers
             foreach (var mmm in newmemb)
             {
 
-                int max = db.Members.
-                    Where(d => d.UserName == mmm.UserName)
+                int? max = db.Members.
+                    Where(d => mmm.UserName==d.UserName)
                     .Select(d => d.CreatedAt.Value.Month).Single();
-                int yea = db.Members.Where(d => d.UserName == mmm.UserName)
+                int? yea = db.Members.Where(d => d.UserName == mmm.UserName)
                            .Select(d => d.CreatedAt.Value.Year).Single();
-                int ju = year - yea;
-                int month1 = month - max + 12 * ju;
+                int? ju = year - yea;
+                int? month1 = month - max + 12 * ju;
                 if (month1 > 0)
                 {
-                    int arrearAm = month1 * 20000;
+                    int? arrearAm = month1 * 20000;
                     arrears.Add(new Subscription(mmm.UserName, arrearAm));
                 }
 
