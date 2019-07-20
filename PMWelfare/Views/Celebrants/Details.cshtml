@@ -4,10 +4,9 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2 style="text-align:center">Details of @Model.Celebration.EventName </h2>
 
-<div>
-    <h4>Celebrant</h4>
+<div style="margin-left:30%">
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -25,10 +24,11 @@
         <dd>
             @Html.DisplayFor(model => model.Member.FirstName)
         </dd>
+        <dd>
+            @Html.ActionLink("Edit data", "Edit", new { id = Model.CelebId })
 
+        </dd>
     </dl>
+
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.CelebId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+

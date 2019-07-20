@@ -1,0 +1,34 @@
+﻿@model IEnumerable<PMWelfare.Models.MemberStatus>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 style="text-align:center">List Of Member Status</h2>
+
+<p style="margin-left:20%">
+    @Html.ActionLink("Create New Status", "Create")
+</p>
+<table class="table table-bordered" style="width:60%; margin-left:20%">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MemberStatus1)
+        </th>
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MemberStatus1)
+        </td>
+
+        <td style="width:30%">
+            @Html.ActionLink("Edit", "Edit", new { id=item.MembersStatusID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.MembersStatusID })
+        </td>
+    </tr>
+}
+
+</table>

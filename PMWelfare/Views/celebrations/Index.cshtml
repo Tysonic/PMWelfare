@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<PMWelfare.Models.Celebration>
 
 @{
-    ViewBag.Title = "View";
+    ViewBag.Title = "List of Events";
 }
 
-<h2>View</h2>
+<h2 style="text-align:center">List of Events</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New Event", "Create")
 </p>
 <table class="table">
     <tr>
@@ -33,13 +33,12 @@
         <td>
             @Html.DisplayFor(modelItem => item.EventDate)
         </td>
-        <td>
+        <td >
             @Html.ActionLink("Edit", "Edit", new { id = item.EventId }) |
             @Html.ActionLink("Details", "Details", new { id = item.EventId }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.EventId })
 
         </td>
-    </tr>
+    </tr>   
 }
-
+        
 </table>

@@ -10,9 +10,12 @@ namespace PMWelfare.Models
         public int CelebId { get; set; }
 
         [StringLength(20)]
+        [Display(Name ="User Name")]
         public string UserName { get; set; }
 
+        [Display(Name = "Event Name")]
         public int EventId { get; set; }
+
 
         public virtual Celebration Celebration { get; set; }
 

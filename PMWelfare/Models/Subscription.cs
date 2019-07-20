@@ -23,19 +23,26 @@ namespace PMWelfare.Models
             this.UserName = s;
         }
 
+        public Subscription(string s, decimal? arrearAmount) : this(s)
+        {
+        }
+
         [Key]
         public int SubId { get; set; }
 
         [StringLength(40)]
+        [Display(Name = "User Name")]
         public string UserName { get; set; }
 
         [Column(TypeName = "money")]
         public decimal Amount { get; set; }
 
-        public int SubMonth { get; set; }
+        
+        [Display(Name = "Month")]
+        public int? SubMonth { get; set; }
 
-        public int SubYear { get; set; }
-
+        [Display(Name = "Year")]
+        public int? SubYear { get; set; }
 
         public virtual Member Member { get; set; }
     }

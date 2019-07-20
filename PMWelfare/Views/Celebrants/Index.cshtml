@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<PMWelfare.Models.Celebrant>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Celebrants";
 }
 
-<h2>Index</h2>
+<h2 style="text-align:center">List of Celebrants</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Add a celebrant", "Create")
 </p>
 <table class="table">
     <tr>
@@ -31,7 +31,7 @@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.CelebId }) |
             @Html.ActionLink("Details", "Details", new { id=item.CelebId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CelebId })
+            
         </td>
     </tr>
 }

@@ -48,6 +48,8 @@ namespace PMWelfare.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "SupId,SupTel,SupName,Email,CreatedBy,CreatedAt,UpdatedBy,UpdatedAt")] Supplier supplier)
         {
+            supplier.CreatedAt = DateTime.Now;
+            supplier.CreatedBy = "nicho";
             if (ModelState.IsValid)
             {
                 db.Suppliers.Add(supplier);

@@ -48,6 +48,8 @@ namespace PMWelfare.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "chat_id,user_name,message,posted_at,updated_by,updated_at")] ChatRoom chatRoom)
         {
+            chatRoom.PostedAt = DateTime.Now;
+            chatRoom.UserName = "nicho";
             if (ModelState.IsValid)
             {
                 db.ChatRoom.Add(chatRoom);

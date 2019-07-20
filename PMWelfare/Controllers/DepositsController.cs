@@ -59,23 +59,25 @@ namespace PMWelfare.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "DepositID,UserName,Amount,CreatedBy,CreatedAt,UpdatedBy,UpdatedAt")]
+        public ActionResult Create([Bind(Include = "DepositID," +
+            "UserName,Amount,UpdatedBy,UpdatedAt")]
         Deposit deposit, Subscription subscriptions )
         {
 
-            
-            
 
+
+            deposit.CreatedAt = DateTime.Now;
+            deposit.CreatedBy = "nicho";
                 decimal SubAmount = 20000;
                 var users = db.Subscriptions.Select
                         (s => s.UserName).ToList();
                 decimal amount = deposit.Amount;
 
 
-            int year;
-            int month;
+            int? year;
+            int? month;
 
-            if (amount > 0 && amount != null)
+            if (amount > 0 )
             {
                 if (amount <= SubAmount)
                 {

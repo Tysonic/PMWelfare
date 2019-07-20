@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<PMWelfare.Models.SupProducts>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Products supplied";
 }
 
-<h2>Index</h2>
-
+<h2 style="text-align:center">List of Products supplied</h2>
+<br />
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Add a new Product", "Create")
 </p>
 <table class="table">
     <tr>
@@ -23,25 +23,13 @@
         <th>
             @Html.DisplayNameFor(model => model.UnitPrice)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedBy)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedAt)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UpdatedBy)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UpdatedAt)
-        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Celebration.EventName)
+            @Html.DisplayFor(modelItem =>  item.Celebration.EventName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Supplier.SupTel)
@@ -50,25 +38,11 @@
             @Html.DisplayFor(modelItem => item.ProductName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.UnitPrice)
+            @Html.DisplayFor(modelItem => item.UnitPrice )
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CreatedBy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedAt)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UpdatedBy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UpdatedAt)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ProductId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ProductId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ProductId })
-        </td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ProductId }) 
+            </td>
     </tr>
 }
 

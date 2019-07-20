@@ -54,6 +54,8 @@ namespace PMWelfare.Controllers
             "EventId,EventDate,CreatedBy,CreatedAt,UpdatedBy," +
             "UpdatedAt,EventTypeId,EventName")] Celebration celebration)
         {
+            celebration.CreatedAt = DateTime.Now;
+            celebration.CreatedBy = "nicho";
             if (ModelState.IsValid)
             {
                 db.Celebrations.Add(celebration);

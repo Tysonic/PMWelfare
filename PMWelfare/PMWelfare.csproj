@@ -180,7 +180,6 @@
     <Compile Include="Controllers\MembersController.cs" />
     <Compile Include="Controllers\MemberStatusController.cs" />
     <Compile Include="Controllers\MonthlySummaryController.cs" />
-    <Compile Include="Controllers\StatementController.cs" />
     <Compile Include="Controllers\SubscriptionsController.cs" />
     <Compile Include="Controllers\SuppliersController.cs" />
     <Compile Include="Controllers\SupProductsController.cs" />
@@ -307,11 +306,6 @@
     <Content Include="Views\Celebrations\Delete.cshtml" />
     <Content Include="Views\Celebrations\Details.cshtml" />
     <Content Include="Views\Celebrations\Edit.cshtml" />
-    <Content Include="Views\MemberStatus\Create.cshtml" />
-    <Content Include="Views\MemberStatus\Delete.cshtml" />
-    <Content Include="Views\MemberStatus\Details.cshtml" />
-    <Content Include="Views\MemberStatus\Edit.cshtml" />
-    <Content Include="Views\MemberStatus\Index.cshtml" />
     <Content Include="Views\ChatRooms\Create.cshtml" />
     <Content Include="Views\ChatRooms\Delete.cshtml" />
     <Content Include="Views\ChatRooms\Details.cshtml" />
@@ -375,6 +369,11 @@
     <Content Include="Views\Expenses\CurrentExpenses.cshtml" />
     <Content Include="Views\Suppliers\Listsupplier.cshtml" />
     <Content Include="Views\Expenses\TotalPreviousMonthExpense.cshtml" />
+    <Content Include="Views\MemberStatus\Create.cshtml" />
+    <Content Include="Views\MemberStatus\Delete.cshtml" />
+    <Content Include="Views\MemberStatus\Details.cshtml" />
+    <Content Include="Views\MemberStatus\Edit.cshtml" />
+    <Content Include="Views\MemberStatus\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201907180652348_welfare.resx">

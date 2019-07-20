@@ -55,18 +55,7 @@ namespace PMWelfare.Controllers
             
             return View(expenses);
         }
-        public ActionResult TotalPreviousMonthExpense()
-        {
-            var expenses = from t1 in db.Expenses
-                           join t2 in db.SupProducts on t1.ProductId equals t2.ProductId
-                           join t3 in db.Celebrations on t2.EventId equals t3.EventId
-                           where t3.EventDate.Month == DateTime.Now.Month - 1
-                           select (t1.Quantity * t2.UnitPrice);
-                           
-            ViewBag.Total = expenses.DefaultIfEmpty().Sum();
 
-            return View();
-        }
 
 
         public ActionResult Create()
@@ -82,6 +71,8 @@ namespace PMWelfare.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ExpenseId,ExpenseDate,ProductId,Quantity,CreatedBy,CreatedAt,UpdatedBy,UpdatedAt")] Expense expense)
         {
+            expense.CreatedAt = DateTime.Now;
+            expense.CreatedBy = "nicho";
             if (ModelState.IsValid)
             {
                 db.Expenses.Add(expense);
@@ -196,6 +187,18 @@ namespace PMWelfare.Controllers
                            };
 
             return View(expenses);
+        }
+        public ActionResult TotalPreviousMonthExpense()
+        {
+            var expenses = from t1 in db.Expenses
+                           join t2 in db.SupProducts on t1.ProductId equals t2.ProductId
+                           join t3 in db.Celebrations on t2.EventId equals t3.EventId
+                           where t3.EventDate.Month == DateTime.Now.Month - 1
+                           select (t1.Quantity * t2.UnitPrice);
+
+            ViewBag.Total = expenses.DefaultIfEmpty().Sum();
+
+            return View();
         }
     }
 }

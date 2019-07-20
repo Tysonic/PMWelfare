@@ -13,33 +13,28 @@ namespace PMWelfare.Models
         public int ExpenseId { get; set; }
 
         [Column(TypeName = "date")]
+        [Display(Name = "Date of Expenditure")]
         public DateTime ExpenseDate { get; set; }
 
+        [Display(Name = "Product Name")]
         public int? ProductId { get; set; }
 
+        
         public int Quantity { get; set; }
 
-        [Required]
+        
         [StringLength(40)]
+        [Display(Name = "Created by")]
         public string CreatedBy { get; set; }
 
+        [Display(Name = "Created at")]
         public DateTime? CreatedAt { get; set; }
-        public DateTime TimeStamp
-        {
-            get
-            {
-                if (CreatedAt == null)
-                {
-                    CreatedAt = DateTime.Now;
-                }
-                return CreatedAt.Value;
-            }
-            private set { CreatedAt = value; }
-        }
 
         [StringLength(40)]
+        [Display(Name = "Updated by")]
         public string UpdatedBy { get; set; }
 
+        [Display(Name = "Updated at")]
         public DateTime? UpdatedAt { get; set; }
 
         public virtual SupProducts SupProducts { get; set; }

@@ -1,13 +1,12 @@
 ﻿@model PMWelfare.Models.Supplier
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Details of ";
 }
 
-<h2>Details</h2>
+<h2 style="text-align:center">Details Of @Model.SupName   </h2>
 
 <div>
-    <h4>Supplier</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -65,10 +64,15 @@
         <dd>
             @Html.DisplayFor(model => model.UpdatedAt)
         </dd>
+       
+        <dd>
+            <br />  
+            <button>    
+            @Html.ActionLink("Edit Record", "Edit", new { id = Model.SupId })
+            </button>   
+        </dd>
 
     </dl>
+
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.SupId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+

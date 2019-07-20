@@ -1,33 +1,18 @@
 ﻿@model IEnumerable<PMWelfare.Models.Deposit>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Record of collectios";
 }
 
-<h2>Index</h2>
+<h2 style="text-align:center">Record of Payments</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+<table class="table table-bordered">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Member.FirstName)
+            @Html.DisplayNameFor(model => model.Member.UserName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Amount)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedBy)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedAt)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UpdatedBy)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UpdatedAt)
         </th>
         <th></th>
     </tr>
@@ -35,27 +20,16 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Member.FirstName)
+            @Html.DisplayFor(modelItem => item.Member.UserName)
         </td>
         <td>
+
             @Html.DisplayFor(modelItem => item.Amount)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedBy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedAt)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UpdatedBy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UpdatedAt)
-        </td>
-        <td>
+
+        <td style="width:10%">
             @Html.ActionLink("Edit", "Edit", new { id=item.DepositId }) |
             @Html.ActionLink("Details", "Details", new { id=item.DepositId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.DepositId })
         </td>
     </tr>
 }
