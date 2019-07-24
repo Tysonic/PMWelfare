@@ -1,12 +1,23 @@
-﻿@*@model IEnumerable<PMWelfare.Models.Subscription>
+﻿@model IEnumerable<PMWelfare.Models.Subscription.AdvancesViewModel>
 
-<table>
+<table class="table">
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.Amount)
+        </td>
+        <td>
+            @Html.DisplayNameFor(model => model.UserName)
+        </td>
+    </tr>
     @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Amount)
-                </td>
-            </tr>
-        }
-    </table>*@
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+        </tr>
+    }
+</table>

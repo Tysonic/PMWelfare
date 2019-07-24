@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PMWelfare.Models;
+using static PMWelfare.Models.Subscription;
 
 namespace PMWelfare.Controllers
 {
@@ -122,13 +123,15 @@ namespace PMWelfare.Controllers
         
         public ActionResult Advances()
         {
-            decimal advance = db.Subscriptions.Where(s => 
-            (s.SubMonth > DateTime.Now.Month && s.SubYear == DateTime.Now.Year)
-           || s.SubYear > DateTime.Now.Year).DefaultIfEmpty().Sum(s => s.Amount);
+            decimal? advance = db.Subscriptions.Where(s => 
+            (s.SubMonth > DateTime.Now.Month && s.SubYear 
+            == DateTime.Now.Year)
+           || s.SubYear > DateTime.Now.Year)
+           .DefaultIfEmpty().Sum(s => s.Amount);
 
             ViewBag.Advances = advance;
 
-            return View(ViewBag.Advances);
+            return View();
         }
 
         public ActionResult Arrears() {
@@ -139,7 +142,8 @@ namespace PMWelfare.Controllers
                 var subscribers = db.Subscriptions
                    .Where(s => s.SubMonth == month && s.SubYear == year)
                    .Select(s => s.UserName).Distinct().ToList();
-                var all = db.Members.Select(s => s.UserName).Distinct().ToList();
+                var all = db.Members.Select(s => s.UserName)
+                .Distinct().ToList();
                 List<string> notsub = all.Except(subscribers).ToList();
                 List<Subscription> user = new List<Subscription>();
             List<Subscription> arrears = new List<Subscription>();
@@ -185,7 +189,8 @@ namespace PMWelfare.Controllers
                 int max = db.Members.
                     Where(d => d.UserName == mmm.UserName)
                     .Select(d => d.CreatedAt.Value.Month).Single();
-                int yea = db.Members.Where(d => d.UserName == mmm.UserName)
+                int yea = db.Members.Where(d => d.UserName ==
+                mmm.UserName)
                            .Select(d => d.CreatedAt.Value.Year).Single();
                     int? ju = year - yea;
                     int? month1 = month - max + 12 * ju;
@@ -202,13 +207,14 @@ namespace PMWelfare.Controllers
             subscribers.ForEach(hm => subs.Add(new Subscription(hm)));
             foreach (var jt in subs)
             {
-                decimal amount = db.Subscriptions
-                        .Where(s => s.UserName == jt.UserName && s.SubMonth == month && s.SubYear == year)
+                decimal? amount = db.Subscriptions
+                        .Where(s => s.UserName == jt.UserName 
+                        && s.SubMonth == month && s.SubYear == year)
                         .Select(s => s.Amount).Single();
                 decimal subamount = 20000;
                 if (amount < subamount)
                 {
-                    decimal subamount1 = subamount - amount;
+                    decimal? subamount1 = subamount - amount;
 
                     arrears.Add(new Subscription(jt.UserName, subamount1));
                 }
@@ -224,7 +230,7 @@ namespace PMWelfare.Controllers
             var advances = db.Subscriptions.Where(s => (s.SubMonth
             > DateTime.Now.Month && s.SubYear == DateTime.Now.Year)
              || s.SubYear > DateTime.Now.Year).
-             Select(s => new { s.Amount, s.UserName }).ToList();
+             Select(s => new AdvancesViewModel{Amount=s.Amount, UserName=s.UserName }).ToList();
             return View(advances);
         }
 
@@ -300,13 +306,13 @@ namespace PMWelfare.Controllers
             subscribers.ForEach(hm => subs.Add(new Subscription(hm)));
             foreach (var jt in subs)
             {
-                decimal amount = db.Subscriptions
+                decimal? amount = db.Subscriptions
                         .Where(s => s.UserName == jt.UserName && s.SubMonth == month && s.SubYear == year)
                         .Select(s => s.Amount).Single();
-                decimal subamount = 20000;
+                decimal? subamount = 20000;
                 if (amount < subamount)
                 {
-                    decimal subamount1 = subamount - amount;
+                    decimal? subamount1 = subamount - amount;
 
                     arrears.Add(new Subscription(jt.UserName, subamount1));
                 }

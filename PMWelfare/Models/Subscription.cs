@@ -11,7 +11,7 @@ namespace PMWelfare.Models
         private string s;
         public Subscription() { }
 
-        public Subscription(string s ,decimal a)
+        public Subscription(string s, decimal a)
         {
             UserName = s;
             Amount = a;
@@ -35,9 +35,10 @@ namespace PMWelfare.Models
         public string UserName { get; set; }
 
         [Column(TypeName = "money")]
-        public decimal Amount { get; set; }
+        [DisplayFormat(DataFormatString = "Shs{0:N0}")]
+        public decimal? Amount { get; set; }
 
-        
+
         [Display(Name = "Month")]
         public int? SubMonth { get; set; }
 
@@ -45,6 +46,10 @@ namespace PMWelfare.Models
         public int? SubYear { get; set; }
 
         public virtual Member Member { get; set; }
+        public class AdvancesViewModel
+        {
+            public string UserName { set; get; }
+            public decimal? Amount { set; get; }
+        }
     }
-
 }

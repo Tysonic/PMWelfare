@@ -11,7 +11,7 @@ namespace PMWelfare.Models
         public int Id { get; set; }
 
         [Display(Name = "End of Month")]
-        public DateTime EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
 
         [Column(TypeName = "money")]
         [Display(Name = "Closing Balance")]

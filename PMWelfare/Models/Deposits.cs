@@ -24,7 +24,8 @@
         public string UserName { get; set; }
 
         [Column(TypeName = "money")]
-        public decimal Amount { get; set; }
+        [DisplayFormat(DataFormatString = "Shs:{0:N0}")]
+        public decimal? Amount { get; set; }
         
         [StringLength(40)]
         [Display(Name = "Created by")]

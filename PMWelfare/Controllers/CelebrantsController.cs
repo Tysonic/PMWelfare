@@ -42,6 +42,9 @@ namespace PMWelfare.Controllers
         {
             ViewBag.EventId = new SelectList(db.Celebrations, "EventId", "EventName");
             ViewBag.UserName = new SelectList(db.Members, "UserName", "FirstName");
+
+
+            
             return View();
         }
 

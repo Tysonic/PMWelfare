@@ -21,9 +21,9 @@ namespace PMWelfare.Models
         [StringLength(40)]
         public string ProductName { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:C0}")]
+        [DisplayFormat(DataFormatString = "Shs:{0:N0}")]
         [Column(TypeName = "money")]
-        public decimal UnitPrice { get; set; }
+        public decimal? UnitPrice { get; set; }
 
         
         public int? EventId { get; set; }

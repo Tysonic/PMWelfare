@@ -20,7 +20,7 @@ namespace PMWelfare.Models
         public int? ProductId { get; set; }
 
         
-        public int Quantity { get; set; }
+        public int? Quantity { get; set; }
 
         
         [StringLength(40)]

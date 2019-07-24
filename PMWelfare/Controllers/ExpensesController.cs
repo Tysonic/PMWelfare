@@ -42,7 +42,7 @@ namespace PMWelfare.Controllers
                          join t2 in db.SupProducts on t1.ProductId equals t2.ProductId
                          join t3 in db.Celebrations on t2.EventId equals t3.EventId
                          join t4 in db.EventTypes on t3.EventTypeId equals t4.Id
-                         where t3.EventDate.Month == DateTime.Now.Month-1
+                         where t3.EventDate.Value.Month == DateTime.Now.Month-1
                          select new Expense.MonthlyExpensesViewModel
                             {
                                Quantity = t1.Quantity,
@@ -155,16 +155,17 @@ namespace PMWelfare.Controllers
 
         public ActionResult TotalExpense()
         {
-            var expense = db.Expenses.Join(db.SupProducts, s =>
+            decimal? expense = db.Expenses.Join(db.SupProducts, s =>
             s.ProductId, e => e.ProductId, (s, e) =>
             new { u = e.UnitPrice, q = s.Quantity, s.ExpenseDate })
             .Where(s => s.ExpenseDate.Month == DateTime.Now.Month
-             && s.ExpenseDate.Year == DateTime.Now.Year).Select(s=> s.u*s.q)
+             && s.ExpenseDate.Year == DateTime.Now.Year) 
+             .Sum(s=> s.u*s.q).GetValueOrDefault()
              ;
 
-            ViewBag.total = expense.DefaultIfEmpty().Sum();
+            ViewBag.total = expense;
 
-            return View(ViewBag.total);
+            return View();
         }
         public ActionResult CurrentExpenses()
         {
@@ -190,13 +191,13 @@ namespace PMWelfare.Controllers
         }
         public ActionResult TotalPreviousMonthExpense()
         {
-            var expenses = from t1 in db.Expenses
+            var expenses = (from t1 in db.Expenses
                            join t2 in db.SupProducts on t1.ProductId equals t2.ProductId
                            join t3 in db.Celebrations on t2.EventId equals t3.EventId
-                           where t3.EventDate.Month == DateTime.Now.Month - 1
-                           select (t1.Quantity * t2.UnitPrice);
+                           where t3.EventDate.Value.Month == DateTime.Now.Month - 1
+                           select (t1.Quantity * t2.UnitPrice)).Sum().GetValueOrDefault();
 
-            ViewBag.Total = expenses.DefaultIfEmpty().Sum();
+            ViewBag.Total = expenses;
 
             return View();
         }
