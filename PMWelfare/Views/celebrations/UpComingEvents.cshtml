@@ -1,13 +1,26 @@
 ﻿@model IEnumerable<PMWelfare.Models.Celebration.Celebrationsviewmodel>
 
 @{
-    ViewBag.Title = "Events";
+    Layout = null;
 }
+<head>
+    <title>Arrears</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <style>
+        tr:nth-child(even) {
+            background-color: #dfdfdf
+        }
+    </style>
 
-<h2>Upcoming Events</h2><br /><br /> 
+</head>
+<h2>Upcoming Events</h2><br /><br />
 
-<table class="table">
-    <tr>
+<table class="table table-striped table-hover ">
+    <tr style="background-color:#999999">
         <th>
             @Html.DisplayNameFor(model => model.EventType)
         </th>
@@ -22,18 +35,18 @@
 
     @foreach (var item in Model)
     {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.EventType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EventDate)
-        </td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EventType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EventDate)
+            </td>
 
-    </tr>
+        </tr>
     }
 
 </table>

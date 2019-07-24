@@ -187,7 +187,7 @@ namespace PMWelfare.Controllers
             return View();
         }
 
-        public ActionResult EventsOfProviousMonth()
+        public ActionResult EventsOfPreviousMonth()
         {
 
             var events = db.Celebrants.Join(db.Celebrations, m =>
