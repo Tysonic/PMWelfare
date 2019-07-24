@@ -22,3 +22,70 @@ select,
 textarea {
     max-width: 280px;
 }
+.navbar-fixed-top {
+    top: 0;
+    border-width: 0 0 1px;
+    background-color: #0f88bd;
+}
+    .navbar-fixed-top .navbar-nav > li > a {
+        color: #ddd;
+    }
+        .navbar-fixed-top .navbar-nav > li > a:hover,
+        .navbar-fixed-top .navbar-nav > li > a:focus {
+            color: #ff2;
+            background-color: transparent;
+        }
+        .navbar-fixed-top .navbar-nav > .active > a,
+        .navbar-fixed-top .navbar-nav > .active > a:hover,
+        .navbar-fixed-top .navbar-nav > .active > a:focus{
+            background-color:white;
+            color:gold;
+             
+        }
+        .navbar-nav ul li a:hover{
+            background-color:Highlight;
+            color:whitesmoke;
+            
+        }
+
+    
+/*.navbar-nav ul ul {
+    display: none;
+    position: absolute;
+    
+    text-decoration: none;
+    margin-left: 160px;
+    top: 0;
+    padding-left: 30px;
+}
+*/
+.navbar-nav ul {
+    display:none;
+
+}
+.navbar-nav ul li:hover > ul{
+    display:block;
+}
+#next{
+    margin-top:30px;
+}
+    .navbar-nav ul ul {
+        position: absolute;
+        margin-left: 157px;
+        text-decoration: none;
+        list-style: none;
+        top: 0;
+        background-color: white;
+        margin-top:-1px;
+    }
+
+.breadcrumb {
+    background-color: aliceblue;
+}
+     .breadcrumb li > a:hover{
+       text-decoration:none;
+     }
+     .breadcrumb .active >a{
+         color:gold ;
+         
+     }

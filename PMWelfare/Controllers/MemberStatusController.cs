@@ -55,6 +55,7 @@ namespace PMWelfare.Controllers
             memberStatus.CreatedAt = DateTime.Now;
             if (ModelState.IsValid)
             {
+                memberStatus.CreatedBy = "Timo";
                 db.MemberStatus.Add(memberStatus);
                 db.SaveChanges();
                 return RedirectToAction("Index");
