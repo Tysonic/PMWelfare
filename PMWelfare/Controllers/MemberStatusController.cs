@@ -46,10 +46,11 @@ namespace PMWelfare.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,MemberStatus1,CreatedBy,CreatedAt,UpdatedBy,UpdatedAt")] MemberStatus memberStatus)
+        public ActionResult Create([Bind(Include = "MembersStatusID,MemberStatus1,CreatedBy,CreatedAt,TimeStamp,UpdatedBy,UpdatedAt")] MemberStatus memberStatus)
         {
             if (ModelState.IsValid)
             {
+                memberStatus.CreatedBy = "Timo";
                 db.MemberStatus.Add(memberStatus);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -78,7 +79,7 @@ namespace PMWelfare.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,MemberStatus1,CreatedBy,CreatedAt,UpdatedBy,UpdatedAt")] MemberStatus memberStatus)
+        public ActionResult Edit([Bind(Include = "MembersStatusID,MemberStatus1,CreatedBy,CreatedAt,TimeStamp,UpdatedBy,UpdatedAt")] MemberStatus memberStatus)
         {
             if (ModelState.IsValid)
             {
@@ -123,11 +124,5 @@ namespace PMWelfare.Controllers
             }
             base.Dispose(disposing);
         }
-        //public ActionResult CashAt()
-        //{
-        //    var cash = db.Monthlysummary.Where(s => s.CreatedAt.Value.Month == DateTime.Now.Month
-        //    && s.CreatedAt.Value.Year == DateTime.Now.Year).SelectMany(s => s.Split(''));
-        //    return View();
-        //}
     }
 }

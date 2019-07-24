@@ -187,9 +187,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201907151249592_welfare.cs" />
-    <Compile Include="Migrations\201907151249592_welfare.Designer.cs">
-      <DependentUpon>201907151249592_welfare.cs</DependentUpon>
+    <Compile Include="Migrations\201907181713424_Welfare.cs" />
+    <Compile Include="Migrations\201907181713424_Welfare.Designer.cs">
+      <DependentUpon>201907181713424_Welfare.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -205,7 +205,6 @@
     <Compile Include="Models\Member.cs" />
     <Compile Include="Models\MemberStatus.cs" />
     <Compile Include="Models\MonthlySummary.cs" />
-    <Compile Include="Models\Report.cs" />
     <Compile Include="Models\Subscription.cs" />
     <Compile Include="Models\Supplier.cs" />
     <Compile Include="Models\SupProducts.cs" />
@@ -213,6 +212,7 @@
     <Compile Include="Models\Welfare.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utilities\Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -361,10 +361,6 @@
     <Content Include="Views\Celebrations\Details.cshtml" />
     <Content Include="Views\Celebrations\Edit.cshtml" />
     <Content Include="Views\Celebrations\Index.cshtml" />
-    <Content Include="Views\MemberStatus\Create.cshtml" />
-    <Content Include="Views\MemberStatus\Delete.cshtml" />
-    <Content Include="Views\MemberStatus\Index.cshtml" />
-    <Content Include="Views\Members\Create.cshtml" />
     <Content Include="Views\Members\Delete.cshtml" />
     <Content Include="Views\Members\Details.cshtml" />
     <Content Include="Views\Members\Edit.cshtml" />
@@ -385,12 +381,6 @@
     <Content Include="Views\Expenses\Edit.cshtml" />
     <Content Include="Views\Expenses\Index.cshtml" />
     <Content Include="Views\Members\Create.cshtml" />
-    <Content Include="Views\Members\Delete.cshtml" />
-    <Content Include="Views\Members\Details.cshtml" />
-    <Content Include="Views\Members\Edit.cshtml" />
-    <Content Include="Views\Members\Index.cshtml" />
-    <Content Include="Views\MemberStatus\Details.cshtml" />
-    <Content Include="Views\MemberStatus\Edit.cshtml" />
     <Content Include="Views\Suppliers\Listsupplier.cshtml" />
     <Content Include="Views\Subscriptions\Index.cshtml" />
     <Content Include="Views\Subscriptions\Arrears.cshtml" />
@@ -406,9 +396,7 @@
     <Content Include="Views\SupProducts\Details.cshtml" />
     <Content Include="Views\SupProducts\Edit.cshtml" />
     <Content Include="Views\SupProducts\Index.cshtml" />
-    <Content Include="Views\Expenses\MonthlyExpenses.cshtml" />
     <Content Include="Views\Expenses\TotalExpense.cshtml" />
-    <Content Include="Views\Expenses\TotalExpenses.cshtml" />
     <Content Include="Views\MonthlySummary\Index.cshtml" />
     <Content Include="Views\Celebrants\Create.cshtml" />
     <Content Include="Views\Celebrants\Delete.cshtml" />
@@ -417,6 +405,20 @@
     <Content Include="Views\Celebrants\Index.cshtml" />
     <Content Include="Views\Deposits\CashAtHand.cshtml" />
     <Content Include="Views\Deposits\TotalCollection.cshtml" />
+    <Content Include="Views\Expenses\CurrentExpenses.cshtml" />
+    <Content Include="Views\Expenses\PreviousMonthExpense.cshtml" />
+    <Content Include="Views\Expenses\TotalPreviousMonthExpense.cshtml" />
+    <Content Include="Views\Celebrations\EventsOfProviousMonth.cshtml" />
+    <Content Include="Views\Celebrations\TotaleventsOfPreviousMonth.cshtml" />
+    <Content Include="Views\Celebrations\TotalUpComingEvents.cshtml" />
+    <Content Include="Views\Celebrations\UpComingEvents.cshtml" />
+    <Content Include="Views\MonthlySummary\Closing.cshtml" />
+    <Content Include="Views\MemberStatus\Create.cshtml" />
+    <Content Include="Views\MemberStatus\Delete.cshtml" />
+    <Content Include="Views\MemberStatus\Details.cshtml" />
+    <Content Include="Views\MemberStatus\Edit.cshtml" />
+    <Content Include="Views\MemberStatus\Index.cshtml" />
+    <Content Include="Views\Subscriptions\ExportToExcel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -431,8 +433,8 @@
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201907151249592_welfare.resx">
-      <DependentUpon>201907151249592_welfare.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201907181713424_Welfare.resx">
+      <DependentUpon>201907181713424_Welfare.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -4,7 +4,11 @@
     ViewBag.Title = "EventsOfProviousMonth";
 
 }
-
+<ol class="breadcrumb">
+    <li>@Html.ActionLink("Home","Index")</li>
+    <li >@Html.ActionLink("Events", "Index")</li>
+    <li class="active">@Html.ActionLink("Events of Previous Month", "EventsOfProviousMonth")</li>
+</ol>
 <h2>Events In The Provious Month</h2><br /><br />
 
 <table class="table">

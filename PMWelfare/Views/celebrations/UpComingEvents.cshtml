@@ -3,7 +3,10 @@
 @{
     ViewBag.Title = "Events";
 }
-
+<ol class="breadcrumb">
+    <li class="active">@Html.ActionLink("Events", "Index")</li>
+    <li>@Html.ActionLink("List of Upcoming Events", "UpComingEvents")</li>
+</ol>
 <h2>Upcoming Events</h2><br /><br /> 
 
 <table class="table">

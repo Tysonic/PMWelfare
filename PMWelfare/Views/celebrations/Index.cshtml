@@ -3,11 +3,17 @@
 @{
     ViewBag.Title = "View";
 }
-
+<ol class="breadcrumb">
+    <li>@Html.ActionLink("Home","Index")</li>
+    <li class="active">@Html.ActionLink("Events", "Index")</li>
+    <li></li>
+</ol>
 <h2>View</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    
+
+
 </p>
 <table class="table">
     <tr>

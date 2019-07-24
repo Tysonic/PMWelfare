@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 using PMWelfare.Models;
 
 namespace PMWelfare.Controllers
@@ -15,12 +18,57 @@ namespace PMWelfare.Controllers
         private welfare db = new welfare();
 
         // GET: Subscriptions
-        public ActionResult Index()
+        public ActionResult Index(int submonth , int subyear)
         {
-            var subscriptions = db.Subscriptions.Include(s => s.Member);
+           //ViewBag.submonth =  System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(
+                
+           //    );
+
+            ViewBag.submonth = db.Subscriptions.Select(s => s.SubMonth).Distinct();
+            ViewBag.subyear = db.Subscriptions.Select(x => x.SubYear).Distinct();
+            var subscriptions = db.Subscriptions.Where(s => s.SubMonth ==
+            submonth && s.SubYear == subyear).Include(s => s.Member).ToList();
+            Session["students"] = subscriptions.ToList<Subscription>();
             return View(subscriptions.ToList());
         }
 
+        // GET: ExportData
+        public void ExportToExcel()
+        {
+            var data1 = (List<Subscription>)Session["students"];
+            // Step 1 - get the data from database
+            var data = db.Subscriptions.Include(s => s.Member).ToList();
+
+            // instantiate the GridView control from System.Web.UI.WebControls namespace
+            // set the data source
+            GridView gridview = new GridView
+            {
+                DataSource = data1
+            };
+            gridview.DataBind();
+
+            // Clear all the content from the current response
+            Response.ClearContent();
+            Response.Buffer = true;
+            // set the header
+            Response.AddHeader("content-disposition", "attachment;filename = subscriptions.xls");
+            Response.ContentType = "application/ms-excel";
+            Response.Charset = "";
+            // create HtmlTextWriter object with StringWriter
+            using (StringWriter sw = new StringWriter())
+            {
+                using (HtmlTextWriter htw = new HtmlTextWriter(sw))
+                {
+                    // render the GridView to the HtmlTextWriter
+                    gridview.RenderControl(htw);
+                    // Output the GridView content saved into StringWriter
+                    Response.Output.Write(sw.ToString());
+                    Response.Flush();
+                    Response.End();
+                }
+            }
+            
+        }
         // GET: Subscriptions/Details/5
         public ActionResult Details(int? id)
         {
@@ -122,9 +170,9 @@ namespace PMWelfare.Controllers
         
         public ActionResult Advances()
         {
-            decimal advance = db.Subscriptions.Where(s => 
+           decimal advance = db.Subscriptions.Where(s => 
             (s.SubMonth > DateTime.Now.Month && s.SubYear == DateTime.Now.Year)
-           || s.SubYear > DateTime.Now.Year).DefaultIfEmpty().Sum(s => s.Amount);
+           || s.SubYear > DateTime.Now.Year).Select(s => s.Amount).DefaultIfEmpty().Sum();
 
             ViewBag.Advances = advance;
 
@@ -328,5 +376,9 @@ namespace PMWelfare.Controllers
             base.Dispose(disposing);
         }
        
+    }
+
+    internal class Subs
+    {
     }
 }

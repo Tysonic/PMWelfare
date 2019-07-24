@@ -32,6 +32,7 @@ namespace PMWelfare.Models
         [Column(TypeName = "money")]
         public decimal Amount { get; set; }
 
+        
         public int SubMonth { get; set; }
 
         public int SubYear { get; set; }

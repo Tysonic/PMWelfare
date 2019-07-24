@@ -2,7 +2,7 @@
 
 
 @{
-    ViewBag.Title = "Summery Page";
+    ViewBag.Title = "Summary Page";
 }
 <h1 style="text-align:center">PM-Welfare summary page</h1><br /><br />
 
@@ -39,7 +39,7 @@
             <td>Advance Collections</td>
             <td>@{Html.RenderAction("Advances", "Subscriptions");}</td>
             <td>
-                @Html.ActionLink("Details", "../Celebrations/eventsofproviousmonth",
+                @Html.ActionLink("Details", "../Celebrations/",
    null, new { target = "Details" })
             </td>
         </tr>
@@ -59,7 +59,7 @@
             <td>Total Expenditure</td>
             <td>@{Html.RenderAction("TotalExpense", "Expenses");}</td>
             <td>
-                @Html.ActionLink("Details", "../Expenses/TotalCurrentExpenses",
+                @Html.ActionLink("Details", "../Expenses/CurrentExpenses",
    null, new { target = "Details" })
             </td>
         </tr>
@@ -102,9 +102,9 @@
         </tr>
         <tr>
             <td>Total Expenditure</td>
-            <td>@{Html.RenderAction("TotalxPreviousMonthExpense", "Expenses");}</td>
+            <td>@{Html.RenderAction("TotalPreviousMonthExpense", "Expenses");}</td>
             <td>
-                @Html.ActionLink("Details", "../Celebrations/eventsofproviousmonth",
+                @Html.ActionLink("Details", "../Expenses/PreviousMonthExpense",
               null, new { target="Details"})
             </td>
         </tr>

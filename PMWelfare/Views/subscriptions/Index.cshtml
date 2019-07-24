@@ -5,50 +5,61 @@
 }
 
 <h2>Index</h2>
+@using (Html.BeginForm())
+{
+    <text>SubMonth</text>@Html.DropDownList("SubMonth", new SelectList(ViewBag.submonth), htmlAttributes: new { @class = "form-control" })
+    <text>SubYear</text>@Html.DropDownList("SubYear", new SelectList(ViewBag.subyear), htmlAttributes: new { @class = "form-control" })
+    <input type="submit" value="Search"/>
+}
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.UserName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Amount)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SubMonth)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SubYear)
-        </th>
-
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+@using (Html.BeginForm("ExportToExcel", "Subscriptions", FormMethod.Post))
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Amount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SubMonth)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SubYear)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.SubId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.SubId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.SubId })
-            </td>
-        </tr>
-    }
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th>
 
-</table>
+                @Html.DisplayNameFor(model => model.SubMonth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubYear)
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    @System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(item.SubMonth)
+
+
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SubYear)
+                </td>
+
+            </tr>
+        }
+
+    </table>
+    <input type="submit" value="Export to Excel" class="btn btn-info" />
+
+}
 

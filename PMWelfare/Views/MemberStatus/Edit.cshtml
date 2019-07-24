@@ -1,47 +1,26 @@
-﻿@model PMWelfare.Models.Celebration
+﻿@model PMWelfare.Models.MemberStatus
 
 @{
-                /**/
-
-                ViewBag.Title = "Create";
+    ViewBag.Title = "Edit";
 }
-<ol class="breadcrumb">
-    <li>@Html.ActionLink("Home","Index")</li>
-    <li >@Html.ActionLink("Events", "Index")</li>
-    <li class="active">@Html.ActionLink("Add New Event", "Create")</li>
-</ol>
-<h2>Create</h2>
 
+<h2>Edit</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-
+    
     <div class="form-horizontal">
-        <h4>Celebration</h4>
+        <h4>MemberStatus</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.MembersStatusID)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.EventTypeId, "EventTypeId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.MemberStatus1, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("EventTypeId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.EventTypeId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.EventName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EventName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EventName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.EventDate, htmlAttributes: new { @class = " control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EventDate, new { htmlAttributes = new { @class = " datepicker form-control" } })
-                @Html.ValidationMessageFor(model => model.EventDate, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.MemberStatus1, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MemberStatus1, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -79,7 +58,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
     </div>
@@ -88,16 +67,3 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
-    <script>
-        $(function () {
-            $(".datepicker").datepicker(
-                {
-                    dateFormat:"yy/mm/dd"
-                });
-        });
-    </script>
-}
