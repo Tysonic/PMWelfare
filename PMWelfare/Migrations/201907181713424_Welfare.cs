@@ -53,6 +53,7 @@ namespace PMWelfare.Migrations
                         PostedAt = c.DateTime(),
                         TimeStamp = c.DateTime(nullable: false),
                         UpdatedBy = c.String(maxLength: 40, unicode: false),
+                        ParentId = c.Int(nullable: false),
                         UpdatedAt = c.DateTime(),
                     })
                 .PrimaryKey(t => t.ChatId)

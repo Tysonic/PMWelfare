@@ -16,16 +16,23 @@ namespace PMWelfare.Controllers
     public class SubscriptionsController : Controller
     {
         private welfare db = new welfare();
+        public ActionResult Index()
 
+        {
+            ViewBag.submonth = db.Subscriptions.Select(s => s.SubMonth).DefaultIfEmpty().Distinct();
+            ViewBag.subyear = db.Subscriptions.Select(x => x.SubYear).DefaultIfEmpty().Distinct();
+
+            var subscriptions = db.Subscriptions.Include(s => s.Member).ToList();
+            return View(subscriptions);
+        }
         // GET: Subscriptions
+        [HttpPost]
         public ActionResult Index(int submonth , int subyear)
         {
-           //ViewBag.submonth =  System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(
-                
-           //    );
+            ViewBag.submonth = db.Subscriptions.Select(s => s.SubMonth).DefaultIfEmpty().Distinct();
+            ViewBag.subyear = db.Subscriptions.Select(x => x.SubYear).DefaultIfEmpty().Distinct();
 
-            ViewBag.submonth = db.Subscriptions.Select(s => s.SubMonth).Distinct();
-            ViewBag.subyear = db.Subscriptions.Select(x => x.SubYear).Distinct();
+
             var subscriptions = db.Subscriptions.Where(s => s.SubMonth ==
             submonth && s.SubYear == subyear).Include(s => s.Member).ToList();
             Session["students"] = subscriptions.ToList<Subscription>();
@@ -378,7 +385,5 @@ namespace PMWelfare.Controllers
        
     }
 
-    internal class Subs
-    {
-    }
+  
 }

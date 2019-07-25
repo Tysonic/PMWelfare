@@ -35,6 +35,8 @@ namespace PMWelfare.Models
         [StringLength(40)]
         public string UpdatedBy { get; set; }
 
+        public int ParentId { get; set; }
+
         public DateTime? UpdatedAt { get; set; }
 
         public virtual Member Member { get; set; }

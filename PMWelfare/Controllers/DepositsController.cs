@@ -415,18 +415,18 @@ namespace PMWelfare.Controllers
         {
             decimal Total = db.Deposits.Where(s => s.CreatedAt
             .Value.Month == DateTime.Now.Month
-           && s.CreatedAt.Value.Year == DateTime.Now.Year)
-           .Sum(s => s.Amount);
+           && s.CreatedAt.Value.Year == DateTime.Now.Year).Select(s => s.Amount).DefaultIfEmpty()
+           .Sum();
             ViewBag.total = Total;
             return View();
 
         }
         public ActionResult CashAtHand()
         {
-            decimal Total = db.Deposits.Where(s => 
+            decimal? Total = db.Deposits.Where(s => 
             s.CreatedAt.Value.Month == DateTime.Now.Month
-            && s.CreatedAt.Value.Year == DateTime.Now.Year)
-            .Sum(s => s.Amount);
+            && s.CreatedAt.Value.Year == DateTime.Now.Year).Select(s=> s.Amount).DefaultIfEmpty()
+            .Sum();
 
             decimal expense = db.Expenses.Join(db.SupProducts, s =>
             s.ProductId, e => e.ProductId, (s, e) =>
@@ -438,7 +438,7 @@ namespace PMWelfare.Controllers
                 .Where(s => s.EndDate.Month == DateTime.Now.Month - 1
             && s.EndDate.Year == DateTime.Now.Year).Select(s => s.ClosingBalance).FirstOrDefault();
 
-           decimal Cash = Total + ClosingBalance - expense;
+           decimal? Cash = Total + ClosingBalance - expense;
             ViewBag.total = Cash;
             return View();
         }

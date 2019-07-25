@@ -5,7 +5,7 @@
 }
 
 <h2>Index</h2>
-@using (Html.BeginForm())
+@using (Html.BeginForm("Index","Subscriptions",FormMethod.Post))
 {
     <text>SubMonth</text>@Html.DropDownList("SubMonth", new SelectList(ViewBag.submonth), htmlAttributes: new { @class = "form-control" })
     <text>SubYear</text>@Html.DropDownList("SubYear", new SelectList(ViewBag.subyear), htmlAttributes: new { @class = "form-control" })
