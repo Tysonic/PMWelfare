@@ -40,10 +40,10 @@ namespace PMWelfare.Models
 
 
         [Display(Name = "Month")]
-        public int? SubMonth { get; set; }
+        public int SubMonth { get; set; }
 
         [Display(Name = "Year")]
-        public int? SubYear { get; set; }
+        public int SubYear { get; set; }
 
         public virtual Member Member { get; set; }
         public class AdvancesViewModel

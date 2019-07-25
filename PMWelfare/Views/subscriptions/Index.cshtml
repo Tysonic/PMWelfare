@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>list of subscribers </h2>
 @using (Html.BeginForm())
 {
     <text>SubMonth</text>@Html.DropDownList("SubMonth", new SelectList(ViewBag.submonth), htmlAttributes: new { @class = "form-control" })
@@ -14,9 +14,7 @@
 
 @using (Html.BeginForm("ExportToExcel", "Subscriptions", FormMethod.Post))
 {
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
+
     <table class="table">
         <tr>
             <th>
@@ -48,7 +46,7 @@
                 <td>
                     @System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(item.SubMonth)
 
-
+                   
 
                 </td>
                 <td>

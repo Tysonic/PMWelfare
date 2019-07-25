@@ -44,7 +44,8 @@
         <div class="form-group">
             @Html.Label( "UserName", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10" style="width:50%">
-                @Html.ListBoxFor(model => model.MembersToSave, new MultiSelectList(Model.SelectedMembers, "UserName", "FirstName"), new { id = "multiDropDown", multiple = "multiple" })
+                @Html.ListBoxFor(model => model.MembersToSave, new MultiSelectList(Model.SelectedMembers, "UserName", "FirstName"),
+               new { id = "multiDropDown", multiple = "multiple", @class = "form-control" })
 
             </div>
         </div>
@@ -67,10 +68,3 @@
         })
     </script>
 }
-@*@section scripts{
-    <script>
-        $(function () {
-            $("#multiDropDown").chosen();
-        })
-    </script>
-}*@

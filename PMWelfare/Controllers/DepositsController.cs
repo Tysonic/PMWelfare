@@ -76,8 +76,8 @@ namespace PMWelfare.Controllers
                 decimal? amount = deposit.Amount;
 
 
-            int? year;
-            int? month;
+            int year;
+            int month;
 
             if (amount > 0 )
             {
@@ -94,7 +94,7 @@ namespace PMWelfare.Controllers
                            .Select(s => s.SubYear).Max();
 
                         month = db.Subscriptions.Where
-                        (s => s.UserName == deposit.UserName && s.SubYear == year)
+                        (s => s.UserName == deposit.UserName && s.SubYear == year).DefaultIfEmpty()
                         .Select(s => s.SubMonth).Max();
 
                         decimal? AmountSubscribed = db.Subscriptions.Where
