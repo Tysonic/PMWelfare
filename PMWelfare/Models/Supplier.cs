@@ -18,37 +18,32 @@ namespace PMWelfare.Models
         public int SupId { get; set; }
 
         [StringLength(10)]
+        [Display(Name = "Supplier Contact" )]
         public string SupTel { get; set; }
 
         [Required]
         [StringLength(40)]
+        [Display(Name = "Supplier Name")]
         public string SupName { get; set; }
 
         [Required]
         [StringLength(40)]
+        [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]
+        
         [StringLength(40)]
+        [Display(Name = "Created by")]
         public string CreatedBy { get; set; }
 
+        [Display(Name = "Created at")]
         public DateTime? CreatedAt { get; set; }
-        public DateTime TimeStamp
-        {
-            get
-            {
-                if (CreatedAt == null)
-                {
-                    CreatedAt = DateTime.Now;
-                }
-                return CreatedAt.Value;
-            }
-            private set { CreatedAt = value; }
-        }
 
         [StringLength(40)]
+        [Display(Name = "Updated by")]
         public string UpdatedBy { get; set; }
 
+        [Display(Name = "Updated at")]
         public DateTime? UpdatedAt { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

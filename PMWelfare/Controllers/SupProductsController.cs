@@ -56,6 +56,8 @@ namespace PMWelfare.Controllers
             "UnitPrice,EventId,SupId,CreatedBy," +
             "CreatedAt,UpdatedBy,UpdatedAt")] SupProducts supProducts)
         {
+            supProducts.CreatedAt = DateTime.Now;
+            supProducts.CreatedBy = "nicho";
             if (ModelState.IsValid)
             {
                 db.SupProducts.Add(supProducts);

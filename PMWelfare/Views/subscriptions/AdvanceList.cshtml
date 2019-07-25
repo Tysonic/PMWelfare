@@ -1,12 +1,41 @@
-﻿@*@model IEnumerable<PMWelfare.Models.Subscription>
+﻿@model IEnumerable<PMWelfare.Models.Subscription.AdvancesViewModel>
 
-<table>
-    @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Amount)
-                </td>
-            </tr>
+@{ 
+    Layout = null;
+}
+<head>
+    <title>Arrears</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <style>
+        tr:nth-child(even) {
+            background-color: #dfdfdf
         }
-    </table>*@
+    </style>
+
+</head>
+<h2 style="text-align:center">Advances</h2>
+<table class="table table-striped table-hover ">
+    <tr style="background-color:#999999">
+        <td>
+            @Html.DisplayNameFor(model => model.Amount)
+        </td>
+        <td>
+            @Html.DisplayNameFor(model => model.UserName)
+        </td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+        </tr>
+    }
+</table>

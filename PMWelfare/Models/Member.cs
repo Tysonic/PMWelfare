@@ -6,6 +6,7 @@ namespace PMWelfare.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Web.Mvc;
 
     public partial class Member
     {
@@ -27,12 +28,15 @@ namespace PMWelfare.Models
 
         [Key]
         [StringLength(40)]
+        [Display(Name = "User Name")]
         public string UserName { get; set; }
 
         [StringLength(40)]
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
         [StringLength(40)]
+        [Display(Name = "Other Name")]
         public string OtherName { get; set; }
 
         [Required]
@@ -40,36 +44,30 @@ namespace PMWelfare.Models
         public string Email { get; set; }
 
         [Column(TypeName = "date")]
+        [Display(Name = "Date of birth")]
         public DateTime? DOB { get; set; }
 
+        [Display(Name = "Member Status")]
         public int? MemberStatus { get; set; }
 
+        [Display(Name = "Admin")]
         public bool IsAdmin { get; set; }
 
-        [Required]
+        
         [StringLength(40)]
+        [Display(Name = "Created by")]
         public string CreatedBy { get; set; }
 
 
-        
+        [Display(Name = "Created at")]
         public DateTime? CreatedAt { get; set; }
-        public DateTime TimeStamp
-        {
-            get
-            {
-                if (CreatedAt == null)
-                {
-                    CreatedAt = DateTime.Now;
-                }
-                return CreatedAt.Value;
-            }
-            private set { CreatedAt = value; }
-        }
+
 
         [StringLength(40)]
+        [Display(Name = "Updated by")]
         public string UpdatedBy { get; set; }
 
-        
+        [Display(Name = "Updated at")]
         public DateTime? UpdatedAt { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -21,8 +21,8 @@ namespace PMWelfare.Controllers
         public ActionResult Closing()
         {
             decimal ClosingBalance = db.Monthlysummary
-                 .Where(s => s.EndDate.Month == DateTime.Now.Month - 1
-             && s.EndDate.Year == DateTime.Now.Year).Select(s => s.ClosingBalance).FirstOrDefault();
+                 .Where(s => s.EndDate.Value.Month == DateTime.Now.Month - 1
+             && s.EndDate.Value.Year == DateTime.Now.Year).Select(s => s.ClosingBalance).FirstOrDefault();
 
             ViewBag.balance = ClosingBalance;
             return View(ViewBag.balance);

@@ -32,6 +32,7 @@ namespace PMWelfare.Models
 
             modelBuilder.Entity<ActivityLogs>()
                 .Property(e => e.UserName)
+
                 .IsUnicode(false);
 
             modelBuilder.Entity<ActivityLogs>()
@@ -180,5 +181,6 @@ namespace PMWelfare.Models
                 .IsUnicode(false);
 
         }
+
     }
 }

@@ -6,9 +6,11 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace PMWelfare.Controllers
 {
+
 
 
 
@@ -59,21 +61,23 @@ namespace PMWelfare.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "DepositID,UserName,Amount,CreatedBy,CreatedAt,UpdatedBy,UpdatedAt")]
+        public ActionResult Create([Bind(Include = "DepositID," +
+            "UserName,Amount,UpdatedBy,UpdatedAt")]
         Deposit deposit, Subscription subscriptions )
         {
 
-            
-            
 
-                decimal SubAmount = 20000;
+
+            deposit.CreatedAt = DateTime.Now;
+            deposit.CreatedBy = "nicho";
+                decimal? SubAmount = 20000;
                 var users = db.Subscriptions.Select
                         (s => s.UserName).ToList();
-                decimal amount = deposit.Amount;
+                decimal? amount = deposit.Amount;
 
 
-            int year;
-            int month;
+            int? year;
+            int? month;
 
             if (amount > 0 )
             {
@@ -93,7 +97,7 @@ namespace PMWelfare.Controllers
                         (s => s.UserName == deposit.UserName && s.SubYear == year)
                         .Select(s => s.SubMonth).Max();
 
-                        decimal AmountSubscribed = db.Subscriptions.Where
+                        decimal? AmountSubscribed = db.Subscriptions.Where
                         (s => s.UserName == deposit.UserName && s.SubYear == year
                         && s.SubMonth == month).Select(m => m.Amount).Single();
 ////////////////////////////////////
@@ -106,7 +110,7 @@ namespace PMWelfare.Controllers
 //////////// partial arrears//////
 //////////////////////////////////
 
-                            decimal balance = SubAmount - AmountSubscribed;
+                            decimal? balance = SubAmount - AmountSubscribed;
 
                             subscriptions = db.Subscriptions.Where(s => s.SubMonth == month &&
                              s.SubYear == year && s.UserName == deposit.UserName).Select(l => l).Single();
@@ -205,7 +209,7 @@ namespace PMWelfare.Controllers
                         (s => s.UserName == deposit.UserName && s.SubYear == year)
                         .Select(s => s.SubMonth).Max();
 
-                        decimal AmountSubscribed = db.Subscriptions.Where
+                        decimal? AmountSubscribed = db.Subscriptions.Where
                         (s => s.UserName == deposit.UserName && s.SubYear == year
                         && s.SubMonth == month).Select(m => m.Amount).Single();
 ////////////////////////////////////
@@ -218,7 +222,7 @@ namespace PMWelfare.Controllers
 //member has ever subscribed//
 //////////////////////////////
 
-                        decimal balance = SubAmount - AmountSubscribed;
+                        decimal? balance = SubAmount - AmountSubscribed;
 
                         subscriptions = db.Subscriptions.Where(s => s.SubMonth == month &&
                          s.SubYear == year && s.UserName == deposit.UserName).Select(l => l).Single();
@@ -233,7 +237,7 @@ namespace PMWelfare.Controllers
                         }
 
 
-                        for (decimal x = amount; x > 0; x -= SubAmount)
+                        for (decimal? x = amount; x > 0; x -= SubAmount)
                         {
 ///////////////////////////////////////////////////////////////
 //checking for changes in month and year///////////////////////
@@ -254,8 +258,10 @@ namespace PMWelfare.Controllers
 //////////////////////////////////////////////////////////////////
                             if (x >= SubAmount)
                             {
-                                Subscription subs = new Subscription();
-                                subs.Amount = SubAmount;
+                                Subscription subs = new Subscription
+                                {
+                                    Amount = SubAmount
+                                };
                                 subscriptions.Amount = subs.Amount;
                                 db.Subscriptions.Add(subscriptions);
                                 if (ModelState.IsValid)
@@ -285,7 +291,7 @@ namespace PMWelfare.Controllers
                        .Select(s => s.CreatedAt).Single().Value.Year;
 
 
-                        for (decimal x = amount; x >= 0; x -= SubAmount)
+                        for (decimal? x = amount; x >= 0; x -= SubAmount)
                         {
                             if (month < 12)
                             {
@@ -302,8 +308,10 @@ namespace PMWelfare.Controllers
                             {
                                 if (x >= SubAmount )
                                 {
-                                    Subscription subs = new Subscription();
-                                    subs.Amount = SubAmount;
+                                    Subscription subs = new Subscription
+                                    {
+                                        Amount = SubAmount
+                                    };
                                     subscriptions.Amount = subs.Amount;
                                     db.Subscriptions.Add(subscriptions);
                                     if (ModelState.IsValid)
@@ -413,33 +421,35 @@ namespace PMWelfare.Controllers
         }
         public ActionResult TotalCollection()
         {
-            decimal Total = db.Deposits.Where(s => s.CreatedAt
+            decimal? Total = db.Deposits.Where(s => s.CreatedAt
             .Value.Month == DateTime.Now.Month
-           && s.CreatedAt.Value.Year == DateTime.Now.Year).Select(s => s.Amount).DefaultIfEmpty()
-           .Sum();
+           && s.CreatedAt.Value.Year == DateTime.Now.Year)
+           .Sum(s => (decimal?)s.Amount);
             ViewBag.total = Total;
             return View();
 
         }
         public ActionResult CashAtHand()
         {
-            decimal? Total = db.Deposits.Where(s => 
+            var Total = db.Deposits.Where(s => 
             s.CreatedAt.Value.Month == DateTime.Now.Month
-            && s.CreatedAt.Value.Year == DateTime.Now.Year).Select(s=> s.Amount).DefaultIfEmpty()
-            .Sum();
+            && s.CreatedAt.Value.Year == DateTime.Now.Year)
+            .DefaultIfEmpty().Sum(s => s.Amount) ??0;
 
-            decimal expense = db.Expenses.Join(db.SupProducts, s =>
+            var  expense = db.Expenses.Join(db.SupProducts, s =>
             s.ProductId, e => e.ProductId, (s, e) =>
             new { u = e.UnitPrice, q = s.Quantity, s.ExpenseDate })
             .Where(s => s.ExpenseDate.Month == DateTime.Now.Month
-             && s.ExpenseDate.Year == DateTime.Now.Year).Select(s => s.u * s.q).DefaultIfEmpty().Sum();
+             && s.ExpenseDate.Year == DateTime.Now.Year).DefaultIfEmpty()
+             .Select(s => s.u * s.q).Sum();
 
-            decimal ClosingBalance = db.Monthlysummary
-                .Where(s => s.EndDate.Month == DateTime.Now.Month - 1
-            && s.EndDate.Year == DateTime.Now.Year).Select(s => s.ClosingBalance).FirstOrDefault();
+            decimal? ClosingBalance = db.Monthlysummary
+                .Where(s => s.EndDate.Value.Month == DateTime.Now.Month - 1
+            && s.EndDate.Value.Year == DateTime.Now.Year)
+            .Select(s => s.ClosingBalance).FirstOrDefault();
 
            decimal? Cash = Total + ClosingBalance - expense;
-            ViewBag.total = Cash;
+            ViewBag.total = Cash.GetValueOrDefault();
             return View();
         }
 

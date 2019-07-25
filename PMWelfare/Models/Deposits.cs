@@ -20,31 +20,25 @@
         public int DepositId { get; set; }
 
         [StringLength(40)]
+        [Display(Name = "User Name")]
         public string UserName { get; set; }
 
         [Column(TypeName = "money")]
-        public decimal Amount { get; set; }
-        [Required]
+        [DisplayFormat(DataFormatString = "Shs:{0:N0}")]
+        public decimal? Amount { get; set; }
+        
         [StringLength(40)]
+        [Display(Name = "Created by")]
         public string CreatedBy { get; set; }
 
+        [Display(Name = "Created at")]
         public DateTime? CreatedAt { get; set; }
-        public DateTime TimeStamp
-        {
-            get
-            {
-                if (CreatedAt == null)
-                {
-                    CreatedAt = DateTime.Now;
-                }
-                return CreatedAt.Value;
-            }
-            private set { CreatedAt = value; }
-        }
 
         [StringLength(40)]
+        [Display(Name = "Updated by")]
         public string UpdatedBy { get; set; }
 
+        [Display(Name = "Updated at")]
         public DateTime? UpdatedAt { get; set; }
 
         public virtual Member Member { get; set; }

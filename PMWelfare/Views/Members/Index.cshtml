@@ -1,15 +1,15 @@
 ﻿@model IEnumerable<PMWelfare.Models.Member>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "new staff member";
 }
 
-<h2>Index</h2>
+<h2 style="text-align:center    ">List of Staffs in the system</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+<button>
+    @Html.ActionLink("Add a new member", "Create")
+</button>
+<table class="table table-bordered">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.MemberStatus1.MemberStatus1)
@@ -29,18 +29,7 @@
         <th>
             @Html.DisplayNameFor(model => model.IsAdmin)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedBy)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedAt)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UpdatedBy)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UpdatedAt)
-        </th>
+
         <th></th>
     </tr>
 
@@ -64,24 +53,12 @@
         <td>
             @Html.DisplayFor(modelItem => item.IsAdmin)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedBy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedAt)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UpdatedBy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UpdatedAt)
-        </td>
-        <td>
+
+        <td style="width:10%">
             @Html.ActionLink("Edit", "Edit", new { id=item.UserName }) |
             @Html.ActionLink("Details", "Details", new { id=item.UserName }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.UserName })
         </td>
-    </tr>
+    </tr>   
 }
 
 </table>

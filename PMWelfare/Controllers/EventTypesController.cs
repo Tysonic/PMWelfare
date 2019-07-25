@@ -48,6 +48,8 @@ namespace PMWelfare.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Type,CreatedBy,CreatedAt,UpdatedBy,UpdatedAt")] EventType EventType)
         {
+            EventType.CreatedAt = DateTime.Now;
+            EventType.CreatedBy = "nicho";
             if (ModelState.IsValid)
             {
                 db.EventTypes.Add(EventType);

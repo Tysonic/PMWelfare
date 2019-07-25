@@ -39,7 +39,9 @@ namespace PMWelfare.Controllers
         // GET: Members/Create
         public ActionResult Create()
         {
-            ViewBag.MemberStatus = new SelectList(db.MemberStatus, "MembersStatusID", "MemberStatus1");
+            ViewBag.MemberStatus = new 
+                SelectList(db.MemberStatus, "MembersStatusID", 
+                "MemberStatus1");
             return View();
         }
 
@@ -50,9 +52,13 @@ namespace PMWelfare.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "UserName,FirstName,OtherName,Email,DOB,MemberStatus,IsAdmin,CreatedBy,CreatedAt,UpdatedBy,UpdatedAt")] Member member)
         {
+            member.CreatedAt = DateTime.Now;
+            member.CreatedBy = "nicho";
+            db.Members.Add(member);
+
             if (ModelState.IsValid)
             {
-                db.Members.Add(member);
+                
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -128,5 +134,6 @@ namespace PMWelfare.Controllers
             }
             base.Dispose(disposing);
         }
+
     }
 }

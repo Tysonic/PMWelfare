@@ -36,13 +36,17 @@ namespace PMWelfare.Controllers
             }
             return View(celebration);
         }
-
         // GET: Celebrations/Create
-        public ActionResult Create()
+        public ActionResult Create(int id = 0)
         {
+            
             ViewBag.EventTypeId = new SelectList(db.EventTypes, 
                 "Id", "Type");
-            return View();
+            
+            Celebration mem = new Celebration();
+            mem.SelectedMembers = db.Members.ToList();
+            return View(mem);
+     
         }
 
         // POST: Celebrations/Create
@@ -52,22 +56,44 @@ namespace PMWelfare.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = 
             "EventId,EventDate,CreatedBy,CreatedAt,UpdatedBy," +
-            "UpdatedAt,EventTypeId,EventName")] Celebration celebration)
+            "UpdatedAt,EventTypeId,EventName")] Celebration celebration,Celebrant emp
+            
+            )
         {
+            celebration.CreatedAt = DateTime.Now;
+            celebration.CreatedBy = "nicho";
+
             if (ModelState.IsValid)
             {
                 db.Celebrations.Add(celebration);
                 db.SaveChanges();
-                return RedirectToAction("Create","Celebrants", 
-                    new {area= "" });
+                emp.members = emp.MembersToSave.ToList();
+                foreach (var m in emp.members)
+                {
+                    emp.EventId = celebration.EventId;
+                    emp.UserName = m;
+                    if (ModelState.IsValid)
+                    {
+                        db.Celebrants.Add(emp);
+                        db.SaveChanges();
+                    }
+                }
+                return RedirectToAction("index", "Celebrations",
+                    new { area = "" });
             }
+
+            
+           
+
+
+            
 
             ViewBag.EventTypeId = new SelectList(db.EventTypes, 
                 "Id", "Type", celebration.EventTypeId);
             return View(celebration);
         }
 
-        // GET: Celebrations/Edit/5
+
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -143,8 +169,9 @@ namespace PMWelfare.Controllers
             {
                 EventType = s.EventType.Type,
                 EventDate = s.EventDate,
-                UserName = m.UserName
-            }).Where(s => s.EventDate.Month == (DateTime.Now.Month))
+                UserName = m.UserName,
+                EventName = s.EventName
+            }).Where(s => s.EventDate.Value.Month == (DateTime.Now.Month))
             .DefaultIfEmpty().ToList();
             return View(events);
         }
@@ -154,13 +181,13 @@ namespace PMWelfare.Controllers
 
             var events = db.Celebrants.Join(db.Celebrations, m =>
             m.EventId, s => s.EventId, (m,s)=> new { s.EventDate,s.EventId})
-            .Where(s =>s.EventDate.Month==DateTime.Now.Month)
+            .Where(s =>s.EventDate.Value.Month==DateTime.Now.Month)
             .Select(s=>s.EventId).Count();
             @ViewBag.total = events;
             return View();
         }
 
-        public ActionResult EventsOfProviousMonth()
+        public ActionResult EventsOfPreviousMonth()
         {
 
             var events = db.Celebrants.Join(db.Celebrations, m =>
@@ -180,7 +207,7 @@ namespace PMWelfare.Controllers
         public ActionResult TotaleventsOfPreviousMonth()
         {
            int events = db.Celebrations.Where
-                (s =>s.EventDate.Month==(DateTime.Now.Month-1))
+                (s =>s.EventDate.Value.Month==(DateTime.Now.Month-1))
             .Select(s => s.EventId).Count();
             ViewBag.events = events;
             return View(ViewBag.events);

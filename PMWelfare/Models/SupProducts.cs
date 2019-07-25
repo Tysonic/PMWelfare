@@ -21,29 +21,19 @@ namespace PMWelfare.Models
         [StringLength(40)]
         public string ProductName { get; set; }
 
+        [DisplayFormat(DataFormatString = "Shs:{0:N0}")]
         [Column(TypeName = "money")]
-        public decimal UnitPrice { get; set; }
+        public decimal? UnitPrice { get; set; }
 
+        
         public int? EventId { get; set; }
 
         public int? SupId { get; set; }
-        [Required]
+        
         [StringLength(40)]
         public string CreatedBy { get; set; }
 
         public DateTime? CreatedAt { get; set; }
-        public DateTime TimeStamp
-        {
-            get
-            {
-                if (CreatedAt == null)
-                {
-                    CreatedAt = DateTime.Now;
-                }
-                return CreatedAt.Value;
-            }
-            private set { CreatedAt = value; }
-        }
 
         [StringLength(40)]
         public string UpdatedBy { get; set; }

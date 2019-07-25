@@ -1,15 +1,9 @@
 ﻿@model PMWelfare.Models.Celebration
 
 @{
-                /**/
-
-                ViewBag.Title = "Create";
+    ViewBag.Title = "Create";
 }
-<ol class="breadcrumb">
-    <li>@Html.ActionLink("Home","Index")</li>
-    <li >@Html.ActionLink("Events", "Index")</li>
-    <li class="active">@Html.ActionLink("Add New Event", "Create")</li>
-</ol>
+
 <h2>Create</h2>
 
 
@@ -38,66 +32,45 @@
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.EventDate, htmlAttributes: new { @class = " control-label col-md-2" })
+            @Html.LabelFor(model => model.EventDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.EventDate, new { htmlAttributes = new { @class = " datepicker form-control" } })
+                @Html.EditorFor(model => model.EventDate, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.EventDate, "", new { @class = "text-danger" })
             </div>
         </div>
 
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.CreatedBy, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CreatedBy, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CreatedBy, "", new { @class = "text-danger" })
+            @Html.Label( "UserName", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10" style="width:50%">
+                @Html.ListBoxFor(model => model.MembersToSave, new MultiSelectList(Model.SelectedMembers, "UserName", "FirstName"), new { id = "multiDropDown", multiple = "multiple" })
+
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CreatedAt, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CreatedAt, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CreatedAt, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.UpdatedBy, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UpdatedBy, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UpdatedBy, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.UpdatedAt, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UpdatedAt, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UpdatedAt, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Submit" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
     <script>
         $(function () {
-            $(".datepicker").datepicker(
-                {
-                    dateFormat:"yy/mm/dd"
-                });
-        });
+            $("#multiDropDown").chosen();
+        })
     </script>
 }
+@*@section scripts{
+    <script>
+        $(function () {
+            $("#multiDropDown").chosen();
+        })
+    </script>
+}*@

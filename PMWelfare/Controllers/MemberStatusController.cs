@@ -48,6 +48,11 @@ namespace PMWelfare.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "MembersStatusID,MemberStatus1,CreatedBy,CreatedAt,TimeStamp,UpdatedBy,UpdatedAt")] MemberStatus memberStatus)
         {
+            memberStatus.CreatedBy = "nicho";
+
+
+
+            memberStatus.CreatedAt = DateTime.Now;
             if (ModelState.IsValid)
             {
                 memberStatus.CreatedBy = "Timo";
