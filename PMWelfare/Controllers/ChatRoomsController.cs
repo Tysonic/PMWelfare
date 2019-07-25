@@ -13,13 +13,34 @@ namespace PMWelfare.Controllers
     public class ChatRoomsController : Controller
     {
         private welfare db = new welfare();
+        CommentRepo repo = new CommentRepo();
 
         // GET: ChatRooms
         public ActionResult Index()
         {
             return View(db.ChatRoom.ToList());
         }
+        public PartialViewResult CommentPartial()
+        {
+            var comments = repo.GetAll();
+            return PartialView("_CommentPartial", comments);
+        }
+        public JsonResult AddNewComment(CommentDTO comment)
+        {
+            try
+            {
+                var model = repo.AddComment(comment);
 
+                return Json(new { error = false, result = model }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception)
+            {
+                //Handle Error here..
+            }
+
+            return Json(new { error = true }, JsonRequestBehavior.AllowGet);
+        }
         // GET: ChatRooms/Details/5
         public ActionResult Details(int? id)
         {
