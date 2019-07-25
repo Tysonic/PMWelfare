@@ -19,7 +19,7 @@ namespace PMWelfare.Controllers
         private welfare db = new welfare();
 
         // GET: Subscriptions
-        public ActionResult Index(int submonth , int subyear)
+        public ActionResult Index()
         {
            //ViewBag.submonth =  System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(
                 
@@ -27,12 +27,23 @@ namespace PMWelfare.Controllers
 
             ViewBag.submonth = db.Subscriptions.Select(s => s.SubMonth).Distinct();
             ViewBag.subyear = db.Subscriptions.Select(x => x.SubYear).Distinct();
-            var subscriptions = db.Subscriptions.Where(s => s.SubMonth ==
-            submonth && s.SubYear == subyear).Include(s => s.Member).ToList();
+            var subscriptions = db.Subscriptions.Include(s => s.Member).ToList();
             Session["students"] = subscriptions.ToList<Subscription>();
             return View(subscriptions.ToList());
         }
+        [HttpPost]
+        public ActionResult Index(int submonth, int subyear)
+        {
+            //ViewBag.submonth =  System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(
 
+            //    );
+
+            ViewBag.submonth = db.Subscriptions.Select(s => s.SubMonth).Distinct();
+            ViewBag.subyear = db.Subscriptions.Select(x => x.SubYear).Distinct();
+            var subscriptions = db.Subscriptions.Where(s=>s.SubMonth==submonth && s.SubYear==subyear).Include(s => s.Member).ToList();
+            Session["students"] = subscriptions.ToList<Subscription>();
+            return View(subscriptions.ToList());
+        }
         // GET: ExportData
         public void ExportToExcel()
         {
@@ -171,7 +182,7 @@ namespace PMWelfare.Controllers
         
         public ActionResult Advances()
         {
-            decimal advance = db.Subscriptions.Where(s => 
+            decimal? advance = db.Subscriptions.Where(s => 
             (s.SubMonth > DateTime.Now.Month && s.SubYear == DateTime.Now.Year)
            || s.SubYear > DateTime.Now.Year).DefaultIfEmpty().Sum(s => s.Amount);
 
@@ -264,7 +275,7 @@ namespace PMWelfare.Controllers
 
                     arrears.Add(new Subscription(jt.UserName, subamount1));
                 }
-
+                
             }
             ViewBag.are = arrears.Sum(x => x.Amount);
 
