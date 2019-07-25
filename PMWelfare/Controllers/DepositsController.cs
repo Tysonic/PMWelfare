@@ -75,7 +75,7 @@ namespace PMWelfare.Controllers
             int year;
             int month;
 
-            if (amount > 0 && amount != null)
+            if (amount > 0 )
             {
                 if (amount <= SubAmount)
                 {
