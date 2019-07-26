@@ -2,6 +2,19 @@
     padding-top: 50px;
     padding-bottom: 20px;
 }
+.breadcrumb > li + li:before {
+    padding: 0 5px;
+    color: #ccc;
+    content: ">>";
+}
+a{
+    text-decoration:none;
+}
+.breadcrumb{
+    margin-left:-120px;
+  
+    background-color:whitesmoke);
+}
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
@@ -79,14 +92,13 @@ select
         margin-top:-1px;
     }
 
-.breadcrumb {
-    background-color: aliceblue;
-}
+
+
      .breadcrumb li > a:hover{
        text-decoration:none;
      }
      .breadcrumb .active >a{
-         color:gold ;
+         color:cadetblue ;
          
      }
 

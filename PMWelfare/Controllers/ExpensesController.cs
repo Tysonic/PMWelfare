@@ -72,12 +72,13 @@ namespace PMWelfare.Controllers
         public ActionResult Create([Bind(Include = "ExpenseId,ExpenseDate,ProductId,Quantity,CreatedBy,CreatedAt,UpdatedBy,UpdatedAt")] Expense expense)
         {
             expense.CreatedAt = DateTime.Now;
-            expense.CreatedBy = "nicho";
+            expense.CreatedBy = "nico";
             if (ModelState.IsValid)
             {
                 db.Expenses.Add(expense);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                ViewBag.SuccessMsg = " New Expense Record Successfully added";
+                //return RedirectToAction("Index");
             }
 
             ViewBag.ProductId = new SelectList(db.SupProducts, "ProductId", "ProductName", expense.ProductId);

@@ -1,10 +1,16 @@
 ﻿@model IEnumerable<PMWelfare.Models.Deposit>
 
 @{
-    ViewBag.Title = "Record of collectios";
+    ViewBag.Title = "Record of collections";
     
 }
-
+<div>
+    <ol class="breadcrumb">
+        <li> @Html.ActionLink("Home", "Index", "Home")</li>
+        <li class="active"> @Html.ActionLink("Deposits", "Index", "Deposits")</li>
+      
+    </ol>
+</div>
 <h2 style="text-align:center">Record of Payments</h2>
 
 <table class="table table-bordered">

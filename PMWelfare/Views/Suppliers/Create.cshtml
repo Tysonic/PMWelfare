@@ -1,9 +1,15 @@
 ﻿@model PMWelfare.Models.Supplier
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Add new Supplier";
 }
-
+<div>
+    <ol class="breadcrumb">
+        <li> @Html.ActionLink("Home", "Index", "Home")</li>
+        <li> @Html.ActionLink("Suppliers", "Index")</li>
+        <li class="active"> @Html.ActionLink("New Supplier", "Create")</li>
+    </ol>
+</div>
 <h2 style="text-align:center">Create A New Supplier</h2>
 
 @using (Html.BeginForm()) 

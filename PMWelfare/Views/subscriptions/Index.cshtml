@@ -1,10 +1,15 @@
 ﻿@model IEnumerable<PMWelfare.Models.Subscription>
 
-@{
-    ViewBag.Title = "Index";
-}
+<head>
+    <title>Subscriptions</title>
+</head>
 
-<h2>Index</h2>
+<div >
+    <ol class="breadcrumb">
+        <li> @Html.ActionLink("Home", "Index","Home")</li>
+        <li class="active"> @Html.ActionLink("Subscriptions", "Index")</li>
+    </ol>
+</div>
 @using (Html.BeginForm("Index","Subscriptions",FormMethod.Post))
 {
     <text>SubMonth</text>@Html.DropDownList("SubMonth", new SelectList(ViewBag.submonth), htmlAttributes: new { @class = "form-control" })
@@ -46,7 +51,7 @@
                     @Html.DisplayFor(modelItem => item.Amount)
                 </td>
                 <td>
-                    @System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(item.SubMonth)
+                    @System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(Convert.ToInt32(item.SubMonth))
 
 
 

@@ -1,9 +1,15 @@
 ﻿@model PMWelfare.Models.Member
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Create New Member";
 }
-
+<div>
+    <ol class="breadcrumb">
+        <li> @Html.ActionLink("Home", "Index", "Home")</li>
+        <li> @Html.ActionLink("Members", "Index", "Members")</li>
+        <li class="active"> @Html.ActionLink("Add Member Info", "Edit", "Members")</li>
+    </ol>
+</div>
 <h2 style="text-align:center">Create A New Member</h2>
 
 @using (Html.BeginForm()) 

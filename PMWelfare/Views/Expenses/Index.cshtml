@@ -1,14 +1,21 @@
 ﻿@model IEnumerable<PMWelfare.Models.Expense>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Expenses";
 }
-
+<div>
+    <ol class="breadcrumb">
+        <li> @Html.ActionLink("Home", "Index", "Home")</li>
+        <li> @Html.ActionLink("Events", "Index", "Celebrations")</li>
+        <li class="active"> @Html.ActionLink("Expense", "Index", "Expenses")</li>
+    </ol>
+</div>
 <h2 style="text-align:center">Record Of Expenditures</h2>
 
 <br />
-<button class="btn btn-info">
-    @Html.ActionLink("Create New Expense", "Create")
+<button class="btn btn-info" onclick="location.href='@Url.Action("Create","Expenses")'">
+    Create New Expense
+   
 </button>
 
 <table class="table table-bordered">

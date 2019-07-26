@@ -1,9 +1,15 @@
 ﻿@model PMWelfare.Models.Expense
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit Expense Record";
 }
-
+<div>
+    <ol class="breadcrumb">
+        <li> @Html.ActionLink("Home", "Index", "Home")</li>
+        <li> @Html.ActionLink("Events", "Index", "Celebrations")</li>
+        <li class="active"> @Html.ActionLink("Edit Expense", "Edit", "Expenses")</li>
+    </ol>
+</div>
 <h2>Edit</h2>
 
 

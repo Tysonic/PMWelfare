@@ -1,9 +1,15 @@
 ﻿@model PMWelfare.Models.MemberStatus
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Details Of Member Status";
 }
-
+<div>
+    <ol class="breadcrumb">
+        <li> @Html.ActionLink("Home", "Index", "Home")</li>
+        <li> @Html.ActionLink("Member Status", "Index", "MemberStatus")</li>
+        <li class="active"> @Html.ActionLink("Details", "Create")</li>
+    </ol>
+</div>
 <h2 style="text-align:center">Details of @Model.MemberStatus1 Status</h2>
 
 <div>

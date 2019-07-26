@@ -33,9 +33,8 @@ namespace PMWelfare.Migrations
                         DOB = c.DateTime(storeType: "date"),
                         MemberStatus = c.Int(),
                         IsAdmin = c.Boolean(nullable: false),
-                        CreatedBy = c.String(nullable: false, maxLength: 40, unicode: false),
+                        CreatedBy = c.String(maxLength: 40, unicode: false),
                         CreatedAt = c.DateTime(),
-                        TimeStamp = c.DateTime(nullable: false),
                         UpdatedBy = c.String(maxLength: 40, unicode: false),
                         UpdatedAt = c.DateTime(),
                     })
@@ -51,9 +50,8 @@ namespace PMWelfare.Migrations
                         UserName = c.String(maxLength: 40, unicode: false),
                         Message = c.String(nullable: false, maxLength: 250, unicode: false),
                         PostedAt = c.DateTime(),
-                        TimeStamp = c.DateTime(nullable: false),
-                        UpdatedBy = c.String(maxLength: 40, unicode: false),
                         ParentId = c.Int(nullable: false),
+                        UpdatedBy = c.String(maxLength: 40, unicode: false),
                         UpdatedAt = c.DateTime(),
                     })
                 .PrimaryKey(t => t.ChatId)
@@ -66,10 +64,9 @@ namespace PMWelfare.Migrations
                     {
                         DepositId = c.Int(nullable: false, identity: true),
                         UserName = c.String(maxLength: 40, unicode: false),
-                        Amount = c.Decimal(nullable: false, storeType: "money"),
-                        CreatedBy = c.String(nullable: false, maxLength: 40, unicode: false),
+                        Amount = c.Decimal(storeType: "money"),
+                        CreatedBy = c.String(maxLength: 40, unicode: false),
                         CreatedAt = c.DateTime(),
-                        TimeStamp = c.DateTime(nullable: false),
                         UpdatedBy = c.String(maxLength: 40, unicode: false),
                         UpdatedAt = c.DateTime(),
                     })
@@ -83,13 +80,13 @@ namespace PMWelfare.Migrations
                     {
                         MembersStatusID = c.Int(nullable: false, identity: true),
                         MemberStatus = c.String(nullable: false, maxLength: 20, unicode: false),
-                        CreatedBy = c.String(nullable: false, maxLength: 40, unicode: false),
+                        CreatedBy = c.String(maxLength: 40, unicode: false),
                         CreatedAt = c.DateTime(),
-                        TimeStamp = c.DateTime(nullable: false),
                         UpdatedBy = c.String(maxLength: 40, unicode: false),
                         UpdatedAt = c.DateTime(),
                     })
-                .PrimaryKey(t => t.MembersStatusID);
+                .PrimaryKey(t => t.MembersStatusID)
+                .Index(t => t.MemberStatus, unique: true, name: "IX_X_Category");
             
             CreateTable(
                 "dbo.Subscriptions",
@@ -97,7 +94,7 @@ namespace PMWelfare.Migrations
                     {
                         SubId = c.Int(nullable: false, identity: true),
                         UserName = c.String(maxLength: 40, unicode: false),
-                        Amount = c.Decimal(nullable: false, storeType: "money"),
+                        Amount = c.Decimal(storeType: "money"),
                         SubMonth = c.Int(nullable: false),
                         SubYear = c.Int(nullable: false),
                     })
@@ -126,10 +123,9 @@ namespace PMWelfare.Migrations
                         EventId = c.Int(nullable: false, identity: true),
                         EventName = c.String(nullable: false, maxLength: 40),
                         EventTypeId = c.Int(nullable: false),
-                        EventDate = c.DateTime(nullable: false),
-                        CreatedBy = c.String(nullable: false, maxLength: 40, unicode: false),
+                        EventDate = c.DateTime(),
+                        CreatedBy = c.String(maxLength: 40, unicode: false),
                         CreatedAt = c.DateTime(),
-                        TimeStamp = c.DateTime(nullable: false),
                         UpdatedBy = c.String(maxLength: 40, unicode: false),
                         UpdatedAt = c.DateTime(),
                     })
@@ -143,9 +139,8 @@ namespace PMWelfare.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Type = c.String(maxLength: 40),
-                        CreatedBy = c.String(nullable: false, maxLength: 40),
+                        CreatedBy = c.String(maxLength: 40),
                         CreatedAt = c.DateTime(),
-                        TimeStamp = c.DateTime(nullable: false),
                         UpdatedBy = c.String(maxLength: 40),
                         UpdatedAt = c.DateTime(),
                     })
@@ -157,12 +152,11 @@ namespace PMWelfare.Migrations
                     {
                         ProductId = c.Int(nullable: false, identity: true),
                         ProductName = c.String(nullable: false, maxLength: 40, unicode: false),
-                        UnitPrice = c.Decimal(nullable: false, storeType: "money"),
+                        UnitPrice = c.Decimal(storeType: "money"),
                         EventId = c.Int(),
                         SupId = c.Int(),
-                        CreatedBy = c.String(nullable: false, maxLength: 40, unicode: false),
+                        CreatedBy = c.String(maxLength: 40, unicode: false),
                         CreatedAt = c.DateTime(),
-                        TimeStamp = c.DateTime(nullable: false),
                         UpdatedBy = c.String(maxLength: 40, unicode: false),
                         UpdatedAt = c.DateTime(),
                     })
@@ -179,10 +173,9 @@ namespace PMWelfare.Migrations
                         ExpenseId = c.Int(nullable: false, identity: true),
                         ExpenseDate = c.DateTime(nullable: false, storeType: "date"),
                         ProductId = c.Int(),
-                        Quantity = c.Int(nullable: false),
-                        CreatedBy = c.String(nullable: false, maxLength: 40, unicode: false),
+                        Quantity = c.Int(),
+                        CreatedBy = c.String(maxLength: 40, unicode: false),
                         CreatedAt = c.DateTime(),
-                        TimeStamp = c.DateTime(nullable: false),
                         UpdatedBy = c.String(maxLength: 40, unicode: false),
                         UpdatedAt = c.DateTime(),
                     })
@@ -198,9 +191,8 @@ namespace PMWelfare.Migrations
                         SupTel = c.String(maxLength: 10, fixedLength: true),
                         SupName = c.String(nullable: false, maxLength: 40, unicode: false),
                         Email = c.String(nullable: false, maxLength: 40, unicode: false),
-                        CreatedBy = c.String(nullable: false, maxLength: 40, unicode: false),
+                        CreatedBy = c.String(maxLength: 40, unicode: false),
                         CreatedAt = c.DateTime(),
-                        TimeStamp = c.DateTime(nullable: false),
                         UpdatedBy = c.String(maxLength: 40, unicode: false),
                         UpdatedAt = c.DateTime(),
                     })
@@ -211,7 +203,7 @@ namespace PMWelfare.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        EndDate = c.DateTime(nullable: false),
+                        EndDate = c.DateTime(),
                         ClosingBalance = c.Decimal(nullable: false, storeType: "money"),
                     })
                 .PrimaryKey(t => t.Id);
@@ -250,6 +242,7 @@ namespace PMWelfare.Migrations
             DropIndex("dbo.Celebrants", new[] { "EventId" });
             DropIndex("dbo.Celebrants", new[] { "UserName" });
             DropIndex("dbo.Subscriptions", new[] { "UserName" });
+            DropIndex("dbo.MemberStatus", "IX_X_Category");
             DropIndex("dbo.Deposits", new[] { "UserName" });
             DropIndex("dbo.ChatRooms", new[] { "UserName" });
             DropIndex("dbo.Members", new[] { "MemberStatus" });

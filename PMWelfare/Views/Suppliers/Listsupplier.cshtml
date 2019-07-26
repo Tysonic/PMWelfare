@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<PMWelfare.Models.Supplier.supplierlistViewModel>
 
 @{
-    Layout = null ;
+    Layout = null;
 }
 
 <head>
-    <title>Arrears</title>
+    <title>Supplier List</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -18,6 +18,14 @@
     </style>
 
 </head>
+
+<div>
+    <ol class="breadcrumb">
+        <li> @Html.ActionLink("Home", "Index", "Home")</li>
+        <li> @Html.ActionLink("Suppliers", "Index")</li>
+        <li> @Html.ActionLink("Suppliers List", "Listsupplier")</li>
+    </ol>
+</div>
 
 <h2 style="text-align:center;">List of suppliers</h2>
 

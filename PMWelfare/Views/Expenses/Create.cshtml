@@ -1,23 +1,29 @@
 ﻿@model PMWelfare.Models.Expense
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Create Expense Record";
 }
-
+<div>
+    <ol class="breadcrumb">
+        <li> @Html.ActionLink("Home", "Index", "Home")</li>
+        <li> @Html.ActionLink("Events", "Index", "Celebrations")</li>
+        <li class="active"> @Html.ActionLink("Add An  Expense ", "Create", "Expenses")</li>
+    </ol>
+</div>
 <h2 style="text-align:center">Create An Expense Record</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.ExpenseDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ExpenseDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.ExpenseDate, new { htmlAttributes = new { @class = "form-control  datepicker" } })
                 @Html.ValidationMessageFor(model => model.ExpenseDate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -46,8 +52,28 @@
         </div>
     </div>
 }
+@{
+    var message = ViewBag.SuccessMsg;
+}
 
-
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
 @section Scripts {
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script type="text/javascript">
+    var message = '@message';
+    if(message){
+        alert(message);
+         window.location.href = '@Url.Action("Index", "Deposits")';
+    }
+    </script>
+
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
     @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(function () {
+            $(".datepicker").datepicker({
+                dateFormat: "yy-mm-dd"
+            });
+        });
+    </script>
 }

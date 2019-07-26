@@ -3,7 +3,13 @@
 @{
     ViewBag.Title = "Edit";
 }
-
+<div>
+    <ol class="breadcrumb">
+        <li> @Html.ActionLink("Home", "Index", "Home")</li>
+        <li> @Html.ActionLink("Suppliers", "Index")</li>
+        <li class="active"> @Html.ActionLink("Edit Supplier", "Edit")</li>
+    </ol>
+</div>
 <h2 style="text-align:center">Edit The Record For  @Model.SupName </h2>
 
 @using (Html.BeginForm())

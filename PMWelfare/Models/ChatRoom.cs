@@ -22,6 +22,9 @@ namespace PMWelfare.Models
         [Display(Name = "Posted at")]
         public DateTime? PostedAt { get; set; }
 
+        public int ParentId { get; set; }
+
+
         [StringLength(40)]
         [Display(Name = "Updated by")]
         public string UpdatedBy { get; set; }

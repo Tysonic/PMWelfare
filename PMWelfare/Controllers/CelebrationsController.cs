@@ -61,12 +61,13 @@ namespace PMWelfare.Controllers
             )
         {
             celebration.CreatedAt = DateTime.Now;
-            celebration.CreatedBy = "nicho";
+            celebration.CreatedBy = "nico";
 
             if (ModelState.IsValid)
             {
                 db.Celebrations.Add(celebration);
                 db.SaveChanges();
+                
                 emp.members = emp.MembersToSave.ToList();
                 foreach (var m in emp.members)
                 {
@@ -78,8 +79,9 @@ namespace PMWelfare.Controllers
                         db.SaveChanges();
                     }
                 }
+
                 return RedirectToAction("index", "Celebrations",
-                    new { area = "" });
+                   new { area = "" });
             }
 
             

@@ -3,7 +3,13 @@
 @{
     ViewBag.Title = "Details of ";
 }
-
+<div>
+    <ol class="breadcrumb">
+        <li> @Html.ActionLink("Home", "Index", "Home")</li>
+        <li> @Html.ActionLink("Suppliers", "Index")</li>
+        <li class="active"> @Html.ActionLink("Supplier's Details", "Details")</li>
+    </ol>
+</div>
 <h2 style="text-align:center">Details Of @Model.SupName   </h2>
 
 <div>

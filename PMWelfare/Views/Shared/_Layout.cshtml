@@ -7,7 +7,7 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
+    <link href="~/Content/Chosen/chosen.min.css" rel="stylesheet" />
 </head>
 <body>
     <div class= "navbar navbar-fixed-top">
@@ -20,7 +20,7 @@
                 </button>
             </div>
             <div class="navbar-collapse collapse">
-             <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
 
                     <li class="dropdown">
@@ -52,9 +52,9 @@
                                 </ul>
 
                             </li>
-                            <li >
+                            <li>
                                 <a data-toggle="dropdown" href="#">  MemberStatus  <span class=""></span> </a>
-                                <ul class="dropdown-menu"id="next">
+                                <ul class="dropdown-menu" id="next">
                                     <li>@Html.ActionLink("Add New MemberStatus", "Create", "MemberStatus")</li>
                                     <li>@Html.ActionLink("List of MemberStatuses", "Index", "MemberStatus")</li>
                                 </ul>
@@ -79,12 +79,13 @@
                         </ul>
                     </li>
                     <!--dropdown Menu End-->
-                    
-                   <li>@Html.ActionLink("Subscriptions", "Index", "Subscriptions")</li>
-      
+
+                    <li>@Html.ActionLink("Subscriptions", "Index", "Subscriptions")</li>
+
                     <li class='@Html.IsActive("Deposits", "Create")'>@Html.ActionLink("Deposits", "Create", "Deposits")</li>
 
                     <li class='@Html.IsActive("MonthlySummary", "Index")'>@Html.ActionLink("MonthlySummary", "index", "MonthlySummary")</li>
+                    <li class='@Html.IsActive("Upload", "ImportExcel")'>@Html.ActionLink("File Upload", "ImportExcel", "Upload")</li>
 
 
 
@@ -109,6 +110,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/chosen.jquery.min.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
