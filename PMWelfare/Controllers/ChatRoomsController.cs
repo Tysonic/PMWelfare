@@ -41,7 +41,7 @@ namespace PMWelfare.Controllers
 
             return Json(new { error = true }, JsonRequestBehavior.AllowGet);
         }
-        // GET: ChatRooms/Details/5
+        //GET: ChatRooms/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)

@@ -12,10 +12,10 @@
 </div>
 <h2 style="text-align:center">Create A New Member</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -62,7 +62,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.MemberStatus, "MemberStatus", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("MemberStatus", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("MemberStatus", null, htmlAttributes: new { @class = "form-control",id= "DropDown"})
                 @Html.ValidationMessageFor(model => model.MemberStatus, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -88,3 +88,11 @@
 }
 
 
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(function () {
+            $("#DropDown").chosen();
+        })
+    </script>
+}

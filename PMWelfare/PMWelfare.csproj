@@ -47,8 +47,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EPPlus, Version=4.1.1.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
-      <HintPath>..\packages\EPPlus.4.1.1\lib\net40\EPPlus.dll</HintPath>
+    <Reference Include="AjaxControlToolkit, Version=19.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <HintPath>..\packages\AjaxControlToolkit.19.1.0\lib\net40\AjaxControlToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus, Version=4.5.3.2, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.5.3.2\lib\net40\EPPlus.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
@@ -84,11 +87,13 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -171,6 +176,11 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Connected Services\LoginService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CelebrantsController.cs" />
     <Compile Include="Controllers\CelebrationsController.cs" />
@@ -186,13 +196,12 @@
     <Compile Include="Controllers\SubscriptionsController.cs" />
     <Compile Include="Controllers\SuppliersController.cs" />
     <Compile Include="Controllers\SupProductsController.cs" />
-    <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201907181713424_Welfare.cs" />
-    <Compile Include="Migrations\201907181713424_Welfare.designer.cs">
-      <DependentUpon>201907181713424_Welfare.cs</DependentUpon>
+    <Compile Include="Migrations\201907180652348_welfare.cs" />
+    <Compile Include="Migrations\201907180652348_welfare.Designer.cs">
+      <DependentUpon>201907180652348_welfare.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -211,6 +220,7 @@
     <Compile Include="Models\MemberStatus.cs" />
     <Compile Include="Models\ModelBinder.cs" />
     <Compile Include="Models\MonthlySummary.cs" />
+    <Compile Include="Models\pmw.cs" />
     <Compile Include="Models\Subscription.cs" />
     <Compile Include="Models\Supplier.cs" />
     <Compile Include="Models\SupProducts.cs" />
@@ -219,9 +229,32 @@
     <Compile Include="Models\Welfare.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utilities\ADTesting.cs" />
     <Compile Include="Utilities\Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Connected Services\LoginService\PMWelfare.LoginService.AdEntry.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\LoginService\PMWelfare.LoginService.AuthenticateDomainUserResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\LoginService\PMWelfare.LoginService.AuthenticateUserResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\LoginService\PMWelfare.LoginService.ChangeDomainPasswordResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\LoginService\PMWelfare.LoginService.GetUserResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\LoginService\URALoginService.disco" />
+    <None Include="Connected Services\LoginService\configuration91.svcinfo" />
+    <None Include="Connected Services\LoginService\configuration.svcinfo" />
+    <None Include="Connected Services\LoginService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -296,15 +329,68 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="libman.json" />
+    <None Include="Connected Services\LoginService\URALoginService.wsdl" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
-    <Content Include="Scripts\handlebars.amd.js" />
-    <Content Include="Scripts\handlebars.amd.min.js" />
-    <Content Include="Scripts\handlebars.js" />
-    <Content Include="Scripts\handlebars.min.js" />
-    <Content Include="Scripts\handlebars.runtime.amd.js" />
-    <Content Include="Scripts\handlebars.runtime.amd.min.js" />
-    <Content Include="Scripts\handlebars.runtime.js" />
-    <Content Include="Scripts\handlebars.runtime.min.js" />
+    <Content Include="Scripts\i18n\af.js" />
+    <Content Include="Scripts\i18n\ar.js" />
+    <Content Include="Scripts\i18n\az.js" />
+    <Content Include="Scripts\i18n\bg.js" />
+    <Content Include="Scripts\i18n\bn.js" />
+    <Content Include="Scripts\i18n\bs.js" />
+    <Content Include="Scripts\i18n\ca.js" />
+    <Content Include="Scripts\i18n\cs.js" />
+    <Content Include="Scripts\i18n\da.js" />
+    <Content Include="Scripts\i18n\de.js" />
+    <Content Include="Scripts\i18n\dsb.js" />
+    <Content Include="Scripts\i18n\el.js" />
+    <Content Include="Scripts\i18n\en.js" />
+    <Content Include="Scripts\i18n\es.js" />
+    <Content Include="Scripts\i18n\et.js" />
+    <Content Include="Scripts\i18n\eu.js" />
+    <Content Include="Scripts\i18n\fa.js" />
+    <Content Include="Scripts\i18n\fi.js" />
+    <Content Include="Scripts\i18n\fr.js" />
+    <Content Include="Scripts\i18n\gl.js" />
+    <Content Include="Scripts\i18n\he.js" />
+    <Content Include="Scripts\i18n\hi.js" />
+    <Content Include="Scripts\i18n\hr.js" />
+    <Content Include="Scripts\i18n\hsb.js" />
+    <Content Include="Scripts\i18n\hu.js" />
+    <Content Include="Scripts\i18n\hy.js" />
+    <Content Include="Scripts\i18n\id.js" />
+    <Content Include="Scripts\i18n\is.js" />
+    <Content Include="Scripts\i18n\it.js" />
+    <Content Include="Scripts\i18n\ja.js" />
+    <Content Include="Scripts\i18n\ka.js" />
+    <Content Include="Scripts\i18n\km.js" />
+    <Content Include="Scripts\i18n\ko.js" />
+    <Content Include="Scripts\i18n\lt.js" />
+    <Content Include="Scripts\i18n\lv.js" />
+    <Content Include="Scripts\i18n\mk.js" />
+    <Content Include="Scripts\i18n\ms.js" />
+    <Content Include="Scripts\i18n\nb.js" />
+    <Content Include="Scripts\i18n\ne.js" />
+    <Content Include="Scripts\i18n\nl.js" />
+    <Content Include="Scripts\i18n\pl.js" />
+    <Content Include="Scripts\i18n\ps.js" />
+    <Content Include="Scripts\i18n\pt-BR.js" />
+    <Content Include="Scripts\i18n\pt.js" />
+    <Content Include="Scripts\i18n\ro.js" />
+    <Content Include="Scripts\i18n\ru.js" />
+    <Content Include="Scripts\i18n\sk.js" />
+    <Content Include="Scripts\i18n\sl.js" />
+    <Content Include="Scripts\i18n\sq.js" />
+    <Content Include="Scripts\i18n\sr-Cyrl.js" />
+    <Content Include="Scripts\i18n\sr.js" />
+    <Content Include="Scripts\i18n\sv.js" />
+    <Content Include="Scripts\i18n\th.js" />
+    <Content Include="Scripts\i18n\tk.js" />
+    <Content Include="Scripts\i18n\tr.js" />
+    <Content Include="Scripts\i18n\uk.js" />
+    <Content Include="Scripts\i18n\vi.js" />
+    <Content Include="Scripts\i18n\zh-CN.js" />
+    <Content Include="Scripts\i18n\zh-TW.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -331,6 +417,9 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Views\Images\ura1.jpg" />
+    <Content Include="Views\Images\ura2.png" />
+    <Content Include="Views\MonthlySummary\ura1.jpg" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -367,26 +456,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\EventTypes\Create.cshtml" />
-    <Content Include="Views\EventTypes\Delete.cshtml" />
-    <Content Include="Views\EventTypes\Details.cshtml" />
-    <Content Include="Views\EventTypes\Edit.cshtml" />
-    <Content Include="Views\EventTypes\Index.cshtml" />
-    <Content Include="Views\Celebrations\Create.cshtml" />
-    <Content Include="Views\Celebrations\Delete.cshtml" />
-    <Content Include="Views\Celebrations\Details.cshtml" />
-    <Content Include="Views\Celebrations\Edit.cshtml" />
-    <Content Include="Views\ChatRooms\Create.cshtml" />
-    <Content Include="Views\ChatRooms\Delete.cshtml" />
-    <Content Include="Views\ChatRooms\Details.cshtml" />
-    <Content Include="Views\ChatRooms\Edit.cshtml" />
-    <Content Include="Views\ChatRooms\Index.cshtml" />
-    <Content Include="Views\Expenses\Create.cshtml" />
-    <Content Include="Views\Expenses\Delete.cshtml" />
-    <Content Include="Views\Expenses\Details.cshtml" />
-    <Content Include="Views\Expenses\Edit.cshtml" />
-    <Content Include="Views\Expenses\Index.cshtml" />
-    <Content Include="Views\Subscriptions\Index.cshtml" />
+    <Content Include="Views\Statement\Index.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper-utils.min.js.map" />
@@ -396,15 +466,40 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\MonthlySummary\Index.cshtml" />
-    <Content Include="Views\Deposits\TotalCollection.cshtml" />
+    <Content Include="Views\EventTypes\Create.cshtml" />
+    <Content Include="Views\EventTypes\Delete.cshtml" />
+    <Content Include="Views\EventTypes\Details.cshtml" />
+    <Content Include="Views\EventTypes\Edit.cshtml" />
+    <Content Include="Views\EventTypes\Index.cshtml" />
+    <Content Include="Views\Celebrations\Create.cshtml" />
+    <Content Include="Views\Celebrations\Delete.cshtml" />
+    <Content Include="Views\Celebrations\Details.cshtml" />
+    <Content Include="Views\Celebrations\Edit.cshtml" />
+    <Content Include="Views\MemberStatus\Create.cshtml" />
+    <Content Include="Views\MemberStatus\Delete.cshtml" />
+    <Content Include="Views\MemberStatus\Details.cshtml" />
+    <Content Include="Views\MemberStatus\Edit.cshtml" />
+    <Content Include="Views\MemberStatus\Index.cshtml" />
+    <Content Include="Views\ChatRooms\Create.cshtml" />
+    <Content Include="Views\ChatRooms\Delete.cshtml" />
+    <Content Include="Views\ChatRooms\Details.cshtml" />
+    <Content Include="Views\ChatRooms\Edit.cshtml" />
+    <Content Include="Views\ChatRooms\Index.cshtml" />
+    <Content Include="Views\Deposits\Create.cshtml" />
+    <Content Include="Views\Deposits\Delete.cshtml" />
+    <Content Include="Views\Deposits\Details.cshtml" />
+    <Content Include="Views\Deposits\Edit.cshtml" />
+    <Content Include="Views\Deposits\Index.cshtml" />
+    <Content Include="Views\Expenses\Create.cshtml" />
+    <Content Include="Views\Expenses\Delete.cshtml" />
+    <Content Include="Views\Expenses\Details.cshtml" />
+    <Content Include="Views\Expenses\Edit.cshtml" />
+    <Content Include="Views\Expenses\Index.cshtml" />
     <Content Include="Views\Members\Create.cshtml" />
-    <Content Include="Views\Members\Delete.cshtml" />
-    <Content Include="Views\Members\Details.cshtml" />
-    <Content Include="Views\Members\Edit.cshtml" />
-    <Content Include="Views\Members\Index.cshtml" />
-    <Content Include="Views\Expenses\TotalExpense.cshtml" />
-    <Content Include="Views\Deposits\CashAtHand.cshtml" />
+    <Content Include="Views\Suppliers\Listsupplier.cshtml" />
+    <Content Include="Views\Subscriptions\Index.cshtml" />
+    <Content Include="Views\Subscriptions\Arrears.cshtml" />
+    <Content Include="Views\Subscriptions\AdvanceList.cshtml" />
     <Content Include="Views\Subscriptions\Advances.cshtml" />
     <Content Include="Views\Deposits\Create.cshtml" />
     <Content Include="Views\Deposits\Delete.cshtml" />
@@ -415,6 +510,7 @@
     <Content Include="Views\Celebrations\TotaleventsOfPreviousMonth.cshtml" />
     <Content Include="Views\Celebrants\Index.cshtml" />
     <Content Include="Views\Celebrants\Details.cshtml" />
+    <Content Include="Views\Celebrants\Create.cshtml" />
     <Content Include="Views\Celebrants\Edit.cshtml" />
     <Content Include="Views\Celebrants\Delete.cshtml" />
     <Content Include="Views\SupProducts\Create.cshtml" />
@@ -422,14 +518,19 @@
     <Content Include="Views\SupProducts\Details.cshtml" />
     <Content Include="Views\SupProducts\Edit.cshtml" />
     <Content Include="Views\SupProducts\Index.cshtml" />
-    <Content Include="Views\Suppliers\Create.cshtml" />
-    <Content Include="Views\Suppliers\Delete.cshtml" />
-    <Content Include="Views\Suppliers\Details.cshtml" />
-    <Content Include="Views\Suppliers\Edit.cshtml" />
-    <Content Include="Views\Suppliers\Index.cshtml" />
+    <Content Include="Views\Expenses\TotalExpense.cshtml" />
+    <Content Include="Views\MonthlySummary\Index.cshtml" />
+    <Content Include="Views\Celebrants\Create.cshtml" />
+    <Content Include="Views\Celebrants\Delete.cshtml" />
+    <Content Include="Views\Celebrants\Details.cshtml" />
+    <Content Include="Views\Celebrants\Edit.cshtml" />
+    <Content Include="Views\Celebrants\Index.cshtml" />
+    <Content Include="Views\Deposits\CashAtHand.cshtml" />
+    <Content Include="Views\Deposits\TotalCollection.cshtml" />
+    <Content Include="Views\Expenses\CurrentExpenses.cshtml" />
     <Content Include="Views\Expenses\PreviousMonthExpense.cshtml" />
     <Content Include="Views\Celebrations\Index.cshtml" />
-    <Content Include="Views\Celebrations\EventsOfPreviousMonth.cshtml" />
+    <Content Include="Views\Celebrations\EventsOfProviousMonth.cshtml" />
     <Content Include="Views\Celebrations\UpComingEvents.cshtml" />
     <Content Include="Views\MonthlySummary\Closing.cshtml" />
     <Content Include="Views\Subscriptions\Arrears.cshtml" />
@@ -446,6 +547,13 @@
     <Content Include="Views\Subscriptions\ExportToExcel.cshtml" />
     <Content Include="Views\Upload\ImportExcel.cshtml" />
     <Content Include="Views\Upload\Index.cshtml" />
+    <Content Include="Views\Members\Details.cshtml" />
+    <Content Include="Views\Members\Edit.cshtml" />
+    <Content Include="Views\Members\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="cl\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -457,7 +565,15 @@
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\LoginService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201907181713424_Welfare.resx">
+      <DependentUpon>201907181713424_Welfare.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201907181713424_Welfare.resx">

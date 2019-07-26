@@ -19,9 +19,7 @@
 
 @using (Html.BeginForm("ExportToExcel", "Subscriptions", FormMethod.Post))
 {
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
+
     <table class="table">
         <tr>
             <th>
@@ -51,10 +49,7 @@
                     @Html.DisplayFor(modelItem => item.Amount)
                 </td>
                 <td>
-                    @System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(Convert.ToInt32(item.SubMonth))
-
-
-
+                    @System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(item.SubMonth)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.SubYear)

@@ -18,7 +18,7 @@ namespace PMWelfare.Migrations
         
         string IMigrationMetadata.Source
         {
-            get { return null; }
+            get { return Resources.GetString("Source"); }
         }
         
         string IMigrationMetadata.Target
