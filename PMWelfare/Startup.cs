@@ -1,7 +1,5 @@
-﻿using Microsoft.Owin;
-using Owin;
+﻿using Owin;
 
-[assembly: OwinStartupAttribute(typeof(PMWelfare.Startup))]
 namespace PMWelfare
 {
     public partial class Startup

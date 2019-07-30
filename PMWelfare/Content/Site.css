@@ -9,171 +9,34 @@
     padding-right: 15px;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
-}
-
 /* Set width on the form input elements since they're 100% wide by default */
 input,
-select
- {
+select,
+textarea {
     max-width: 280px;
 }
-.navbar-fixed-top {
-    top: 0;
-    border-width: 0 0 1px;
-    background-color: #0f88bd;
-}
-    .navbar-fixed-top .navbar-nav > li > a {
-        color: #ddd;
-    }
-        .navbar-fixed-top .navbar-nav > li > a:hover,
-        .navbar-fixed-top .navbar-nav > li > a:focus {
-            color: #ff2;
-            background-color: transparent;
-        }
-        .navbar-fixed-top .navbar-nav > .active > a,
-        .navbar-fixed-top .navbar-nav > .active > a:hover,
-        .navbar-fixed-top .navbar-nav > .active > a:focus{
-            background-color:white;
-            color:gold;
-             
-        }
-        .navbar-nav ul li a:hover{
-            background-color:Highlight;
-            color:whitesmoke;
-            
-        }
 
-    
-/*.navbar-nav ul ul {
+/* styles for validation helpers */
+.field-validation-error {
+    color: #b94a48;
+}
+
+.field-validation-valid {
     display: none;
-    position: absolute;
-    
-    text-decoration: none;
-    margin-left: 160px;
-    top: 0;
-    padding-left: 30px;
-}
-*/
-.navbar-nav ul {
-    display:none;
-
-}
-.navbar-nav ul li:hover > ul{
-    display:block;
-}
-#next{
-    margin-top:30px;
-}
-    .navbar-nav ul ul {
-        position: absolute;
-        margin-left: 157px;
-        text-decoration: none;
-        list-style: none;
-        top: 0;
-        background-color: white;
-        margin-top:-1px;
-    }
-
-.breadcrumb {
-    background-color: aliceblue;
-}
-     .breadcrumb li > a:hover{
-       text-decoration:none;
-     }
-     .breadcrumb .active >a{
-         color:gold ;
-         
-     }
-
-.page-title {
-    margin-bottom: 20px;
 }
 
-textarea {
-    border-radius: 0 !important;
+input.input-validation-error {
+    border: 1px solid #b94a48;
 }
 
-.panel-body {
-    padding: 0 !important;
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
 }
 
-.comment-action {
-    padding: 0 !important;
-    background: #f6f8f9 !important;
-    clear: both;
-    min-height: 35px;
+.validation-summary-errors {
+    color: #b94a48;
 }
 
-.submit-comment {
-    background: #606d75;
-    width: 130px;
-    float: right;
-    min-height: 35px;
-    text-align: center;
-}
-
-    .submit-comment a {
-        color: #fff !important;
-        display: block;
-        line-height: 35px;
-        text-decoration: none;
-    }
-
-ul.comments {
-    margin: 0;
-    list-style-type: none;
-    padding: 0;
-    display: block;
-}
-
-.comments .comment .avatar {
-    position: absolute;
-    top: 8px;
-    left: 10px;
-}
-
-.comments .comment {
-    display: block;
-    position: relative;
-    padding-left: 92px;
-}
-
-    .comments .comment .comment-body header {
-        display: block;
-        margin-bottom: 8px;
-    }
-
-        .comments .comment .comment-body header .pubdate {
-            color: #777;
-            font-size: .9em;
-        }
-
-        .comments .comment .comment-body header .userlink {
-            font-weight: bold;
-            font-size: 1.1em;
-        }
-
-
-    .comments .comment .comment-body {
-        padding: 0px 3px;
-        padding-bottom: 12px;
-        padding-top: 8px;
-    }
-
-
-footer .reply-link {
-    float: right;
-    color: #777;
-    font-size: 1em;
-    text-decoration: none;
-}
-
-.comments .comment .replies {
-    margin-top: 2px;
-    margin-bottom: 3px;
+.validation-summary-valid {
+    display: none;
 }

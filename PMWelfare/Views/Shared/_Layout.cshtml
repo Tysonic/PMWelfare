@@ -7,10 +7,11 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/css1/jquery.dataTables.css" rel="stylesheet" />
     <link href="~/Content/Chosen/chosen.min.css" rel="stylesheet" />
 </head>
 <body>
-    <div class= "navbar navbar-fixed-top">
+    <div class="navbar navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -20,7 +21,7 @@
                 </button>
             </div>
             <div class="navbar-collapse collapse">
-             <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
 
                     <li class="dropdown">
@@ -48,13 +49,13 @@
                                 <a data-toggle="dropdown" href="#">  Member  <span class=""></span> </a>
                                 <ul class="dropdown-menu">
                                     <li>@Html.ActionLink("Add New Member", "Create", "Members")</li>
-                                    <li>@Html.ActionLink("List of Members", "Index", "Members")</li>
+                                    <li>@Html.ActionLink("List of Members", "ShowGrid", "Members")</li>
                                 </ul>
 
                             </li>
-                            <li >
+                            <li>
                                 <a data-toggle="dropdown" href="#">  MemberStatus  <span class=""></span> </a>
-                                <ul class="dropdown-menu"id="next">
+                                <ul class="dropdown-menu" id="next">
                                     <li>@Html.ActionLink("Add New MemberStatus", "Create", "MemberStatus")</li>
                                     <li>@Html.ActionLink("List of MemberStatuses", "Index", "MemberStatus")</li>
                                 </ul>
@@ -79,28 +80,42 @@
                         </ul>
                     </li>
                     <!--dropdown Menu End-->
-                    
-                   <li>@Html.ActionLink("Subscriptions", "Index", "Subscriptions")</li>
-      
+
+                    <li>@Html.ActionLink("Subscriptions", "Index", "Subscriptions")</li>
+
                     <li class='@Html.IsActive("Deposits", "Create")'>@Html.ActionLink("Deposits", "Create", "Deposits")</li>
 
                     <li class='@Html.IsActive("MonthlySummary", "Index")'>@Html.ActionLink("MonthlySummary", "index", "MonthlySummary")</li>
+                    <li class='@Html.IsActive("Upload", "ImportExcel")'>@Html.ActionLink("File Upload", "ImportExcel", "Upload")</li>
 
 
 
 
 
                 </ul>
-                @Html.Partial("_LoginPartial")
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+
+                        @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <li>@Html.ActionLink("RolesAdmin", "Index", "RolesAdmin")</li>
+                            <li>@Html.ActionLink("UsersAdmin", "Index", "UsersAdmin")</li>
+                        }
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>
             </div>
         </div>
     </div>
-   
+
     <div class="container body-content">
         @RenderBody()
         <hr />
 
-       
+
         <footer>
 
             <p>&copy; @DateTime.Now.Year - URA PMW_welfare</p>
@@ -109,7 +124,9 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+
     <script src="~/Scripts/chosen.jquery.min.js"></script>
     @RenderSection("scripts", required: false)
+    <script src="~/Scripts/js/jquery.dataTables.js"></script>
 </body>
 </html>
