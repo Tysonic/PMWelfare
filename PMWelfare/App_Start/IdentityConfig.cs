@@ -142,8 +142,9 @@ namespace PMWelfare.Models
 
     public class ApplicationSignInManager : SignInManager<ApplicationUser, string>
     {
-        public ApplicationSignInManager(ApplicationUserManager userManager, IAuthenticationManager authenticationManager) : 
-            base(userManager, authenticationManager) { }
+        public ApplicationSignInManager(ApplicationUserManager userManager, IAuthenticationManager authenticationManager) :
+            base(userManager, authenticationManager)
+        { }
 
         public override Task<ClaimsIdentity> CreateUserIdentityAsync(ApplicationUser user)
         {
@@ -153,6 +154,20 @@ namespace PMWelfare.Models
         public static ApplicationSignInManager Create(IdentityFactoryOptions<ApplicationSignInManager> options, IOwinContext context)
         {
             return new ApplicationSignInManager(context.GetUserManager<ApplicationUserManager>(), context.Authentication);
+        }
+
+        public SignInStatus PasswordSignIn(string username, string password)
+        {
+            LoginService.UraLoginServiceSoapClient _client = new LoginService.UraLoginServiceSoapClient();
+            string response = _client.AuthenticateDomainUser(username, password, "ura");
+
+            if(response == "SUCCESS")
+            {
+                return SignInStatus.Success;
+            } else
+            {
+                return SignInStatus.Failure;
+            }
         }
     }
 }

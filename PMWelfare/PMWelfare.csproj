@@ -15,7 +15,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PMWelfare</RootNamespace>
     <AssemblyName>PMWelfare</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
@@ -27,6 +27,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -90,6 +91,7 @@
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -98,8 +100,7 @@
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
     </Reference>
@@ -118,9 +119,7 @@
     <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
@@ -138,6 +137,7 @@
     <Reference Include="System.Web.Optimization">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -289,6 +289,8 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="Properties\PublishProfiles\Folder.pubxml" />
+    <None Include="Properties\PublishProfiles\Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\i18n\af.js" />
     <Content Include="Scripts\i18n\ar.js" />
@@ -373,7 +375,6 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
-    <Content Include="Views\MonthlySummary\ura1.jpg" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -410,7 +411,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Statement\Index.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper-utils.min.js.map" />
@@ -462,11 +462,6 @@
     <Content Include="Views\Deposits\Index.cshtml" />
     <Content Include="Views\Subscriptions\AdvanceList.cshtml" />
     <Content Include="Views\Celebrations\TotaleventsOfPreviousMonth.cshtml" />
-    <Content Include="Views\Celebrants\Index.cshtml" />
-    <Content Include="Views\Celebrants\Details.cshtml" />
-    <Content Include="Views\Celebrants\Create.cshtml" />
-    <Content Include="Views\Celebrants\Edit.cshtml" />
-    <Content Include="Views\Celebrants\Delete.cshtml" />
     <Content Include="Views\SupProducts\Create.cshtml" />
     <Content Include="Views\SupProducts\Delete.cshtml" />
     <Content Include="Views\SupProducts\Details.cshtml" />
@@ -474,17 +469,11 @@
     <Content Include="Views\SupProducts\Index.cshtml" />
     <Content Include="Views\Expenses\TotalExpense.cshtml" />
     <Content Include="Views\MonthlySummary\Index.cshtml" />
-    <Content Include="Views\Celebrants\Create.cshtml" />
-    <Content Include="Views\Celebrants\Delete.cshtml" />
-    <Content Include="Views\Celebrants\Details.cshtml" />
-    <Content Include="Views\Celebrants\Edit.cshtml" />
-    <Content Include="Views\Celebrants\Index.cshtml" />
     <Content Include="Views\Deposits\CashAtHand.cshtml" />
     <Content Include="Views\Deposits\TotalCollection.cshtml" />
     <Content Include="Views\Expenses\CurrentExpenses.cshtml" />
     <Content Include="Views\Expenses\PreviousMonthExpense.cshtml" />
     <Content Include="Views\Celebrations\Index.cshtml" />
-    <Content Include="Views\Celebrations\EventsOfProviousMonth.cshtml" />
     <Content Include="Views\Celebrations\UpComingEvents.cshtml" />
     <Content Include="Views\MonthlySummary\Closing.cshtml" />
     <Content Include="Views\Subscriptions\Arrears.cshtml" />
@@ -507,6 +496,11 @@
     <Content Include="Views\RolesAdmin\Delete.cshtml" />
     <Content Include="Views\RolesAdmin\Create.cshtml" />
     <Content Include="Views\Account\DisplayEmail.cshtml" />
+    <Content Include="Views\Celebrants\Delete.cshtml" />
+    <Content Include="Views\Celebrants\Details.cshtml" />
+    <Content Include="Views\Celebrants\Edit.cshtml" />
+    <Content Include="Views\Celebrants\Index.cshtml" />
+    <Content Include="Views\Celebrations\EventsOfPreviousMonth.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
