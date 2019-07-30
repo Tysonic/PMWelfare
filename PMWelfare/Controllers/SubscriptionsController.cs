@@ -184,7 +184,7 @@ namespace PMWelfare.Controllers
         {
             decimal? advance = db.Subscriptions.Where(s => 
             (s.SubMonth > DateTime.Now.Month && s.SubYear == DateTime.Now.Year)
-           || s.SubYear > DateTime.Now.Year).DefaultIfEmpty().Sum(s => s.Amount);
+           || s.SubYear > DateTime.Now.Year).DefaultIfEmpty().Sum(s => s.Amount) ?? 0;
 
             ViewBag.Advances = advance;
 

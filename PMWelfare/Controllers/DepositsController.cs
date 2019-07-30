@@ -424,7 +424,7 @@ namespace PMWelfare.Controllers
             decimal? Total = db.Deposits.Where(s => s.CreatedAt
             .Value.Month == DateTime.Now.Month
            && s.CreatedAt.Value.Year == DateTime.Now.Year)
-           .Sum(s => (decimal?)s.Amount);
+           .Sum(s =>s.Amount) ?? 0;
             ViewBag.total = Total;
             return View();
 
@@ -441,7 +441,7 @@ namespace PMWelfare.Controllers
             new { u = e.UnitPrice, q = s.Quantity, s.ExpenseDate })
             .Where(s => s.ExpenseDate.Month == DateTime.Now.Month
              && s.ExpenseDate.Year == DateTime.Now.Year).DefaultIfEmpty()
-             .Select(s => s.u * s.q).Sum();
+             .Sum(s => s.u * s.q) ?? 0;
 
             decimal? ClosingBalance = db.Monthlysummary
                 .Where(s => s.EndDate.Value.Month == DateTime.Now.Month - 1
