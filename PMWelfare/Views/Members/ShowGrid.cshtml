@@ -1,0 +1,117 @@
+﻿@{
+    Layout = null;
+}
+<head><link href="~/Content/bootstrap.css" rel="stylesheet" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css" />
+</head>
+
+<div class="container">
+    <br />
+    <div style="width:90%; margin:0 auto;">
+        <table id="example" class="table table-striped table-bordered dt-responsive nowrap"  cellspacing="0">
+            <thead>
+                <tr>
+                    <th>UserName</th>
+                    <th>FirstName</th>
+                    <th>OtherName</th>
+                    <th>Email</th>
+                    <th>Date Of Birth</th>
+                    
+                    <th>Edit</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
+    <script>
+       
+
+        $(document).ready(function ()
+        {
+            $("#example").DataTable({
+                "processing": false, // for show progress bar
+                "serverSide": true, // for process server side
+                "filter": true, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "ajax": {
+                    "url": "/Members/LoadData",
+                    "type": "POST",
+                    "datatype": "json"
+                },
+                "columnDefs":
+                [{
+                    "targets": [0],
+                    "visible": true,
+                    "searchable": true
+                }],
+                "columns": [
+                    { "data": "UserName", "name": "UserName", "autoWidth": true },
+                    { "data": "FirstName", "name": "FirstName", "autoWidth": true },
+                    { "data": "OtherName", "name": "OtherName", "autoWidth": true },
+                    { "data": "Email", "email": "Email", "autoWidth": true },
+                    {
+                        "data": "DOB", "DateTime": "Date Of Birth", "autoWidth": true,
+                        "render": function (value) {
+                            if (value === null) return "";
+                            var pattern = /Date\(([^)]+)\)/;//date format from server side
+                            var results = pattern.exec(value);
+                            var dt = new Date(parseFloat(results[1]));
+
+                            return dt.getDate() + "/" + (dt.getMonth() + 1) + "/" + dt.getFullYear();
+                        }
+                    },
+                    {
+                        "render": function (data, type, full, meta)
+                        { return '<a class="btn btn-info" href="/Members/Edit/' + full.UserName + '">Edit</a>'; }
+                    },
+                    {
+                        data: null, render: function (data, type, row)
+                        {
+                            return "<a href='#' class='btn btn-default' onclick=Details('" + row.UserName + "'); >Details</a>";
+                        }
+                    },
+                ]
+
+            });
+        });
+
+
+    function DetailData(UserName)
+        {
+            if (confirm("Are you sure you want to delete ...?"))
+            {
+                Details(UserName);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
+        function Details(UserName)
+    {
+        var url = '@Url.Content("~/")' + "Members/Details/UserName";
+
+            $.post(url, { id: UserName }, function (data)
+                {
+                    if (data)
+                    {
+                        //confirm(UserName +"'s"+ "" + "details")
+                        window.location.href = '@Url.Content("~/")' + "Members/Details/" + UserName;
+                    }
+                    else
+                    {
+                        alert("Something Went Wrong!");
+                    }
+                });
+    }
+
+</script>
+    
+    
+ 

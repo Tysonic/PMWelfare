@@ -58,7 +58,7 @@ namespace PMWelfare.Controllers
                 memberStatus.CreatedBy = "Timo";
                 db.MemberStatus.Add(memberStatus);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                ViewBag.SuccessMsg = " New Record Successfully Added";
             }
 
             return View(memberStatus);
@@ -90,7 +90,7 @@ namespace PMWelfare.Controllers
             {
                 db.Entry(memberStatus).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                ViewBag.SuccessMsg = "  Record Successfully Edited";
             }
             return View(memberStatus);
         }

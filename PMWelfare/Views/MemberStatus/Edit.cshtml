@@ -1,9 +1,15 @@
 ﻿@model PMWelfare.Models.MemberStatus
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit Record";
 }
-
+<div>
+    <ol class="breadcrumb">
+        <li> @Html.ActionLink("Home", "Index", "Home")</li>
+        <li> @Html.ActionLink("Member Status", "Index", "MemberStatus")</li>
+        <li class="active"> @Html.ActionLink("Edit Status", "Create")</li>
+    </ol>
+</div>
 <h2>Edit</h2>
 
 @using (Html.BeginForm())
@@ -64,6 +70,19 @@
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+@{
+    var message = ViewBag.SuccessMsg;
+}
+@section scripts{
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script type="text/javascript">
+    var message = '@message';
+    if(message){
+        alert(message);
+         window.location.href = '@Url.Action("Index", "MemberStatus")';
+    }
+    </script>
+
+}
+
+

@@ -1,9 +1,15 @@
 ﻿@model PMWelfare.Models.Supplier
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit  Info";
 }
-
+<div>
+    <ol class="breadcrumb">
+        <li> @Html.ActionLink("Home", "Index", "Home")</li>
+        <li> @Html.ActionLink("Suppliers", "Index")</li>
+        <li class="active"> @Html.ActionLink("Edit Supplier", "Edit")</li>
+    </ol>
+</div>
 <h2 style="text-align:center">Edit The Record For  @Model.SupName </h2>
 
 @using (Html.BeginForm())
@@ -78,4 +84,18 @@
         </div>
     </div>
 }
+@{
+    var message = ViewBag.SuccessMsg;
+}
 
+@section scripts{
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script type="text/javascript">
+    var message = '@message';
+    if(message){
+        alert(message);
+         window.location.href = '@Url.Action("Index", "Suppliers")';
+    }
+    </script>
+
+}

@@ -3,11 +3,20 @@
 @{
     ViewBag.Title = "Products supplied";
 }
+<div>
+    <ol class="breadcrumb">
+        <li> @Html.ActionLink("Home", "Index", "Home")</li>
+        <li class="active"> @Html.ActionLink("Suppliers' Products", "Index")</li>
 
+    </ol>
+</div>
 <h2 style="text-align:center">List of Products supplied</h2>
 <br />
 <p>
-    @Html.ActionLink("Add a new Product", "Create")
+    <button class=" btn btn-info" onclick="location.href='@Url.Action("Create","SupProducts")'">
+        Add New Product
+    </button>
+
 </p>
 <table class="table">
     <tr>

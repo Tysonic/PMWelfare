@@ -3,12 +3,22 @@
 @{
     ViewBag.Title = "Index";
 }
+<div>
+    <ol class="breadcrumb">
+        <li> @Html.ActionLink("Home", "Index", "Home")</li>
+        <li class="active"> @Html.ActionLink("Member Status", "Index", "MemberStatus")</li>
 
+    </ol>
+</div>
 <h2 style="text-align:center">List Of Member Status</h2>
 
 <p style="margin-left:20%">
-    @Html.ActionLink("Create New Status", "Create")
+
+    <button class=" btn btn-info" onclick="location.href='@Url.Action("Create","MemberStatus")'">
+        Add New Status
+    </button>
 </p>
+<tabl
 <table class="table table-bordered" style="width:60%; margin-left:20%">
     <tr>
         <th>

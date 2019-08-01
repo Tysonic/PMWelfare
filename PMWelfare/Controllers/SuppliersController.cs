@@ -54,7 +54,7 @@ namespace PMWelfare.Controllers
             {
                 db.Suppliers.Add(supplier);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                ViewBag.SuccessMsg = " New  Record Successfully added";
             }
 
             return View(supplier);
@@ -86,7 +86,8 @@ namespace PMWelfare.Controllers
             {
                 db.Entry(supplier).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                ViewBag.SuccessMsg = " Supplier Record Successfully Edited";
+         
             }
             return View(supplier);
         }
