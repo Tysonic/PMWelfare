@@ -3,7 +3,13 @@
 @{
     ViewBag.Title = "Details";
 }
-
+<div>
+    <ol class="breadcrumb">
+        <li> @Html.ActionLink("Home", "Index", "Home")</li>
+        <li> @Html.ActionLink("Deposits", "Index", "Deposits")</li>
+        <li class="active"> @Html.ActionLink(" Deposit Info", "Details")</li>
+    </ol>
+</div>
 <h2>Details</h2>
 
 <div>

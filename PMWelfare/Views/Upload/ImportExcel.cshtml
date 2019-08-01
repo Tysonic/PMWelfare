@@ -9,9 +9,26 @@
 {
     <table>
         <tr> <td> File: </td> <td> <input type="file" name="UploadedFile" /> </td> </tr>
-        <tr><td>@Html.DropDownListFor(model => model.SelectedTable, 
-               new SelectList(Enum.GetValues(typeof(TableName))),"Select File To Upload", 
-               htmlAttributes: new { @class = "form-control" })</td></tr>
+        <tr>
+            <td>
+                @Html.DropDownListFor(model => model.SelectedTable,
+           new SelectList(Enum.GetValues(typeof(TableName))),"Select File To Upload",
+           htmlAttributes: new { @class = "form-control" })
+            </td>
+        </tr>
         <tr> <td colspan="2"> <input type="submit" name="Submit" value="Submit" /> </td> </tr>
     </table>
+}
+@{
+    var message = ViewBag.SuccessMsg;
+}
+@section scripts{
+
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script type="text/javascript">
+    var message = '@message';
+    if(message){
+        alert(message);
+    }
+    </script>
 }

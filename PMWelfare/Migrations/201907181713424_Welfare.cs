@@ -50,9 +50,9 @@ namespace PMWelfare.Migrations
                         UserName = c.String(maxLength: 40, unicode: false),
                         Message = c.String(nullable: false, maxLength: 250, unicode: false),
                         PostedAt = c.DateTime(),
+                        ParentId = c.Int(nullable: false),
                         UpdatedBy = c.String(maxLength: 40, unicode: false),
                         UpdatedAt = c.DateTime(),
-                        ParentId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ChatId)
                 .ForeignKey("dbo.Members", t => t.UserName)

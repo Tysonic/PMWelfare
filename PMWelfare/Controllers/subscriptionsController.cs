@@ -10,40 +10,35 @@ using System.Web.Mvc;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using PMWelfare.Models;
-using static PMWelfare.Models.Subscription;
 
 namespace PMWelfare.Controllers
 {
     public class SubscriptionsController : Controller
     {
         private welfare db = new welfare();
-
-        // GET: Subscriptions
         public ActionResult Index()
-        {
-           //ViewBag.submonth =  System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(
-                
-           //    );
 
-            ViewBag.submonth = db.Subscriptions.Select(s => s.SubMonth).Distinct();
-            ViewBag.subyear = db.Subscriptions.Select(x => x.SubYear).Distinct();
+        {
+            ViewBag.submonth = db.Subscriptions.Select(s => s.SubMonth).DefaultIfEmpty().Distinct();
+            ViewBag.subyear = db.Subscriptions.Select(x => x.SubYear).DefaultIfEmpty().Distinct();
+
             var subscriptions = db.Subscriptions.Include(s => s.Member).ToList();
-            Session["students"] = subscriptions.ToList<Subscription>();
-            return View(subscriptions.ToList());
+            return View(subscriptions);
         }
+        // GET: Subscriptions
         [HttpPost]
-        public ActionResult Index(int submonth, int subyear)
+        public ActionResult Index(int submonth , int subyear)
         {
-            //ViewBag.submonth =  System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(
+            ViewBag.submonth = db.Subscriptions.Select(s => s.SubMonth).DefaultIfEmpty().Distinct();
+            ViewBag.subyear = db.Subscriptions.Select(x => x.SubYear).DefaultIfEmpty().Distinct();
 
-            //    );
 
-            ViewBag.submonth = db.Subscriptions.Select(s => s.SubMonth).Distinct();
-            ViewBag.subyear = db.Subscriptions.Select(x => x.SubYear).Distinct();
-            var subscriptions = db.Subscriptions.Where(s=>s.SubMonth==submonth && s.SubYear==subyear).Include(s => s.Member).ToList();
+            var subscriptions = db.Subscriptions.Where(s => s.SubMonth ==
+            submonth && s.SubYear == subyear).Include(s => s.Member).ToList();
             Session["students"] = subscriptions.ToList<Subscription>();
             return View(subscriptions.ToList());
         }
+
         // GET: ExportData
         public void ExportToExcel()
         {
@@ -182,9 +177,9 @@ namespace PMWelfare.Controllers
         
         public ActionResult Advances()
         {
-            decimal? advance = db.Subscriptions.Where(s => 
+           decimal? advance = db.Subscriptions.Where(s => 
             (s.SubMonth > DateTime.Now.Month && s.SubYear == DateTime.Now.Year)
-           || s.SubYear > DateTime.Now.Year).DefaultIfEmpty().Sum(s => s.Amount) ?? 0;
+           || s.SubYear > DateTime.Now.Year).Select(s => s.Amount).DefaultIfEmpty().Sum()??0;
 
             ViewBag.Advances = advance;
 
@@ -193,14 +188,13 @@ namespace PMWelfare.Controllers
 
         public ActionResult Arrears() {
   
-             int? month = DateTime.Now.Month;
-                int? year = DateTime.Now.Year;
+             int month = DateTime.Now.Month;
+                int year = DateTime.Now.Year;
 
                 var subscribers = db.Subscriptions
                    .Where(s => s.SubMonth == month && s.SubYear == year)
                    .Select(s => s.UserName).Distinct().ToList();
-                var all = db.Members.Select(s => s.UserName)
-                .Distinct().ToList();
+                var all = db.Members.Select(s => s.UserName).Distinct().ToList();
                 List<string> notsub = all.Except(subscribers).ToList();
                 List<Subscription> user = new List<Subscription>();
             List<Subscription> arrears = new List<Subscription>();
@@ -246,14 +240,13 @@ namespace PMWelfare.Controllers
                 int max = db.Members.
                     Where(d => d.UserName == mmm.UserName)
                     .Select(d => d.CreatedAt.Value.Month).Single();
-                int yea = db.Members.Where(d => d.UserName ==
-                mmm.UserName)
+                int yea = db.Members.Where(d => d.UserName == mmm.UserName)
                            .Select(d => d.CreatedAt.Value.Year).Single();
-                    int? ju = year - yea;
-                    int? month1 = month - max + 12 * ju;
+                    int ju = year - yea;
+                    int month1 = month - max + 12 * ju;
                     if (month1 > 0)
                     {
-                        int? arrearAm = month1 * 20000;
+                        int arrearAm = month1 * 20000;
                         arrears.Add(new Subscription(mmm.UserName, arrearAm));
                     }
                 
@@ -265,17 +258,16 @@ namespace PMWelfare.Controllers
             foreach (var jt in subs)
             {
                 decimal? amount = db.Subscriptions
-                        .Where(s => s.UserName == jt.UserName 
-                        && s.SubMonth == month && s.SubYear == year)
+                        .Where(s => s.UserName == jt.UserName && s.SubMonth == month && s.SubYear == year)
                         .Select(s => s.Amount).Single();
-                decimal subamount = 20000;
+                decimal? subamount = 20000;
                 if (amount < subamount)
                 {
                     decimal? subamount1 = subamount - amount;
 
                     arrears.Add(new Subscription(jt.UserName, subamount1));
                 }
-                
+
             }
             ViewBag.are = arrears.Sum(x => x.Amount);
 
@@ -287,7 +279,7 @@ namespace PMWelfare.Controllers
             var advances = db.Subscriptions.Where(s => (s.SubMonth
             > DateTime.Now.Month && s.SubYear == DateTime.Now.Year)
              || s.SubYear > DateTime.Now.Year).
-             Select(s => new AdvancesViewModel{Amount=s.Amount, UserName=s.UserName }).ToList();
+             Select(s => new { s.Amount, s.UserName }).ToList();
             return View(advances);
         }
 
@@ -343,16 +335,16 @@ namespace PMWelfare.Controllers
             foreach (var mmm in newmemb)
             {
 
-                int? max = db.Members.
-                    Where(d => mmm.UserName==d.UserName)
+                int max = db.Members.
+                    Where(d => d.UserName == mmm.UserName)
                     .Select(d => d.CreatedAt.Value.Month).Single();
-                int? yea = db.Members.Where(d => d.UserName == mmm.UserName)
+                int yea = db.Members.Where(d => d.UserName == mmm.UserName)
                            .Select(d => d.CreatedAt.Value.Year).Single();
-                int? ju = year - yea;
-                int? month1 = month - max + 12 * ju;
+                int ju = year - yea;
+                int month1 = month - max + 12 * ju;
                 if (month1 > 0)
                 {
-                    int? arrearAm = month1 * 20000;
+                    int arrearAm = month1 * 20000;
                     arrears.Add(new Subscription(mmm.UserName, arrearAm));
                 }
 
@@ -366,7 +358,7 @@ namespace PMWelfare.Controllers
                 decimal? amount = db.Subscriptions
                         .Where(s => s.UserName == jt.UserName && s.SubMonth == month && s.SubYear == year)
                         .Select(s => s.Amount).Single();
-                decimal? subamount = 20000;
+                decimal subamount = 20000;
                 if (amount < subamount)
                 {
                     decimal? subamount1 = subamount - amount;
@@ -393,7 +385,5 @@ namespace PMWelfare.Controllers
        
     }
 
-    internal class Subs
-    {
-    }
+  
 }

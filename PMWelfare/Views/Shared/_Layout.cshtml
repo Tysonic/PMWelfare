@@ -37,7 +37,34 @@
                         </ul>
                     </li>
                     <!--dropdown Menu End-->
-                    
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Members
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+
+
+                            <li>
+                                <a data-toggle="dropdown" href="#">  Member  <span class=""></span> </a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Add New Member", "Create", "Members")</li>
+                                    <li>@Html.ActionLink("List of Members", "Index", "Members")</li>
+                                </ul>
+
+                            </li>
+                            <li>
+                                <a data-toggle="dropdown" href="#">  MemberStatus  <span class=""></span> </a>
+                                <ul class="dropdown-menu" id="next">
+                                    <li>@Html.ActionLink("Add New MemberStatus", "Create", "MemberStatus")</li>
+                                    <li>@Html.ActionLink("List of MemberStatuses", "Index", "MemberStatus")</li>
+                                </ul>
+
+                            </li>
+
+
+                        </ul>
+                    </li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             Events
