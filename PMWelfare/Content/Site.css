@@ -2,6 +2,19 @@
     padding-top: 50px;
     padding-bottom: 20px;
 }
+.breadcrumb > li + li:before {
+    padding: 0 5px;
+    color: #ccc;
+    content: ">>";
+}
+a{
+    text-decoration:none;
+}
+.breadcrumb{
+    margin-left:-120px;
+  
+    background-color:whitesmoke);
+}
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
@@ -9,34 +22,170 @@
     padding-right: 15px;
 }
 
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
 /* Set width on the form input elements since they're 100% wide by default */
 input,
-select,
-textarea {
+select
+ {
     max-width: 280px;
 }
-
-/* styles for validation helpers */
-.field-validation-error {
-    color: #b94a48;
+.navbar-fixed-top {
+    top: 0;
+    border-width: 0 0 1px;
+    background-color: #0f88bd;
 }
+    .navbar-fixed-top .navbar-nav > li > a {
+        color: #ddd;
+    }
+        .navbar-fixed-top .navbar-nav > li > a:hover,
+        .navbar-fixed-top .navbar-nav > li > a:focus {
+            color: #ff2;
+            background-color: transparent;
+        }
+        .navbar-fixed-top .navbar-nav > .active > a,
+        .navbar-fixed-top .navbar-nav > .active > a:hover,
+        .navbar-fixed-top .navbar-nav > .active > a:focus{
+            background-color:white;
+            color:gold;
+             
+        }
+        .navbar-nav ul li a:hover{
+            background-color:Highlight;
+            color:whitesmoke;
+            
+        }
 
-.field-validation-valid {
+    
+/*.navbar-nav ul ul {
     display: none;
+    position: absolute;
+    
+    text-decoration: none;
+    margin-left: 160px;
+    top: 0;
+    padding-left: 30px;
+}
+*/
+.navbar-nav ul {
+    display:none;
+
+}
+.navbar-nav ul li:hover > ul{
+    display:block;
+}
+#next{
+    margin-top:30px;
+}
+    .navbar-nav ul ul {
+        position: absolute;
+        margin-left: 157px;
+        text-decoration: none;
+        list-style: none;
+        top: 0;
+        background-color: white;
+        margin-top:-1px;
+    }
+
+
+
+     .breadcrumb li > a:hover{
+       text-decoration:none;
+     }
+     .breadcrumb .active >a{
+         color:cadetblue ;
+         
+     }
+
+.page-title {
+    margin-bottom: 20px;
 }
 
-input.input-validation-error {
-    border: 1px solid #b94a48;
+textarea {
+    border-radius: 0 !important;
 }
 
-input[type="checkbox"].input-validation-error {
-    border: 0 none;
+.panel-body {
+    padding: 0 !important;
 }
 
-.validation-summary-errors {
-    color: #b94a48;
+.comment-action {
+    padding: 0 !important;
+    background: #f6f8f9 !important;
+    clear: both;
+    min-height: 35px;
 }
 
-.validation-summary-valid {
-    display: none;
+.submit-comment {
+    background: #606d75;
+    width: 130px;
+    float: right;
+    min-height: 35px;
+    text-align: center;
+}
+
+    .submit-comment a {
+        color: #fff !important;
+        display: block;
+        line-height: 35px;
+        text-decoration: none;
+    }
+
+ul.comments {
+    margin: 0;
+    list-style-type: none;
+    padding: 0;
+    display: block;
+}
+
+.comments .comment .avatar {
+    position: absolute;
+    top: 8px;
+    left: 10px;
+}
+
+.comments .comment {
+    display: block;
+    position: relative;
+    padding-left: 92px;
+}
+
+    .comments .comment .comment-body header {
+        display: block;
+        margin-bottom: 8px;
+    }
+
+        .comments .comment .comment-body header .pubdate {
+            color: #777;
+            font-size: .9em;
+        }
+
+        .comments .comment .comment-body header .userlink {
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+
+    .comments .comment .comment-body {
+        padding: 0px 3px;
+        padding-bottom: 12px;
+        padding-top: 8px;
+    }
+
+
+footer .reply-link {
+    float: right;
+    color: #777;
+    font-size: 1em;
+    text-decoration: none;
+}
+
+.comments .comment .replies {
+    margin-top: 2px;
+    margin-bottom: 3px;
 }
