@@ -1,9 +1,17 @@
 ﻿@model PMWelfare.Models.Deposit
 
 @{
-    ViewBag.Title = "Create a deposit";
-}
+                /**/
 
+                ViewBag.Title = "Create a deposit";
+}
+<div>
+    <ol class="breadcrumb">
+        <li> @Html.ActionLink("Home", "Index", "Home")</li>
+        <li> @Html.ActionLink("Deposits", "Index", "Deposits")</li>
+        <li class="active"> @Html.ActionLink("Add New Deposit", "Create", "Deposits")</li>
+    </ol>
+</div>
 <h2 style="text-align:center">Add new deposit</h2>
 
 @using (Html.BeginForm())
@@ -44,5 +52,15 @@
         $(function () {
             $("#DropDown").chosen();
         })
+    </script>
+}
+@section scripts{
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script type="text/javascript">
+    var message = '@message';
+    if(message){
+        alert(message);
+         window.location.href = '@Url.Action("Index", "Deposits")';
+    }
     </script>
 }

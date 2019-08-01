@@ -204,9 +204,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201907181713424_Welfare.cs" />
-    <Compile Include="Migrations\201907181713424_Welfare.Designer.cs">
-      <DependentUpon>201907181713424_Welfare.cs</DependentUpon>
+    <Compile Include="Migrations\201907180652348_welfare.cs" />
+    <Compile Include="Migrations\201907180652348_welfare.Designer.cs">
+      <DependentUpon>201907180652348_welfare.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Scripts\Models\AccountViewModels.cs" />
@@ -567,6 +567,14 @@
     <Content Include="Views\Subscriptions\TotalArrears.cshtml" />
     <Content Include="Views\Celebrations\TotalUpComingEvents.cshtml" />
     <Content Include="Views\Expenses\TotalPreviousMonthExpense.cshtml" />
+    <Content Include="Views\MemberStatus\Create.cshtml" />
+    <Content Include="Views\MemberStatus\Delete.cshtml" />
+    <Content Include="Views\MemberStatus\Details.cshtml" />
+    <Content Include="Views\MemberStatus\Edit.cshtml" />
+    <Content Include="Views\MemberStatus\Index.cshtml" />
+    <Content Include="Views\Subscriptions\ExportToExcel.cshtml" />
+    <Content Include="Views\Upload\ImportExcel.cshtml" />
+    <Content Include="Views\Upload\Index.cshtml" />
     <Content Include="Views\Members\Details.cshtml" />
     <Content Include="Views\Members\Edit.cshtml" />
     <Content Include="Views\Members\Index.cshtml" />
@@ -614,6 +622,11 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\LoginService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201907181713424_Welfare.resx">
+      <DependentUpon>201907181713424_Welfare.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201907181713424_Welfare.resx">

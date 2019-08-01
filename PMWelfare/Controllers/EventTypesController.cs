@@ -49,12 +49,15 @@ namespace PMWelfare.Controllers
         public ActionResult Create([Bind(Include = "Id,Type,CreatedBy,CreatedAt,UpdatedBy,UpdatedAt")] EventType EventType)
         {
             EventType.CreatedAt = DateTime.Now;
-            EventType.CreatedBy = "nicho";
+            EventType.CreatedBy = "nico";
             if (ModelState.IsValid)
             {
                 db.EventTypes.Add(EventType);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+
+                ViewBag.SuccessMsg = " New Event Type Successfully added";
+               
+                //return RedirectToAction("Index");
             }
 
             return View(EventType);

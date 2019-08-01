@@ -1,9 +1,9 @@
 ﻿using System;
-using OfficeOpenXml; 
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using OfficeOpenXml;
 using PMWelfare.Models;
 
 namespace PMWelfare.Controllers
@@ -82,6 +82,7 @@ namespace PMWelfare.Controllers
                                     db.Subscriptions.Add(item);
                                 }
                                 db.SaveChanges();
+                                ViewBag.SuccessMsg = "Subscriptions Successfully added";
                             }
                         }
 
@@ -98,7 +99,7 @@ namespace PMWelfare.Controllers
                                 user.DOB = Convert.ToDateTime(workSheet.Cells[rowIterator, 5].Value);
                                 user.MemberStatus =Convert.ToInt32(workSheet.Cells[rowIterator, 6].Value);
                                 //user.IsAdmin = Convert.ToBoolean(workSheet.Cells[rowIterator, 7]);
-                                user.CreatedBy = "nicho";
+                                user.CreatedBy = "nico";
                                 user.CreatedAt = DateTime.Now; 
 
                                 Mb.Add(user);
@@ -110,6 +111,7 @@ namespace PMWelfare.Controllers
                                     db.Members.Add(item);
                                 }
                                 db.SaveChanges();
+                                ViewBag.SuccessMsg = "Members successfully added";
                             }
                         }
 

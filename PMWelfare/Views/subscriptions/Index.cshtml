@@ -1,11 +1,16 @@
 ﻿@model IEnumerable<PMWelfare.Models.Subscription>
 
-@{
-    ViewBag.Title = "Index";
-}
+<head>
+    <title>Subscriptions</title>
+</head>
 
-<h2>list of subscribers </h2>
-@using (Html.BeginForm())
+<div >
+    <ol class="breadcrumb">
+        <li> @Html.ActionLink("Home", "Index","Home")</li>
+        <li class="active"> @Html.ActionLink("Subscriptions", "Index")</li>
+    </ol>
+</div>
+@using (Html.BeginForm("Index","Subscriptions",FormMethod.Post))
 {
     <text>SubMonth</text>@Html.DropDownList("SubMonth", new SelectList(ViewBag.submonth), htmlAttributes: new { @class = "form-control" })
     <text>SubYear</text>@Html.DropDownList("SubYear", new SelectList(ViewBag.subyear), htmlAttributes: new { @class = "form-control" })

@@ -1,10 +1,16 @@
 ﻿@model PMWelfare.Models.Celebration
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Create Event";
 }
-
-<h2>Create</h2>
+<div>
+    <ol class="breadcrumb">
+        <li> @Html.ActionLink("Home", "Index", "Home")</li>
+        <li> @Html.ActionLink("Events", "Index", "Celebrations")</li>
+        <li class="active"> @Html.ActionLink("Add New Event", "Edit", "Celebrations")</li>
+    </ol>
+</div>
+<h2>Create Event</h2>
 
 
 @using (Html.BeginForm())
@@ -34,7 +40,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.EventDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.EventDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.EventDate, new { htmlAttributes = new { @class = "form-control datepicker" } })
                 @Html.ValidationMessageFor(model => model.EventDate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -42,10 +48,10 @@
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.Label( "UserName", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("UserName", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10" style="width:50%">
                 @Html.ListBoxFor(model => model.MembersToSave, new MultiSelectList(Model.SelectedMembers, "UserName", "FirstName"),
-               new { multiple = "multiple", @class = "form-control multiDropDown" })
+               new { id = "multiDropDown", multiple = "multiple",@class= "form-control" })
 
             </div>
         </div>
@@ -59,12 +65,26 @@
     </div>
 }
 
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
     <script>
         $(function () {
             $(".multiDropDown").chosen();
         })
     </script>
+   
+   
+    @*datepicker*@
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(function () {
+            $(".datepicker").datepicker({
+                dateFormat: "yy-mm-dd"
+            });
+        });
+    </script>
 }
+
+

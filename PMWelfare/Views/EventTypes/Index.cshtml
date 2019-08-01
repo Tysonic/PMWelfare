@@ -3,9 +3,20 @@
 @{
     ViewBag.Title = "Index";
 }
+<div>
+    <ol class="breadcrumb">
+        <li> @Html.ActionLink("Home", "Index", "Home")</li>
+        <li class="active"> @Html.ActionLink("Event Types", "Index", "EventTypes")</li>
+        
+    </ol>
+</div>
+<h2 style="text-align:center">List of event types</h2>
+<p style="margin-left:20%">
+    <button class="btn btn-info" onclick="location.href='@Url.Action("Create","EventTypes")'">
+        Add New Event Type
 
-<h2 style="text-align:center">List of event types</h2>
-<h2 style="text-align:center">List of event types</h2>
+    </button>
+</p>
 
 
 <table class="table table-bordered" style="width:60%; margin-left:20%">
