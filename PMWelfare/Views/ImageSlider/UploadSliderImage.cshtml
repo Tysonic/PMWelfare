@@ -1,0 +1,70 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+
+    <title>UploadSliderImage</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    
+    <link href="~/Content/css1/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    @*<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css" />*@
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#dataTable").dataTable();
+        });
+    </script>
+    <style>
+        .carousel-inner img {
+            width: 70%;
+            height: 350px;
+        }
+        .slide{
+            width:70%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-4">
+        <h3 class="text-center text-uppercase"></h3>
+        <div id="demo" class="carousel slide" data-ride="carousel">
+            <ul class="carousel-indicators">
+                <li data-target="#demo" data-slide-to="0" class="active"></li>
+                <li data-target="#demo" data-slide-to="1"></li>
+                <li data-target="#demo" data-slide-to="2"></li>
+                <li data-target="#demo" data-slide-to="3"></li>
+            </ul>
+            <div class="carousel-inner" role="listbox">
+                @{int i = 0;}
+                @foreach (var item in Model)
+                {
+                    i++;
+                    var active = i == 1 ? "active" : "";
+                    <div class="item @active">
+                        <img src="@Url.Content(@item.FilePath)" alt="">
+                    </div>
+                }
+            </div>
+            <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next" href="#demo" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </a>
+        </div>
+       
+    </div>
+</body>
+</html>

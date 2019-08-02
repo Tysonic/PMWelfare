@@ -1,32 +1,46 @@
-﻿@{
-    Layout = null;
+﻿@{ 
+    ViewBag.Title = "List Of Members";
 }
-<head><link href="~/Content/bootstrap.css" rel="stylesheet" />
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css" />
-</head>
+<html>
 
-<div class="container">
-    <br />
-    <div style="width:90%; margin:0 auto;">
-        <table id="example" class="table table-striped table-bordered dt-responsive nowrap"  cellspacing="0">
-            <thead>
-                <tr>
-                    <th>UserName</th>
-                    <th>FirstName</th>
-                    <th>OtherName</th>
-                    <th>Email</th>
-                    <th>Date Of Birth</th>
-                    
-                    <th>Edit</th>
-                    <th>Details</th>
-                </tr>
-            </thead>
-        </table>
+<body>
+    <div>
+        <ol class="breadcrumb">
+            <li> @Html.ActionLink("Home", "Index", "Home")</li>
+            <li class="active"> @Html.ActionLink("Members", "ShowGrid", "Members")</li>
+
+        </ol>
     </div>
-</div>
+    <h2 style="text-align:center">List of Staffs in the system</h2>
 
-<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
+    <button class=" btn btn-info" onclick="location.href='@Url.Action("Create","Members")'">
+        Add a new member
+    </button>
+    <div class="container">
+        <br />
+        <div style="width:90%; margin:0 auto;">
+            <table id="example" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>UserName</th>
+                        <th>FirstName</th>
+                        <th>OtherName</th>
+                        <th>Email</th>
+                        <th>Date Of Birth</th>
+
+                        <th>Edit</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/js/jquery.dataTables.min.js"></script>
+@*<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>*@
     <script>
        
 

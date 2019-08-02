@@ -1,0 +1,68 @@
+﻿
+@{
+                /**/
+
+                Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Pics</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="row">
+        <button style="margin-left: 27px;margin-bottom:10px;" type="button" class="btn btn-primary rounded-0" data-toggle="modal" data-target="#myModal">
+            <i class="fa fa-plus-circle"></i> Add New
+        </button>
+        <div class="modal fade" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Upload New Slider Image</h4>
+                        <button type="button" class="close" data-dismiss="modal">×</button>
+                    </div>
+                    <div class="modal-body">
+                        @using (Html.BeginForm("Gallery", "ImageSlider", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+
+                            <div class="form-group">
+                                <label>Choose File:</label>
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input type="file" id="fileupload" name="fileupload" class="custom-file-input" />
+                                        <label class="custom-file-label"></label>
+                                    </div>
+                                    <div class="input-group-append">
+                                        <input type="submit" id="btnUpload" class="btn btn-secondary" value="Upload" />
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+@{
+    var message = ViewBag.message;
+}
+<script>
+     var message = '@message';
+    if(message){
+        alert(message);
+         window.location.href = '@Url.Action("Gallery", "ImageSlider")';
+    }
+</script>

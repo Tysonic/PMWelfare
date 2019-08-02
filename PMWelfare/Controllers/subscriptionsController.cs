@@ -21,8 +21,9 @@ namespace PMWelfare.Controllers
         {
             ViewBag.submonth = db.Subscriptions.Select(s => s.SubMonth).DefaultIfEmpty().Distinct();
             ViewBag.subyear = db.Subscriptions.Select(x => x.SubYear).DefaultIfEmpty().Distinct();
-
+           
             var subscriptions = db.Subscriptions.Include(s => s.Member).ToList();
+            Session["students"] = subscriptions.ToList<Subscription>();
             return View(subscriptions);
         }
         // GET: Subscriptions
@@ -202,7 +203,8 @@ namespace PMWelfare.Controllers
             List<Subscription> newmemb = new List<Subscription>();
             notsub.ForEach(s => user.Add(new Subscription(s)));
             var jr = db.Subscriptions.Select(s => s.UserName);
-       
+            //int submonth = db.Subscriptions.Select(s => s.SubMonth).Max();
+          
             foreach (var m in user)
             {
                 var jrm = db.Subscriptions.Select(s => s.UserName);
@@ -231,7 +233,7 @@ namespace PMWelfare.Controllers
 
             }
           
-           //new member who have not subscribed yet
+           //new members who have not subscribed yet
             var ful = all.Except(jr).ToList();
             ful.ForEach(h => newmemb.Add(new Subscription(h)));
             foreach (var mmm in newmemb)

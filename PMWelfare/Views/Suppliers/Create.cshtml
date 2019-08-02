@@ -57,12 +57,16 @@
 }
 @section scripts{
     <script src="~/Scripts/jquery-3.4.1.js"></script>
-    <script type="text/javascript">
+    @if (ViewBag.Message != null)
+    {
+
+        <script type="text/javascript">
     var message = '@message';
     if(message){
         alert(message);
          window.location.href = '@Url.Action("Index", "Suppliers")';
     }
-    </script>
+        </script>}
+
 
 }

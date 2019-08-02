@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Linq.Dynamic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using PMWelfare.Models;
 
@@ -44,10 +43,10 @@ namespace PMWelfare.Controllers
                     var customerData = db.Members.Select(s => new { s.FirstName , s.OtherName, s.Email, s.DOB, s.UserName });
 
                     //Sorting    
-                    //if (!(string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnDir)))
-                    //{
-                    //    customerData = customerData.OrderBy(sortColumn + " " + sortColumnDir);
-                    //}
+                    if (!(string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnDir)))
+                    {
+                        customerData = customerData.OrderBy(sortColumn + " " + sortColumnDir);
+                    }
                     //Search    
                     if (!string.IsNullOrEmpty(searchValue))
                     {
@@ -57,9 +56,9 @@ namespace PMWelfare.Controllers
                     //total number of rows count     
                     recordsTotal = customerData.Count();
                     //Paging     
-                    var data = customerData.Skip(skip).Take(pageSize).ToList();
+                   var data = customerData.Skip(skip).Take(pageSize).ToList();
                     //Returning Json Data    
-                    return Json(new { draw, recordsFiltered = recordsTotal, recordsTotal, data }, JsonRequestBehavior.AllowGet);
+                    return Json(new { draw, recordsFiltered = recordsTotal, recordsTotal,data }, JsonRequestBehavior.AllowGet);
                 }
             }
             catch (Exception)
@@ -116,7 +115,8 @@ namespace PMWelfare.Controllers
             {
                 
                 db.SaveChanges();
-                return RedirectToAction("Index");
+
+                ViewBag.SuccessMsg = " New Record Successfully added";
             }
 
             ViewBag.MemberStatus = new SelectList(db.MemberStatus, "MembersStatusID", "MemberStatus1", member.MemberStatus);

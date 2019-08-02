@@ -6,7 +6,7 @@
 <div>
     <ol class="breadcrumb">
         <li> @Html.ActionLink("Home", "Index", "Home")</li>
-        <li> @Html.ActionLink("Members", "Index", "Members")</li>
+        <li> @Html.ActionLink("Members", "ShowGrid", "Members")</li>
         <li class="active"> @Html.ActionLink("Add Member Info", "Edit", "Members")</li>
     </ol>
 </div>
@@ -54,7 +54,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DOB, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @class = "form-control datepicker" } })
                 @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -97,21 +97,24 @@
     var message = '@message';
     if(message){
         alert(message);
-         window.location.href = '@Url.Action("Index", "Members")';
+         window.location.href = '@Url.Action("ShowGrid", "Members")';
     }
     </script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<script src="~/Scripts/chosen.jquery.min.js"></script>
+<script>
+    $(function () {
+        $(".datepicker").datepicker({
+            dateFormat: "yy-mm-dd"
+        });
+    });
+</script>
+
     @Scripts.Render("~/bundles/jqueryval")
     <script>
         $(function () {
             $("#DropDown").chosen();
         })
     </script>
-    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
-    <script>
-        $(function () {
-            $(".datepicker").datepicker({
-                dateFormat: "yy-mm-dd"
-            });
-        });
-    </script>
+   
 }

@@ -24,6 +24,8 @@ namespace PMWelfare.Models
         public virtual DbSet<MonthlySummary> Monthlysummary { get; set; }
         public virtual DbSet<Subscription> Subscriptions { get; set; }
         public virtual DbSet<SupProducts> SupProducts { get; set; }
+        public virtual DbSet<Slider> Sliders { get; set; }
+
         public virtual DbSet<Supplier> Suppliers { get; set; }
         public virtual DbSet<Sysdiagram> Sysdiagrams { get; set; }
 

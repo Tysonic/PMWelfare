@@ -1,0 +1,50 @@
+﻿@model IEnumerable<PMWelfare.Models.Slider>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Gallery</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+ 
+    <link href="~/Content/css1/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    @*<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css" />*@
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#dataTable").dataTable();
+        });
+    </script>
+</head>
+<body>
+    <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h6 class="text-uppercase">Image List</h6>
+            </div>
+            <div class="card-body">
+               
+                        @foreach (var item in Model)
+                        {
+                <div  style="width:30%;height:400px; float:left;">
+                    <img src="@Url.Content(@item.FilePath)" class="img-thumbnail" />
+                    <br />  @item.Name
+
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                </div>
+                        }
+                 
+            </div>
+        </div>
+</body>
+</html>

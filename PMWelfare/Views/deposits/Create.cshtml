@@ -44,17 +44,21 @@
         </div>
     </div>
 }
+@{ 
+    var message = ViewBag.message;
 
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-    <script>
-        $(function () {
-            $("#DropDown").chosen();
-        })
-    </script>
 }
+
+
 @section scripts{
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/chosen.jquery.min.js"></script>
+<script>
+    $(function () {
+        $("#DropDown").chosen();
+    })
+</script>
+
     <script src="~/Scripts/jquery-3.4.1.js"></script>
     <script type="text/javascript">
     var message = '@message';

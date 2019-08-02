@@ -16,15 +16,14 @@ namespace PMWelfare.Controllers
             List<string> Table = new List<string>()
             {
             };
-            //Table.Add("Subscriptions");
-            //Table.Add("Members");
+           
             ViewBag.m = Table;
             
 
             Upload ttt = new Upload() {
 
             };
-            //ttt.TableName = Table;
+           
             
             return View();
         }

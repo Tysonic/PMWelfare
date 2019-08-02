@@ -49,7 +49,7 @@
                                 <a data-toggle="dropdown" href="#">  Member  <span class=""></span> </a>
                                 <ul class="dropdown-menu">
                                     <li>@Html.ActionLink("Add New Member", "Create", "Members")</li>
-                                    <li>@Html.ActionLink("List of Members", "Index", "Members")</li>
+                                    <li>@Html.ActionLink("List of Members", "ShowGrid", "Members")</li>
                                 </ul>
 
                             </li>
@@ -92,9 +92,9 @@
                 </ul>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        
                         <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                        <li>@Html.ActionLink("My Details", "MyDetails", "Home")</li>
 
                         @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                         {
